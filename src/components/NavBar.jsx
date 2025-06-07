@@ -18,14 +18,20 @@ function NavigatorBar() {
                                               onClick={e => {
                                                   e.stopPropagation();
                                               }}>Programs</Link>} id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/programs/crossfit">Cross Fit</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/programs/yoga">Yoga</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/programs/spinning">Spinning</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/programs/pilates">Pilates</NavDropdown.Item>
                     </NavDropdown>
                     <NavDropdown renderMenuOnMount={true}
                                  title={<Link style={{color: 'inherit', textDecoration: 'none'}} to="/trainers"
                                               onClick={e => {
                                                   e.stopPropagation();
                                               }}>Trainers</Link>} id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/trainers/george">George</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/trainers/michel">Michel</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/trainers/lucy">Lucy</NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to="/trainers/Miguel">Miguel</NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
                     <Nav.Link as={Link} to="/memberships">Memberships</Nav.Link>

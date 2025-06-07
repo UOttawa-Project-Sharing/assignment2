@@ -4,6 +4,7 @@ import Contact from "./pages/Contact.jsx";
 import {BrowserRouter, Link, Routes, Route} from "react-router";
 import MembershipPage from "./pages/Memberships.jsx";
 import ProgramsPage from "./pages/Programs.jsx";
+import ProgramPage from "./pages/ProgramPage.jsx";
 import TrainersPage from "./pages/Trainers.jsx";
 import HomePage from "./pages/Home.jsx";
 import Footer from "./components/Footer.jsx";
@@ -34,6 +35,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage/>}/>
                 <Route path="/programs" element={<ProgramsPage/>}/>
+                <Route path="/programs/:programName" element={<ProgramPage/>}/>
                 <Route path="/trainers" element={<TrainersPage/>}/>
                 <Route path="/contact" element={<Contact/>}/>
                 <Route path="/memberships" element={<MembershipPage/>}/>
