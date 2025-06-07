@@ -51,9 +51,8 @@ function HomePage() {
                             <img
                                 src={item.image}
                                 alt={item.title}
-                                className="w-100 h-100"
                                 style={{
-                                    objectFit: "cover", opacity: 0.75,
+                                    objectFit: "cover", opacity: 0.75, width: "100vw", height: "75vh",
                                 }}
                             />
                             <div
