@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import NavigatorBar from "./components/NavBar.jsx";
+import Home from "./pages/Home.jsx";
+import Contact from "./pages/Contact.jsx";
+import {BrowserRouter, Link, Routes, Route} from "react-router";
+import MembershipPage from "./pages/Memberships.jsx";
+
+const About = () => { return(<>
+    <h1>About</h1></>);};
+
+const NotFoundPage = () => {
+    return (
+        <div>
+            <h1>404 - Page Not Found</h1>
+            <p>The page you are looking for does not exist.</p>
+            <Link to="/">Home Page</Link>
+        </div>
+    );
+}
+
+// const router = createBrowserRouter([
+//     { path: "/", element: <Home /> },
+//     { path: "/about", element: <About /> },
+//     { path: "*", element: <NotFoundPage /> }
+// ]);
 
 function App() {
-  const [count, setCount] = useState(0)
-
+    // const location = useLocation();
   return (
     <>
-        <NavigatorBar />
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+        {/*<RouterProvider router={router} />*/}
+        <BrowserRouter>
+            <NavigatorBar />
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/memberships" element={<MembershipPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+        </BrowserRouter>
     </>
   )
 }
