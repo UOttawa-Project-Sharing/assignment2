@@ -1,16 +1,11 @@
 import './App.css'
 import NavigatorBar from "./components/NavBar.jsx";
-import Home from "./pages/Home.jsx";
 import Contact from "./pages/Contact.jsx";
 import {BrowserRouter, Link, Routes, Route} from "react-router";
 import MembershipPage from "./pages/Memberships.jsx";
 import ProgramsPage from "./pages/Programs.jsx";
 import TrainersPage from "./pages/Trainers.jsx";
-
-const About = () => {
-    return (<>
-        <h1>About</h1></>);
-};
+import HomePage from "./pages/Home.jsx";
 
 const NotFoundPage = () => {
     return (<div>
@@ -33,8 +28,7 @@ function App() {
         <BrowserRouter basename={"/seg3525-assignment2/"}>
             <NavigatorBar/>
             <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/about" element={<About/>}/>
+                <Route path="/" element={<HomePage/>}/>
                 <Route path="/programs" element={<ProgramsPage/>}/>
                 <Route path="/trainers" element={<TrainersPage/>}/>
                 <Route path="/contact" element={<Contact/>}/>
