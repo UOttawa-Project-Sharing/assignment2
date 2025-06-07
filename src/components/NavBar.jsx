@@ -10,7 +10,7 @@ function NavigatorBar() {
             <Navbar.Brand as={Link} to="/">GymJim</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
+                <Nav className="ms-auto">
                     <Nav.Link as={Link} to="/">Home</Nav.Link>
                     <NavDropdown renderMenuOnMount={true}
                                  title={<Link style={{color: 'inherit', textDecoration: 'none'}} to="/programs"
