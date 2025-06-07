@@ -172,19 +172,30 @@ function ContactPage() {
                   <span className="text-primary-emphasis" style={{fontSize: 18}}>
                     <i className="bi bi-geo-alt-fill"></i>
                   </span>
-                                <span style={{fontSize: 15}}>123 street apple</span>
+                                <span style={{fontSize: 15}}>
+                        <a
+                            href="https://maps.google.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-white text-decoration-none"
+                            style={{textDecoration: "none"}} className={"text-body"}
+                        >123 Fitness Street, Cityville</a></span>
                             </div>
                             <div style={{marginBottom: 12, display: "flex", alignItems: "center", gap: 10}}>
                   <span className="text-primary-emphasis" style={{fontSize: 18}}>
                     <i className="bi bi-telephone-fill"></i>
                   </span>
-                                <span style={{fontSize: 15}}>+1 (123) 456-7890</span>
+                                <span style={{fontSize: 15}}><a href={"tel:+11234567890"}
+                                                                style={{textDecoration: "none"}}
+                                                                className={"text-body"}>+1 (123) 456-7890</a></span>
                             </div>
                             <div style={{marginBottom: 32, display: "flex", alignItems: "center", gap: 10}}>
                   <span className="text-primary-emphasis" style={{fontSize: 18}}>
                     <i className="bi bi-envelope-fill"></i>
                   </span>
-                                <span style={{fontSize: 15}}>contact@GymJim.com</span>
+                                <span style={{fontSize: 15}}><a href={"mailto:contact@gymjim.com"}
+                                                                style={{textDecoration: "none"}}
+                                                                className={"text-body"}>contact@GymJim.com</a></span>
                             </div>
                             <div style={{display: "flex", justifyContent: "center", gap: 24, fontSize: 20}}>
                                 <i className="bi bi-facebook"></i>
@@ -193,8 +204,6 @@ function ContactPage() {
                             </div>
                         </div>
                     </Col>
-                    {/* Right Side - Form */}
-
                 </Card>
             </Row>
         </Container>

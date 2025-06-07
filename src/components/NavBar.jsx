@@ -5,7 +5,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import {Link} from "react-router";
 
 function NavigatorBar() {
-    return (<Navbar expand="lg" className="bg-primary" data-bs-theme="dark">
+    return (
+        <Navbar expand="lg" className="bg-primary sticky-top" data-bs-theme="dark">
         <Container>
             <Navbar.Brand as={Link} to="/">GymJim</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
