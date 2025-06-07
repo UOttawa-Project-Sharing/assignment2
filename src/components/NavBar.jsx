@@ -20,7 +20,7 @@ function NavigatorBar() {
                         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                     </NavDropdown>
                     <NavDropdown renderMenuOnMount={true}
-                                 title={<Link style={{color: 'inherit', textDecoration: 'none'}} href="about"
+                                 title={<Link style={{color: 'inherit', textDecoration: 'none'}} to="/trainers"
                                               onClick={e => {
                                                   e.stopPropagation();
                                               }}>Trainers</Link>} id="basic-nav-dropdown">

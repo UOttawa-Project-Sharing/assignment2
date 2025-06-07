@@ -5,6 +5,7 @@ import Contact from "./pages/Contact.jsx";
 import {BrowserRouter, Link, Routes, Route} from "react-router";
 import MembershipPage from "./pages/Memberships.jsx";
 import ProgramsPage from "./pages/Programs.jsx";
+import TrainersPage from "./pages/Trainers.jsx";
 
 const About = () => {
     return (<>
@@ -35,6 +36,7 @@ function App() {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/about" element={<About/>}/>
                 <Route path="/programs" element={<ProgramsPage/>}/>
+                <Route path="/trainers" element={<TrainersPage/>}/>
                 <Route path="/contact" element={<Contact/>}/>
                 <Route path="/memberships" element={<MembershipPage/>}/>
                 <Route path="*" element={<NotFoundPage/>}/>
