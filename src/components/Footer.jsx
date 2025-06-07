@@ -32,7 +32,7 @@ function Footer() {
                     <div>
                         <a href="mailto:info@gymjim.com" className="text-white text-decoration-none">
                             <i className="bi bi-envelope-fill me-1"></i>
-                            contact@gymjim.com
+                            info@gymjim.com
                         </a>
                     </div>
                 </Col>

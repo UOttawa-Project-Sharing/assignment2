@@ -79,7 +79,7 @@ function ContactPage() {
                                             }}
                                             type="email"
                                             name="email"
-                                            placeholder="contact@GymJim.com"
+                                            placeholder="info@GymJim.com"
                                             value={form.email}
                                             onChange={handleChange}
                                             required
@@ -193,9 +193,9 @@ function ContactPage() {
                   <span className="text-primary-emphasis" style={{fontSize: 18}}>
                     <i className="bi bi-envelope-fill"></i>
                   </span>
-                                <span style={{fontSize: 15}}><a href={"mailto:contact@gymjim.com"}
+                                <span style={{fontSize: 15}}><a href={"mailto:info@gymjim.com"}
                                                                 style={{textDecoration: "none"}}
-                                                                className={"text-body"}>contact@GymJim.com</a></span>
+                                                                className={"text-body"}>info@GymJim.com</a></span>
                             </div>
                             <div style={{display: "flex", justifyContent: "center", gap: 24, fontSize: 20}}>
                                 <i className="bi bi-facebook"></i>
