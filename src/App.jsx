@@ -29,7 +29,7 @@ function App() {
     // const location = useLocation();
     return (<>
         {/*<RouterProvider router={router} />*/}
-        <BrowserRouter>
+        <BrowserRouter basename={"/seg3525-assignment2/"}>
             <NavigatorBar/>
             <Routes>
                 <Route path="/" element={<Home/>}/>
