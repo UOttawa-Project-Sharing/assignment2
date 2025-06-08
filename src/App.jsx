@@ -1,7 +1,7 @@
 import './App.css'
 import NavigatorBar from "./components/NavBar.jsx";
 import Contact from "./pages/Contact.jsx";
-import {BrowserRouter, Link, Routes, Route} from "react-router";
+import {BrowserRouter, Link, Routes, Route, HashRouter} from "react-router";
 import MembershipPage from "./pages/Memberships.jsx";
 import ProgramsPage from "./pages/Programs.jsx";
 import ProgramPage from "./pages/ProgramPage.jsx";
@@ -31,7 +31,7 @@ function App() {
     // const location = useLocation();
     return (<>
         <div className="d-flex flex-column min-vh-100">
-        <BrowserRouter basename={"/seg3525-assignment2/"}>
+        <HashRouter>
             <NavigatorBar/>
             <main className="flex-grow-1">
             <Routes>
@@ -48,7 +48,7 @@ function App() {
             </Routes>
             </main>
             <Footer/>
-        </BrowserRouter>
+        </HashRouter>
         </div>
     </>)
 }
