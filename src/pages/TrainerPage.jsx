@@ -82,7 +82,7 @@ function DiagonalDottedLinesBg() {
     </svg>);
 }
 
-export default function TrainerPage() {
+function TrainerPage() {
     const {TainerName} = useParams();
     const trainer = trainers[TainerName?.toLowerCase()];
 
@@ -97,7 +97,6 @@ export default function TrainerPage() {
 
     return (<>
         <DiagonalDottedLinesBg/>
-        {/* Top right dots */}
         <Row
             className="position-absolute"
             style={{
@@ -517,3 +516,5 @@ export default function TrainerPage() {
         </section>
     </>);
 }
+
+export default TrainerPage;

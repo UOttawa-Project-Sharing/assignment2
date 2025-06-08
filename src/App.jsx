@@ -9,6 +9,8 @@ import TrainersPage from "./pages/Trainers.jsx";
 import HomePage from "./pages/Home.jsx";
 import Footer from "./components/Footer.jsx";
 import TrainerPage from "./pages/TrainerPage.jsx";
+import BookingPage from "./pages/Booking.jsx";
+import PaymentPage from "./pages/Payments.jsx";
 
 const NotFoundPage = () => {
     return (
@@ -28,7 +30,6 @@ const NotFoundPage = () => {
 function App() {
     // const location = useLocation();
     return (<>
-        {/*<RouterProvider router={router} />*/}
         <div className="d-flex flex-column min-vh-100">
         <BrowserRouter basename={"/seg3525-assignment2/"}>
             <NavigatorBar/>
@@ -41,6 +42,8 @@ function App() {
                 <Route path="/trainers/:TainerName" element={<TrainerPage/>}/>
                 <Route path="/contact" element={<Contact/>}/>
                 <Route path="/memberships" element={<MembershipPage/>}/>
+                <Route path="/booking" element={<BookingPage/>}/>
+                <Route path="/payment" element={<PaymentPage/>}/>
                 <Route path="*" element={<NotFoundPage/>}/>
             </Routes>
             </main>
