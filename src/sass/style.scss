@@ -2,11 +2,13 @@
 @import "bootstrap/scss/bootstrap";
 @import "bootswatch";
 
+@import url('https://fonts.googleapis.com/css2?family=Prosto+One&display=swap');
 #root {
   //max-width: 1280px;
   margin: 0 auto;
   //padding: 2rem;
   //text-align: center;
+  font-family: "Prosto One", sans-serif;
 }
 
 .nav-item.dropdown:hover .dropdown-menu {
@@ -15,4 +17,9 @@
 
 .event-item p {
   margin: 0;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+.gym-name {
+    font-family: 'Monoton', sans-serif;
 }

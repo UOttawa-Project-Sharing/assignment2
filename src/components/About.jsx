@@ -1,6 +1,7 @@
 import React from "react";
 import {Container, Row, Col, Card, Button} from "react-bootstrap";
 import {Link} from "react-router";
+import GymName from "./GymName.jsx";
 // Make sure to import bootstrap-icons in your main entry point or index.html
 
 const services = [{
@@ -21,13 +22,13 @@ function AboutGymJim() {
             <Col lg={10}>
                 <Card className="shadow-lg border-0">
                     <Card.Header className="bg-primary text-white text-center py-4">
-                        <h1 className="display-4 mb-0">About GymJim</h1>
+                        <h1 className="display-4 mb-0">About <GymName/></h1>
                     </Card.Header>
                     <Card.Body className="p-5">
                         <Row className="mb-4">
                             <Col>
                                 <p className="lead text-muted mb-4">
-                                    Welcome to GymJim, your premier destination for complete fitness and wellness.
+                                    Welcome to <GymName/>, your premier destination for complete fitness and wellness.
                                     We're more than just a gym – we're a community dedicated to helping you achieve
                                     your health and fitness goals through diverse, high-quality programs tailored to
                                     every lifestyle and fitness level.
@@ -59,7 +60,7 @@ function AboutGymJim() {
                         <Row>
                             <Col>
                                 <p className="mb-4">
-                                    At GymJim, we believe fitness should be accessible, enjoyable, and sustainable.
+                                    At <GymName/>, we believe fitness should be accessible, enjoyable, and sustainable.
                                     Our experienced instructors and trainers are passionate about creating a
                                     welcoming
                                     environment where beginners feel comfortable starting their journey and seasoned
@@ -69,7 +70,7 @@ function AboutGymJim() {
                                     We're committed to fostering a supportive community where every member feels
                                     valued,
                                     motivated, and empowered to become their strongest, healthiest self. Join the
-                                    GymJim
+                                    <GymName/>
                                     family today and discover the difference that variety, quality instruction, and
                                     genuine
                                     community support can make in your fitness journey.
@@ -78,7 +79,7 @@ function AboutGymJim() {
                         </Row>
                         <div className="text-center mt-5">
                             <Button variant="primary" size="lg" className="px-5" as={Link} to={"/memberships"}>
-                                Join GymJim Today
+                                Join <GymName/> Today
                             </Button>
                         </div>
                     </Card.Body>

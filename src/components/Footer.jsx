@@ -1,6 +1,7 @@
 import React from "react";
 import {Container, Row, Col} from "react-bootstrap";
 import {Link} from "react-router";
+import GymName from "./GymName.jsx";
 
 function Footer() {
     return (
@@ -8,7 +9,7 @@ function Footer() {
         <Container>
             <Row className="align-items-center">
                 <Col md={4} className="text-center text-md-start mb-3 mb-md-0">
-                    <h5 className="mb-1 fw-bold">GymJim</h5>
+                    <h5 className="mb-1 fw-bold"><GymName/></h5>
                     <small>&copy; {new Date().getFullYear()} GymJim. All rights reserved.</small>
                 </Col>
                 <Col md={4} className="text-center mb-3 mb-md-0">

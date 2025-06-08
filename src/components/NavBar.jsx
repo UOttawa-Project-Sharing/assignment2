@@ -5,12 +5,14 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import {Link} from "react-router";
 
 import { trainers, ProgramsInfo } from "../utils/data.js";
+import GymName from "./GymName.jsx";
+import React from "react";
 
 function NavigatorBar() {
     return (
         <Navbar expand="lg" className="bg-primary sticky-top" data-bs-theme="dark">
         <Container>
-            <Navbar.Brand as={Link} to="/">GymJim</Navbar.Brand>
+            <Navbar.Brand as={Link} to="/"><GymName/></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ms-auto">

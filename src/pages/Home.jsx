@@ -3,8 +3,7 @@ import {Carousel, Container} from "react-bootstrap";
 import About from "../components/About.jsx";
 
 import {HomePageData} from "../utils/data.js";
-
-const gymName = "GymJim";
+import GymName from "../components/GymName.jsx";
 
 function HomePage() {
     return (<>
@@ -56,7 +55,7 @@ function HomePage() {
                                         fontSize: 34, letterSpacing: 1,
                                     }}
                                 >
-                                    {gymName}
+                                    <GymName/>
                                 </div>
                                 <div>{item.title}</div>
                                 <div className="mt-4 fst-italic text-body-emphasis" style={{fontSize: 19}}>
