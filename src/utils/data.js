@@ -1,25 +1,25 @@
 // home page data
 export const HomePageData = [{
-    image: "https://picsum.photos/1200/800?random=101",
+    image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&h=800&fit=crop",
     title: "Discover Our Cross Fit Programs",
     quote: "Strength does not come from the body. It comes from the will.",
 }, {
-    image: "https://picsum.photos/1200/800?random=102",
+    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&h=800&fit=crop",
     title: "Experience Our Yoga Classes",
     quote: "The body benefits from movement, and the mind benefits from stillness.",
 }, {
-    image: "https://picsum.photos/1200/800?random=103",
+    image: "https://images.unsplash.com/photo-1520877880798-5ee004e3f11e?w=1200&h=800&fit=crop",
     title: "Join Our Spinning Sessions",
-    quote: "Don’t limit your challenges. Challenge your limits.",
+    quote: "Don't limit your challenges. Challenge your limits.",
 }, {
-    image: "https://picsum.photos/1200/800?random=104",
+    image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&h=800&fit=crop",
     title: "Make Progress with Pilates",
     quote: "Change happens through movement and movement heals.",
 }, {
-    image: "https://picsum.photos/1200/800?random=105",
+    image: "https://images.unsplash.com/photo-1595554919503-b806f0f8f106?w=1200&h=800&fit=crop",
     title: "Meet Our Team",
     quote: "Alone we can do so little; together we can do so much.",
-},];
+}];
 
 // Membership data
 export const MembershipPlans = [{
@@ -57,101 +57,101 @@ export const ProgramsInfo = [
     {
         id: "crossfit",
         name: "Cross Fit",
-        image: "https://picsum.photos/170/120",
+        image: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=600&h=330&fit=crop",
         shortDescription: ["CrossFit is a high-intensity fitness program that combines elements of weightlifting, gymnastics, and cardiovascular training. It focuses on functional movements and is designed to improve overall fitness through varied daily workouts."],
         description: "High-intensity fitness program combining weightlifting, gymnastics, and cardio through varied daily workouts. Scalable group classes with certified coaching focus on functional movements and measurable results. Build strength, endurance, and overall fitness in a supportive community environment.",
-        backgroundImage: "https://picsum.photos/1200/800?random=21",
+        backgroundImage: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=800&fit=crop",
         subprograms: [{
             name: "Open Gym",
-            image: "https://picsum.photos/400/220?random=31",
-            description: "Access our facility with flexibility. Train independently with world-class equipment and space.",
+            image: "https://images.unsplash.com/photo-1578762560042-46ad127c95ea?w=400&h=220&fit=crop",
+            description: "Access our fully equipped CrossFit facility with complete freedom to train on your schedule. Use our Olympic weightlifting platforms, pull-up rigs, and full range of functional fitness equipment.",
         }, {
             name: "Circuit Fit",
-            image: "https://picsum.photos/400/220?random=32",
-            description: "High-energy circuit training to improve strength, endurance, and fitness in a supportive group.",
+            image: "https://images.unsplash.com/photo-1533681904393-9ab6eee7e408?w=400&h=220&fit=crop",
+            description: "High-intensity circuit training combining functional movements with time-based challenges. Boost cardiovascular fitness, build lean muscle, and improve overall conditioning in energizing group sessions.",
         }, {
             name: "Power Fit",
-            image: "https://picsum.photos/400/220?random=33",
-            description: "Lift heavy and get stronger. Focused sessions on Olympic lifts and power moves.",
+            image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=400&h=220&fit=crop",
+            description: "Specialized strength training focusing on Olympic lifts, powerlifting movements, and explosive power development. Perfect for athletes and serious lifters looking to maximize strength gains.",
         }, {
             name: "Total Fit",
-            image: "https://picsum.photos/400/220?random=34",
-            description: "A full-body workout blending strength, cardio, and flexibility for total conditioning.",
+            image: "https://images.unsplash.com/photo-1434596922112-19c563067271?w=400&h=220&fit=crop",
+            description: "Comprehensive full-body conditioning program integrating strength training, cardiovascular fitness, mobility work, and functional movement patterns for complete physical development.",
         }],
     },
     {
         id: "yoga",
         name: "Yoga",
-        image: "https://picsum.photos/170/120?random=1",
+        image: "https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=600&h=330&fit=crop",
         shortDescription: ["Yoga is a mind-body practice that combines physical postures, breathing techniques, and meditation. It improves flexibility, strength, and mental well-being through ancient traditions adapted for modern life."],
-        description: "Mind-body practice combining physical postures, breathing techniques, and meditation. Improve flexibility, strength, and mental well-being through ancient traditions adapted for modern life. Classes for all levels in a peaceful, supportive environment.",
-        backgroundImage: "https://picsum.photos/1200/800?random=22",
+        description: "Ancient mind-body practice combining physical postures, breathing techniques, and meditation. Improve flexibility, strength, balance, and mental well-being through time-tested traditions adapted for modern life. Classes for all levels in a peaceful, supportive environment.",
+        backgroundImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop",
         subprograms: [{
             name: "Hatha Yoga",
-            image: "https://picsum.photos/400/220?random=35",
-            description: "Gentle, slow-paced yoga focusing on basic postures and breathing. Perfect for beginners.",
+            image: "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=400&h=220&fit=crop",
+            description: "Gentle, slow-paced yoga practice emphasizing basic postures, proper alignment, and deep breathing. Ideal for beginners and those seeking a meditative, restorative approach to yoga.",
         }, {
             name: "Vinyasa Flow",
-            image: "https://picsum.photos/400/220?random=36",
-            description: "Dynamic sequences linking movement with breath. Build strength and flexibility through flowing transitions.",
+            image: "https://images.unsplash.com/photo-1588286840104-8957b019727f?w=400&h=220&fit=crop",
+            description: "Dynamic, flowing sequences that link breath with movement. Build strength, flexibility, and grace through creative transitions and energizing flows suitable for intermediate practitioners.",
         }, {
             name: "Yin Yoga",
-            image: "https://picsum.photos/400/220?random=37",
-            description: "Passive, meditative practice with long-held poses. Deep stretching and relaxation for stress relief.",
+            image: "https://images.unsplash.com/photo-1524863479829-916d8e77f114?w=400&h=220&fit=crop",
+            description: "Passive, meditative practice featuring long-held poses (3-5 minutes) targeting deep connective tissues. Promotes flexibility, stress relief, and inner calm through stillness and mindfulness.",
         }, {
             name: "Power Yoga",
-            image: "https://picsum.photos/400/220?random=38",
-            description: "Athletic, vigorous style building heat and strength. Fast-paced flow for fitness-focused practitioners.",
+            image: "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=400&h=220&fit=crop",
+            description: "Athletic, vigorous yoga style that builds heat, strength, and stamina. Fast-paced, challenging sequences designed for fitness-focused practitioners seeking a dynamic workout.",
         }],
     },
     {
         id: "spinning",
         name: "Spinning",
-        image: "https://picsum.photos/170/120?random=2",
+        image: "https://images.unsplash.com/photo-1707985287123-4bd2e9152d3d?w=600&h=330&fit=crop",
         shortDescription: ["Spinning is a high-energy indoor cycling workout that combines music, motivation, and expert instruction. It builds cardiovascular endurance, strengthens legs, and burns calories in a fun group setting."],
-        description: "High-energy indoor cycling classes with motivating music and expert instruction. Burn calories, build cardiovascular endurance, and strengthen legs in a fun group setting. All fitness levels welcome with adjustable resistance.",
-        backgroundImage: "https://picsum.photos/1200/800?random=23",
+        description: "High-energy indoor cycling classes featuring motivating music, expert instruction, and immersive experiences. Burn calories, build cardiovascular endurance, and strengthen lower body in an electrifying group atmosphere. All fitness levels welcome with adjustable resistance.",
+        backgroundImage: "https://images.unsplash.com/photo-1598290068762-8a427fd42e7e?w=1200&h=800&fit=crop",
         subprograms: [{
             name: "Spin Basics",
-            image: "https://picsum.photos/400/220?random=39",
-            description: "Introduction to indoor cycling with proper form and technique. Build confidence and endurance.",
+            image: "https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=400&h=220&fit=crop",
+            description: "Beginner-friendly introduction to indoor cycling focusing on proper bike setup, riding technique, and basic training principles. Build confidence and cardiovascular base in a supportive environment.",
         }, {
             name: "HIIT Spin",
-            image: "https://picsum.photos/400/220?random=40",
-            description: "High-intensity interval training on bikes. Maximize calorie burn with challenging sprint intervals.",
+            image: "https://images.unsplash.com/photo-1554470166-20d3f466089b?w=400&h=220&fit=crop",
+            description: "High-intensity interval training on stationary bikes featuring alternating periods of maximum effort sprints and active recovery. Maximize calorie burn and improve anaerobic fitness.",
         }, {
             name: "Endurance Ride",
-            image: "https://picsum.photos/400/220?random=41",
-            description: "Longer, steady-state rides building cardiovascular fitness and mental toughness.",
+            image: "https://images.unsplash.com/photo-1637578371283-d9076f66ba8e?w=400&h=220&fit=crop",
+            description: "Longer, steady-state cycling sessions (45-60 minutes) designed to build aerobic capacity, mental resilience, and cardiovascular endurance through sustained moderate-intensity efforts.",
         }, {
             name: "Rhythm Ride",
-            image: "https://picsum.photos/400/220?random=42",
-            description: "Music-driven cycling experience combining choreography with cardio. Dance on the bike!",
+            image: "https://images.unsplash.com/photo-1625594755684-a73285a64f66?w=400&h=220&fit=crop",
+            description: "Music-driven cycling experience combining choreographed upper body movements with pedaling rhythms. Dance on the bike while getting an amazing cardio workout in this fun, party-like atmosphere.",
         }],
     },
     {
         id: "pilates",
         name: "Pilates",
-        image: "https://picsum.photos/170/120?random=3",
+        image: "https://images.unsplash.com/photo-1717500252179-2811af29e4f7?w=600&h=330&fit=crop",
         shortDescription: ["Pilates is a low-impact exercise method focusing on core strength, flexibility, and body awareness. It uses precise movements and controlled breathing to improve posture, balance, and muscle tone."],
-        description: "Low-impact exercise method focusing on core strength, flexibility, and body awareness. Precise movements and controlled breathing improve posture, balance, and muscle tone. Equipment-based and mat classes available for all abilities.",
-        backgroundImage: "https://picsum.photos/1200/800?random=24",
+        description: "Low-impact exercise method emphasizing core strength, flexibility, and whole-body awareness through precise, controlled movements. Improve posture, balance, muscle tone, and mental focus using both traditional mat work and specialized equipment.",
+        backgroundImage: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&h=800&fit=crop",
         subprograms: [{
             name: "Mat Pilates",
-            image: "https://picsum.photos/400/220?random=43",
-            description: "Classic floor-based Pilates using body weight. Focus on core strength and stability.",
+            image: "https://images.unsplash.com/photo-1600881333290-31fdbdfbe493?w=400&h=220&fit=crop",
+            description: "Traditional floor-based Pilates using body weight resistance and gravity. Focus on core stabilization, postural alignment, and fundamental movement patterns accessible to all fitness levels.",
         }, {
             name: "Reformer Pilates",
-            image: "https://picsum.photos/400/220?random=44",
-            description: "Equipment-based training using springs and pulleys. Enhanced resistance and support for precise movements.",
+            image: "https://images.unsplash.com/photo-1717500252573-d31d4bf5ddf1?w=400&h=220&fit=crop",
+            description: "Equipment-based training using the Pilates reformer with spring resistance and pulley systems. Provides enhanced support and variable resistance for more precise, challenging movements.",
         }, {
             name: "Pilates Fusion",
-            image: "https://picsum.photos/400/220?random=45",
-            description: "Creative blend of Pilates with yoga and barre elements. Dynamic full-body conditioning.",
+            image: "https://images.unsplash.com/photo-1591258370814-01609b341790?w=400&h=220&fit=crop",
+            description: "Creative blend combining Pilates principles with yoga poses, barre techniques, and functional movement. Dynamic full-body conditioning that challenges strength, flexibility, and coordination.",
         }, {
             name: "Clinical Pilates",
-            image: "https://picsum.photos/400/220?random=46",
-            description: "Therapeutic approach for injury recovery and prevention. Small classes with personalized attention.",
+            image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=220&fit=crop",
+            description: "Therapeutic approach designed for injury rehabilitation, chronic pain management, and movement dysfunction correction. Small group classes with individualized modifications and professional guidance.",
         }],
     },
 ];
@@ -173,8 +173,8 @@ export const trainers = [
             icon: "🍎", label: "Nutrition"
         }, {icon: "💪", label: "Strength"}],
         profilePicture: "https://randomuser.me/api/portraits/men/32.jpg",
-        image: "https://images.pexels.com/photos/1552106/pexels-photo-1552106.jpeg?auto=compress&w=500&h=360&fit=crop",
-        image2: "https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=360&fit=crop",
+        image2: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500&h=360&fit=crop",
         cta: "Book a Session",
     },
     {
@@ -189,8 +189,8 @@ export const trainers = [
             icon: "🌱", label: "Wellness"
         }, {icon: "📱", label: "Virtual"}],
         profilePicture: "https://randomuser.me/api/portraits/women/45.jpg",
-        image: "https://images.pexels.com/photos/3822864/pexels-photo-3822864.jpeg?auto=compress&w=500&h=360&fit=crop",
-        image2: "https://images.pexels.com/photos/3823063/pexels-photo-3823063.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image: "https://images.unsplash.com/uploads/1413395496082cbc91228/43e39040?w=500&h=360&fit=crop",
+        image2: "https://images.unsplash.com/photo-1606487704494-4e2fa9969cb5?w=500&h=360&fit=crop",
         cta: "Start Your Journey",
     },
     {
@@ -205,8 +205,8 @@ export const trainers = [
             icon: "🔥", label: "Conditioning"
         }, {icon: "🎯", label: "Sport-Specific"}],
         profilePicture: "https://randomuser.me/api/portraits/men/67.jpg",
-        image: "https://images.pexels.com/photos/1431282/pexels-photo-1431282.jpeg?auto=compress&w=500&h=360&fit=crop",
-        image2: "https://images.pexels.com/photos/3289711/pexels-photo-3289711.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=500&h=360&fit=crop",
+        image2: "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=500&h=360&fit=crop",
         cta: "Train Like a Pro",
     },
     {
@@ -221,8 +221,8 @@ export const trainers = [
             icon: "📊", label: "Progress"
         }, {icon: "💝", label: "Support"}],
         profilePicture: "https://randomuser.me/api/portraits/women/28.jpg",
-        image: "https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&w=500&h=360&fit=crop",
-        image2: "https://images.pexels.com/photos/3775593/pexels-photo-3775593.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image: "https://images.unsplash.com/photo-1606902965551-dce093cda6e7?w=500&h=360&fit=fit",
+        image2: "https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?w=500&h=360&fit=crop",
         cta: "Transform Today",
     },
     {
@@ -237,8 +237,8 @@ export const trainers = [
             icon: "🎭", label: "Functional"
         }, {icon: "⚡", label: "Movement"}],
         profilePicture: "https://randomuser.me/api/portraits/men/23.jpg",
-        image: "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&w=500&h=360&fit=crop",
-        image2: "https://images.pexels.com/photos/3766211/pexels-photo-3766211.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image: "https://images.unsplash.com/photo-1704375058325-e51b6382a95d?w=500&h=360&fit=fit",
+        image2: "https://images.unsplash.com/photo-1639496908204-6f949b0f46e1?w=500&h=360&fit=crop",
         cta: "Move Better",
     },
     {
@@ -253,8 +253,8 @@ export const trainers = [
             icon: "🚶", label: "Mobility"
         }, {icon: "❤️", label: "Heart Health"}],
         profilePicture: "https://randomuser.me/api/portraits/women/52.jpg",
-        image: "https://images.pexels.com/photos/3823207/pexels-photo-3823207.jpeg?auto=compress&w=500&h=360&fit=crop",
-        image2: "https://images.pexels.com/photos/3768043/pexels-photo-3768043.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image: "https://images.unsplash.com/photo-1692372372810-c848c9cca1c5?w=500&h=360&fit=fit",
+        image2: "https://images.unsplash.com/photo-1617293378985-d7fae23773b0?w=500&h=360&fit=crop",
         cta: "Stay Active",
     },
     {
@@ -269,8 +269,8 @@ export const trainers = [
             icon: "📈", label: "Progression"
         }, {icon: "🏆", label: "Competition"}],
         profilePicture: "https://randomuser.me/api/portraits/men/41.jpg",
-        image: "https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?auto=compress&w=500&h=360&fit=crop",
-        image2: "https://images.pexels.com/photos/1431283/pexels-photo-1431283.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image: "https://images.unsplash.com/photo-1636007596622-90bf5679f5dc?w=500&h=360&fit=fit",
+        image2: "https://images.unsplash.com/photo-1744551472900-d23f4997e1cd?w=500&h=360&fit=fit",
         cta: "Get Stronger",
     },
     {
@@ -285,8 +285,8 @@ export const trainers = [
             icon: "⏱️", label: "Efficient"
         }, {icon: "🎵", label: "Fun"}],
         profilePicture: "https://randomuser.me/api/portraits/women/36.jpg",
-        image: "https://images.pexels.com/photos/3768582/pexels-photo-3768582.jpeg?auto=compress&w=500&h=360&fit=crop",
-        image2: "https://images.pexels.com/photos/3775166/pexels-photo-3775166.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image: "https://images.unsplash.com/photo-1598575435251-574ba3ba7ad3?w=500&h=360&fit=fit",
+        image2: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=500&h=360&fit=crop",
         cta: "Burn & Build",
     }
 ];
@@ -366,10 +366,569 @@ export function getTrainerAvailabilityByName(name) {
 }
 
 export const AllCourse = [
-    // Programs events
-    { id: "fop", type: "programs", subType: "Fitness Classes", subSubType: "Open Fit", title: "Open Fit", start: "2025-06-07T14:00:00", end: "2025-06-07T15:00:00", color: "#2E3B9A", status: "2/10" },
-    { id: "fy", type: "programs", subType: "Fitness Classes", subSubType: "Yoga", title: "Yoga", start: "2025-06-06T16:00:00", end: "2025-06-06T17:00:00", color: "#4CA745", status: "full" },
-    { id: "aaaa", type: "programs", subType: "Cross Fit", subSubType: "Circuit Fit", title: "Circuit Fit", start: "2025-06-09T10:00:00", end: "2025-06-09T11:00:00", color: "#FF5733", status: "full" },
+    // CROSSFIT PROGRAMS
+    // Open Gym Sessions
+    {
+        id: "crf-cf-og-2025-06-09-06",
+        type: "programs",
+        subType: "Cross Fit",
+        subSubType: "Open Gym",
+        title: "Open Gym",
+        start: "2025-06-09T06:00:00",
+        end: "2025-06-09T08:00:00",
+        color: "#FF5733",
+        status: "8/15"
+    },
+    {
+        id: "crf-cf-og-2025-06-09-18",
+        type: "programs",
+        subType: "Cross Fit",
+        subSubType: "Open Gym",
+        title: "Open Gym",
+        start: "2025-06-09T18:00:00",
+        end: "2025-06-09T20:00:00",
+        color: "#FF5733",
+        status: "12/15"
+    },
+    {
+        id: "crf-cf-og-2025-06-10-06",
+        type: "programs",
+        subType: "Cross Fit",
+        subSubType: "Open Gym",
+        title: "Open Gym",
+        start: "2025-06-10T06:00:00",
+        end: "2025-06-10T08:00:00",
+        color: "#FF5733",
+        status: "5/15"
+    },
+    {
+        id: "crf-cf-og-2025-06-11-19",
+        type: "programs",
+        subType: "Cross Fit",
+        subSubType: "Open Gym",
+        title: "Open Gym",
+        start: "2025-06-11T19:00:00",
+        end: "2025-06-11T21:00:00",
+        color: "#FF5733",
+        status: "9/15"
+    },
+
+    // Circuit Fit Classes
+    {
+        id: "crf-cf-cf-2025-06-09-10",
+        type: "programs",
+        subType: "Cross Fit",
+        subSubType: "Circuit Fit",
+        title: "Circuit Fit",
+        start: "2025-06-09T10:00:00",
+        end: "2025-06-09T11:00:00",
+        color: "#FF5733",
+        status: "full"
+    },
+    {
+        id: "crf-cf-cf-2025-06-09-17",
+        type: "programs",
+        subType: "Cross Fit",
+        subSubType: "Circuit Fit",
+        title: "Circuit Fit",
+        start: "2025-06-09T17:00:00",
+        end: "2025-06-09T18:00:00",
+        color: "#FF5733",
+        status: "11/12"
+    },
+    {
+        id: "crf-cf-cf-2025-06-10-09",
+        type: "programs",
+        subType: "Cross Fit",
+        subSubType: "Circuit Fit",
+        title: "Circuit Fit",
+        start: "2025-06-10T09:00:00",
+        end: "2025-06-10T10:00:00",
+        color: "#FF5733",
+        status: "7/12"
+    },
+    {
+        id: "crf-cf-cf-2025-06-11-18",
+        type: "programs",
+        subType: "Cross Fit",
+        subSubType: "Circuit Fit",
+        title: "Circuit Fit",
+        start: "2025-06-11T18:00:00",
+        end: "2025-06-11T19:00:00",
+        color: "#FF5733",
+        status: "9/12"
+    },
+
+    // Power Fit Classes
+    {
+        id: "crf-cf-pf-2025-06-09-07",
+        type: "programs",
+        subType: "Cross Fit",
+        subSubType: "Power Fit",
+        title: "Power Fit",
+        start: "2025-06-09T07:00:00",
+        end: "2025-06-09T08:00:00",
+        color: "#FF5733",
+        status: "6/10"
+    },
+    {
+        id: "crf-cf-pf-2025-06-10-19",
+        type: "programs",
+        subType: "Cross Fit",
+        subSubType: "Power Fit",
+        title: "Power Fit",
+        start: "2025-06-10T19:00:00",
+        end: "2025-06-10T20:00:00",
+        color: "#FF5733",
+        status: "full"
+    },
+    {
+        id: "crf-cf-pf-2025-06-12-08",
+        type: "programs",
+        subType: "Cross Fit",
+        subSubType: "Power Fit",
+        title: "Power Fit",
+        start: "2025-06-12T08:00:00",
+        end: "2025-06-12T09:00:00",
+        color: "#FF5733",
+        status: "4/10"
+    },
+
+    // Total Fit Classes
+    {
+        id: "crf-cf-tf-2025-06-09-12",
+        type: "programs",
+        subType: "Cross Fit",
+        subSubType: "Total Fit",
+        title: "Total Fit",
+        start: "2025-06-09T12:00:00",
+        end: "2025-06-09T13:30:00",
+        color: "#FF5733",
+        status: "8/14"
+    },
+    {
+        id: "crf-cf-tf-2025-06-11-17",
+        type: "programs",
+        subType: "Cross Fit",
+        subSubType: "Total Fit",
+        title: "Total Fit",
+        start: "2025-06-11T17:00:00",
+        end: "2025-06-11T18:30:00",
+        color: "#FF5733",
+        status: "12/14"
+    },
+
+    // YOGA PROGRAMS
+    // Hatha Yoga Classes
+    {
+        id: "yg-hy-2025-06-09-08",
+        type: "programs",
+        subType: "Yoga",
+        subSubType: "Hatha Yoga",
+        title: "Hatha Yoga",
+        start: "2025-06-09T08:00:00",
+        end: "2025-06-09T09:15:00",
+        color: "#8E44AD",
+        status: "6/15"
+    },
+    {
+        id: "yg-hy-2025-06-10-18",
+        type: "programs",
+        subType: "Yoga",
+        subSubType: "Hatha Yoga",
+        title: "Hatha Yoga",
+        start: "2025-06-10T18:00:00",
+        end: "2025-06-10T19:15:00",
+        color: "#8E44AD",
+        status: "11/15"
+    },
+    {
+        id: "yg-hy-2025-06-12-10",
+        type: "programs",
+        subType: "Yoga",
+        subSubType: "Hatha Yoga",
+        title: "Hatha Yoga",
+        start: "2025-06-12T10:00:00",
+        end: "2025-06-12T11:15:00",
+        color: "#8E44AD",
+        status: "9/15"
+    },
+
+    // Vinyasa Flow Classes
+    {
+        id: "yg-vf-2025-06-09-09",
+        type: "programs",
+        subType: "Yoga",
+        subSubType: "Vinyasa Flow",
+        title: "Vinyasa Flow",
+        start: "2025-06-09T09:30:00",
+        end: "2025-06-09T10:45:00",
+        color: "#8E44AD",
+        status: "full"
+    },
+    {
+        id: "yg-vf-2025-06-10-17",
+        type: "programs",
+        subType: "Yoga",
+        subSubType: "Vinyasa Flow",
+        title: "Vinyasa Flow",
+        start: "2025-06-10T17:00:00",
+        end: "2025-06-10T18:15:00",
+        color: "#8E44AD",
+        status: "13/16"
+    },
+    {
+        id: "yg-vf-2025-06-11-19",
+        type: "programs",
+        subType: "Yoga",
+        subSubType: "Vinyasa Flow",
+        title: "Vinyasa Flow",
+        start: "2025-06-11T19:30:00",
+        end: "2025-06-11T20:45:00",
+        color: "#8E44AD",
+        status: "8/16"
+    },
+
+    // Yin Yoga Classes
+    {
+        id: "yg-yn-2025-06-09-19",
+        type: "programs",
+        subType: "Yoga",
+        subSubType: "Yin Yoga",
+        title: "Yin Yoga",
+        start: "2025-06-09T19:00:00",
+        end: "2025-06-09T20:15:00",
+        color: "#8E44AD",
+        status: "7/12"
+    },
+    {
+        id: "yg-yn-2025-06-11-11",
+        type: "programs",
+        subType: "Yoga",
+        subSubType: "Yin Yoga",
+        title: "Yin Yoga",
+        start: "2025-06-11T11:00:00",
+        end: "2025-06-11T12:15:00",
+        color: "#8E44AD",
+        status: "5/12"
+    },
+    {
+        id: "yg-yn-2025-06-13-18",
+        type: "programs",
+        subType: "Yoga",
+        subSubType: "Yin Yoga",
+        title: "Yin Yoga",
+        start: "2025-06-13T18:00:00",
+        end: "2025-06-13T19:15:00",
+        color: "#8E44AD",
+        status: "9/12"
+    },
+
+    // Power Yoga Classes
+    {
+        id: "yg-py-2025-06-10-07",
+        type: "programs",
+        subType: "Yoga",
+        subSubType: "Power Yoga",
+        title: "Power Yoga",
+        start: "2025-06-10T07:00:00",
+        end: "2025-06-10T08:15:00",
+        color: "#8E44AD",
+        status: "10/14"
+    },
+    {
+        id: "yg-py-2025-06-12-17",
+        type: "programs",
+        subType: "Yoga",
+        subSubType: "Power Yoga",
+        title: "Power Yoga",
+        start: "2025-06-12T17:00:00",
+        end: "2025-06-12T18:15:00",
+        color: "#8E44AD",
+        status: "full"
+    },
+
+    // SPINNING PROGRAMS
+    // Spin Basics Classes
+    {
+        id: "sp-sb-2025-06-09-06",
+        type: "programs",
+        subType: "Spinning",
+        subSubType: "Spin Basics",
+        title: "Spin Basics",
+        start: "2025-06-09T06:30:00",
+        end: "2025-06-09T07:30:00",
+        color: "#3498DB",
+        status: "4/12"
+    },
+    {
+        id: "sp-sb-2025-06-11-10",
+        type: "programs",
+        subType: "Spinning",
+        subSubType: "Spin Basics",
+        title: "Spin Basics",
+        start: "2025-06-11T10:00:00",
+        end: "2025-06-11T11:00:00",
+        color: "#3498DB",
+        status: "7/12"
+    },
+    {
+        id: "sp-sb-2025-06-13-19",
+        type: "programs",
+        subType: "Spinning",
+        subSubType: "Spin Basics",
+        title: "Spin Basics",
+        start: "2025-06-13T19:00:00",
+        end: "2025-06-13T20:00:00",
+        color: "#3498DB",
+        status: "6/12"
+    },
+
+    // HIIT Spin Classes
+    {
+        id: "sp-hs-2025-06-09-18",
+        type: "programs",
+        subType: "Spinning",
+        subSubType: "HIIT Spin",
+        title: "HIIT Spin",
+        start: "2025-06-09T18:30:00",
+        end: "2025-06-09T19:15:00",
+        color: "#3498DB",
+        status: "full"
+    },
+    {
+        id: "sp-hs-2025-06-10-12",
+        type: "programs",
+        subType: "Spinning",
+        subSubType: "HIIT Spin",
+        title: "HIIT Spin",
+        start: "2025-06-10T12:00:00",
+        end: "2025-06-10T12:45:00",
+        color: "#3498DB",
+        status: "9/16"
+    },
+    {
+        id: "sp-hs-2025-06-12-18",
+        type: "programs",
+        subType: "Spinning",
+        subSubType: "HIIT Spin",
+        title: "HIIT Spin",
+        start: "2025-06-12T18:00:00",
+        end: "2025-06-12T18:45:00",
+        color: "#3498DB",
+        status: "14/16"
+    },
+
+    // Endurance Ride Classes
+    {
+        id: "sp-er-2025-06-10-08",
+        type: "programs",
+        subType: "Spinning",
+        subSubType: "Endurance Ride",
+        title: "Endurance Ride",
+        start: "2025-06-10T08:00:00",
+        end: "2025-06-10T09:00:00",
+        color: "#3498DB",
+        status: "8/14"
+    },
+    {
+        id: "sp-er-2025-06-11-17",
+        type: "programs",
+        subType: "Spinning",
+        subSubType: "Endurance Ride",
+        title: "Endurance Ride",
+        start: "2025-06-11T17:00:00",
+        end: "2025-06-11T18:00:00",
+        color: "#3498DB",
+        status: "11/14"
+    },
+
+    // Rhythm Ride Classes
+    {
+        id: "sp-rr-2025-06-09-11",
+        type: "programs",
+        subType: "Spinning",
+        subSubType: "Rhythm Ride",
+        title: "Rhythm Ride",
+        start: "2025-06-09T11:00:00",
+        end: "2025-06-09T12:00:00",
+        color: "#3498DB",
+        status: "12/18"
+    },
+    {
+        id: "sp-rr-2025-06-12-19",
+        type: "programs",
+        subType: "Spinning",
+        subSubType: "Rhythm Ride",
+        title: "Rhythm Ride",
+        start: "2025-06-12T19:00:00",
+        end: "2025-06-12T20:00:00",
+        color: "#3498DB",
+        status: "15/18"
+    },
+    {
+        id: "sp-rr-2025-06-13-17",
+        type: "programs",
+        subType: "Spinning",
+        subSubType: "Rhythm Ride",
+        title: "Rhythm Ride",
+        start: "2025-06-13T17:00:00",
+        end: "2025-06-13T18:00:00",
+        color: "#3498DB",
+        status: "full"
+    },
+
+    // PILATES PROGRAMS
+    // Mat Pilates Classes
+    {
+        id: "pl-mp-2025-06-09-08",
+        type: "programs",
+        subType: "Pilates",
+        subSubType: "Mat Pilates",
+        title: "Mat Pilates",
+        start: "2025-06-09T08:00:00",
+        end: "2025-06-09T09:00:00",
+        color: "#E67E22",
+        status: "9/15"
+    },
+    {
+        id: "pl-mp-2025-06-10-11",
+        type: "programs",
+        subType: "Pilates",
+        subSubType: "Mat Pilates",
+        title: "Mat Pilates",
+        start: "2025-06-10T11:00:00",
+        end: "2025-06-10T12:00:00",
+        color: "#E67E22",
+        status: "12/15"
+    },
+    {
+        id: "pl-mp-2025-06-11-18",
+        type: "programs",
+        subType: "Pilates",
+        subSubType: "Mat Pilates",
+        title: "Mat Pilates",
+        start: "2025-06-11T18:30:00",
+        end: "2025-06-11T19:30:00",
+        color: "#E67E22",
+        status: "6/15"
+    },
+    {
+        id: "pl-mp-2025-06-13-09",
+        type: "programs",
+        subType: "Pilates",
+        subSubType: "Mat Pilates",
+        title: "Mat Pilates",
+        start: "2025-06-13T09:00:00",
+        end: "2025-06-13T10:00:00",
+        color: "#E67E22",
+        status: "8/15"
+    },
+
+    // Reformer Pilates Classes
+    {
+        id: "pl-rp-2025-06-09-14",
+        type: "programs",
+        subType: "Pilates",
+        subSubType: "Reformer Pilates",
+        title: "Reformer Pilates",
+        start: "2025-06-09T14:00:00",
+        end: "2025-06-09T15:00:00",
+        color: "#E67E22",
+        status: "full"
+    },
+    {
+        id: "pl-rp-2025-06-10-16",
+        type: "programs",
+        subType: "Pilates",
+        subSubType: "Reformer Pilates",
+        title: "Reformer Pilates",
+        start: "2025-06-10T16:00:00",
+        end: "2025-06-10T17:00:00",
+        color: "#E67E22",
+        status: "7/8"
+    },
+    {
+        id: "pl-rp-2025-06-12-10",
+        type: "programs",
+        subType: "Pilates",
+        subSubType: "Reformer Pilates",
+        title: "Reformer Pilates",
+        start: "2025-06-12T10:00:00",
+        end: "2025-06-12T11:00:00",
+        color: "#E67E22",
+        status: "5/8"
+    },
+
+    // Pilates Fusion Classes
+    {
+        id: "pl-pf-2025-06-09-16",
+        type: "programs",
+        subType: "Pilates",
+        subSubType: "Pilates Fusion",
+        title: "Pilates Fusion",
+        start: "2025-06-09T16:00:00",
+        end: "2025-06-09T17:15:00",
+        color: "#E67E22",
+        status: "10/16"
+    },
+    {
+        id: "pl-pf-2025-06-11-12",
+        type: "programs",
+        subType: "Pilates",
+        subSubType: "Pilates Fusion",
+        title: "Pilates Fusion",
+        start: "2025-06-11T12:30:00",
+        end: "2025-06-11T13:45:00",
+        color: "#E67E22",
+        status: "13/16"
+    },
+    {
+        id: "pl-pf-2025-06-13-11",
+        type: "programs",
+        subType: "Pilates",
+        subSubType: "Pilates Fusion",
+        title: "Pilates Fusion",
+        start: "2025-06-13T11:00:00",
+        end: "2025-06-13T12:15:00",
+        color: "#E67E22",
+        status: "7/16"
+    },
+
+    // Clinical Pilates Classes
+    {
+        id: "pl-cp-2025-06-10-14",
+        type: "programs",
+        subType: "Pilates",
+        subSubType: "Clinical Pilates",
+        title: "Clinical Pilates",
+        start: "2025-06-10T14:00:00",
+        end: "2025-06-10T15:00:00",
+        color: "#E67E22",
+        status: "4/6"
+    },
+    {
+        id: "pl-cp-2025-06-12-15",
+        type: "programs",
+        subType: "Pilates",
+        subSubType: "Clinical Pilates",
+        title: "Clinical Pilates",
+        start: "2025-06-12T15:00:00",
+        end: "2025-06-12T16:00:00",
+        color: "#E67E22",
+        status: "5/6"
+    },
+    {
+        id: "pl-cp-2025-06-13-14",
+        type: "programs",
+        subType: "Pilates",
+        subSubType: "Clinical Pilates",
+        title: "Clinical Pilates",
+        start: "2025-06-13T14:00:00",
+        end: "2025-06-13T15:00:00",
+        color: "#E67E22",
+        status: "full"
+    }
 ];
 
 export function getAllEventCourseAndTrainerAvailability() {

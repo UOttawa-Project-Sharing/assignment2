@@ -413,7 +413,7 @@ function TrainerPage() {
                                     style={{
                                         position: "absolute",
                                         top: 44,
-                                        left: 0,
+                                        left: -40,
                                         width: 120,
                                         height: 18,
                                         borderRadius: 8,
@@ -426,7 +426,7 @@ function TrainerPage() {
                                     style={{
                                         position: "absolute",
                                         bottom: 46,
-                                        right: 0,
+                                        right: -40,
                                         width: 120,
                                         height: 18,
                                         borderRadius: 8,
