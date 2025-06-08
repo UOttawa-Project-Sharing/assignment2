@@ -8,6 +8,7 @@ import ProgramPage from "./pages/ProgramPage.jsx";
 import TrainersPage from "./pages/Trainers.jsx";
 import HomePage from "./pages/Home.jsx";
 import Footer from "./components/Footer.jsx";
+import TrainerPage from "./pages/TrainerPage.jsx";
 
 const NotFoundPage = () => {
     return (
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/programs" element={<ProgramsPage/>}/>
                 <Route path="/programs/:programName" element={<ProgramPage/>}/>
                 <Route path="/trainers" element={<TrainersPage/>}/>
+                <Route path="/trainers/:TainerName" element={<TrainerPage/>}/>
                 <Route path="/contact" element={<Contact/>}/>
                 <Route path="/memberships" element={<MembershipPage/>}/>
                 <Route path="*" element={<NotFoundPage/>}/>

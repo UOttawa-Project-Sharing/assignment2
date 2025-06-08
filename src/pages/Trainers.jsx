@@ -14,7 +14,7 @@ const trainers = [{
     image: "https://randomuser.me/api/portraits/men/44.jpg",
     link: "/trainers/michel",
 }, {
-    name: "George",
+    name: "Lucy",
     description: "George is a certified personal trainer with over a decade of experience helping clients achieve their fitness goals. Passionate and motivating, he specializes in strength training and functional movement.",
     image: "https://randomuser.me/api/portraits/men/32.jpg",
     link: "/trainers/george2",
