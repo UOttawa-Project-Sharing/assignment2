@@ -2,35 +2,7 @@ import React from "react";
 import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
 import { useRedirectToBooking } from "../utils/redirection.js";
 
-const plans = [{
-    title: "Base",
-    price: 20,
-    per: "Month",
-    description: "For casual people",
-    features: [{ text: "Gym Access", included: true }],
-    highlight: false,
-}, {
-    title: "Advanced",
-    price: 49,
-    per: "Month",
-    description: "For people that want quick progress",
-    features: [{ text: "Gym Access", included: true }, { text: "1 free course / week", included: true }],
-    highlight: true,
-    tag: "Most Value",
-}, {
-    title: "Expert",
-    price: 120,
-    per: "Month",
-    description: "For people that want the best progress",
-    features: [{ text: "Gym Access", included: true }, { text: "4 free course / week", included: true }],
-    highlight: false,
-}];
-
-const membershipTypeMap = {
-    Base: { type: "Membership", subType: "Base", subSubType: "", eventId: "" },
-    Advanced: { type: "membership", subType: "Advanced", subSubType: "", eventId: "" },
-    Expert: { type: "membership", subType: "Expert", subSubType: "", eventId: "" },
-};
+import { MembershipPlans as plans, MembershipTypeMap } from "../utils/data.js";
 
 function MembershipPage() {
     const redirectToBooking = useRedirectToBooking();
@@ -101,7 +73,7 @@ function MembershipPage() {
                                 <Button
                                     variant="info"
                                     className="w-100 fw-bold fs-5 rounded mt-2 text-dark"
-                                    onClick={() => redirectToBooking(membershipTypeMap[plan.title])}
+                                    onClick={() => redirectToBooking(MembershipTypeMap[plan.title])}
                                 >
                                     Subscribe
                                 </Button>

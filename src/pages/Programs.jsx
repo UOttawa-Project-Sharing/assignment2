@@ -11,22 +11,18 @@ const programs = [{
     title: "Cross Fit",
     description: ["This is a short cross fit description. This is a short cross fit description. This is a short cross fit description.",],
     image: crossfitImg,
-    link: "/programs/crossfit",
 }, {
     title: "Yoga",
     description: ["This is a short yoga description. This is a short yoga description. This is a short yoga description.",],
     image: yogaImg,
-    link: "/programs/yoga",
 }, {
     title: "Spinning",
     description: ["This is a short spinning description. This is a short spinning description. This is a short spinning description.",],
     image: spinningImg,
-    link: "/programs/spinning",
 }, {
     title: "Pilates",
     description: ["This is a short Pilates description. This is a short Pilates description. This is a short Pilates description.",],
     image: pilatesImg,
-    link: "/programs/pilates",
 },];
 
 function ProgramsPage() {
@@ -90,7 +86,7 @@ function ProgramsPage() {
                                                     alignSelf: alignLeft ? "flex-end" : "flex-start"
                                                 }}
                                                 as={Link}
-                                                to={program.link}
+                                                to={`/programs/${program.title.toLowerCase().replace(/\s+/g, "")}`}
                                             >
                                                 More Info
                                             </Button>

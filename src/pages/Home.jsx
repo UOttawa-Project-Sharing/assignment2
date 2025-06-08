@@ -2,27 +2,7 @@ import React from "react";
 import {Carousel, Container} from "react-bootstrap";
 import About from "../components/About.jsx";
 
-const carouselItems = [{
-    image: "https://picsum.photos/1200/800?random=101",
-    title: "Discover Our Cross Fit Programs",
-    quote: "Strength does not come from the body. It comes from the will.",
-}, {
-    image: "https://picsum.photos/1200/800?random=102",
-    title: "Experience Our Yoga Classes",
-    quote: "The body benefits from movement, and the mind benefits from stillness.",
-}, {
-    image: "https://picsum.photos/1200/800?random=103",
-    title: "Join Our Spinning Sessions",
-    quote: "Don’t limit your challenges. Challenge your limits.",
-}, {
-    image: "https://picsum.photos/1200/800?random=104",
-    title: "Make Progress with Pilates",
-    quote: "Change happens through movement and movement heals.",
-}, {
-    image: "https://picsum.photos/1200/800?random=105",
-    title: "Meet Our Team",
-    quote: "Alone we can do so little; together we can do so much.",
-},];
+import {HomePageData} from "../utils/data.js";
 
 const gymName = "GymJim";
 
@@ -41,7 +21,7 @@ function HomePage() {
                 }}
             >
                 <Carousel indicators={false} interval={6000} className="mb-0 h-100">
-                    {carouselItems.map((item, idx) => (<Carousel.Item key={idx} className="h-100">
+                    {HomePageData.map((item, idx) => (<Carousel.Item key={idx} className="h-100">
                         <div
                             className="position-relative w-100 h-100 d-flex align-items-center justify-content-center overflow-hidden bg-light"
                             style={{
