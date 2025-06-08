@@ -295,70 +295,364 @@ export function getTrainerById(id) {
     return trainers.find(trainer => trainer.id === id);
 }
 
+function getTrainerAvailability({
+                                    trainerId = "george",
+                                    type = "personal trainer",
+                                    subType = "George Lechapé",
+                                    color = "#4c9be8",
+                                    slotPatterns = []
+                                } = {}) {
+    if (!Array.isArray(slotPatterns) || slotPatterns.length === 0) {
+        throw new Error("slotPatterns array is required and must be non-empty.");
+    }
+
+    const availabilities = [];
+    const now = new Date();
+    const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    const endDate = new Date(startDate);
+    endDate.setMonth(endDate.getMonth() + 2);
+
+    // Helper to deterministically skip some days (e.g. skip every 4th and 7th day)
+    function shouldSkipDay(dayIndex) {
+        return (dayIndex % 7 === 3 || dayIndex % 7 === 6);
+    }
+
+    let dayIndex = 0;
+    for (let d = new Date(startDate); d < endDate; d.setDate(d.getDate() + 1), dayIndex++) {
+        if (shouldSkipDay(dayIndex)) continue;
+        const dateStr = d.toISOString().slice(0, 10); // "YYYY-MM-DD"
+        // Choose a pattern based on the day index for variety
+        const slots = slotPatterns[dayIndex % slotPatterns.length];
+        for (const slot of slots) {
+            const startHour = String(slot.hour).padStart(2, "0");
+            const startDateTime = `${dateStr}T${startHour}:00:00`;
+            const endHour = String(slot.hour + 1).padStart(2, "0");
+            const endDateTime = `${dateStr}T${endHour}:00:00`;
+            availabilities.push({
+                id: `${trainerId}-${dateStr}-${startHour}`,
+                type,
+                subType,
+                title: `PT: ${subType}`,
+                start: startDateTime,
+                end: endDateTime,
+                color,
+                status: slot.status
+            });
+        }
+    }
+    return availabilities;
+}
+
+const georgeSlotPatterns = [
+    [
+        { hour: 9, status: 'available' },
+        { hour: 10, status: 'booked' },
+        { hour: 14, status: 'available' },
+        { hour: 15, status: 'available' }
+    ],
+    [
+        { hour: 8, status: 'available' },
+        { hour: 11, status: 'booked' },
+        { hour: 16, status: 'available' }
+    ],
+    [
+        { hour: 9, status: 'available' },
+        { hour: 12, status: 'booked' }
+    ],
+    [
+        { hour: 10, status: 'available' },
+        { hour: 13, status: 'available' },
+        { hour: 17, status: 'booked' }
+    ]
+];
+
+const georgeAvailability = getTrainerAvailability({
+    trainerId: "george",
+    type: "personal trainer",
+    subType: "George Lechapé",
+    color: "#4c9be8",
+    slotPatterns: georgeSlotPatterns
+});
+
+const sarahSlotPatterns = [
+    [
+        { hour: 7, status: 'available' },
+        { hour: 8, status: 'booked' },
+        { hour: 18, status: 'available' }
+    ],
+    [
+        { hour: 12, status: 'available' },
+        { hour: 13, status: 'available' },
+        { hour: 17, status: 'booked' }
+    ],
+    [
+        { hour: 11, status: 'available' }
+    ],
+    [
+        { hour: 9, status: 'available' },
+        { hour: 15, status: 'booked' },
+        { hour: 16, status: 'available' }
+    ]
+];
+
+const sarahAvailability = getTrainerAvailability({
+    trainerId: "sarah",
+    type: "personal trainer",
+    subType: "Sarah Martinez",
+    color: "#e84c8b",
+    slotPatterns: sarahSlotPatterns
+});
+
+const marcusSlotPatterns = [
+    [
+        { hour: 8, status: 'available' },
+        { hour: 9, status: 'booked' },
+        { hour: 14, status: 'available' }
+    ],
+    [
+        { hour: 10, status: 'available' },
+        { hour: 11, status: 'booked' },
+        { hour: 15, status: 'available' }
+    ],
+    [
+        { hour: 12, status: 'available' },
+        { hour: 13, status: 'booked' }
+    ],
+    [
+        { hour: 16, status: 'available' },
+        { hour: 17, status: 'booked' }
+    ]
+];
+
+const marcusAvailability = getTrainerAvailability({
+    trainerId: "marcus",
+    type: "personal trainer",
+    subType: "Marcus Thompson",
+    color: "#f39c12",
+    slotPatterns: marcusSlotPatterns
+});
+
+const elenaSlotPatterns = [
+    [
+        { hour: 6, status: 'available' },
+        { hour: 9, status: 'available' },
+        { hour: 13, status: 'booked' },
+        { hour: 19, status: 'available' }
+    ],
+    [
+        { hour: 7, status: 'booked' },
+        { hour: 10, status: 'available' },
+        { hour: 14, status: 'available' },
+        { hour: 18, status: 'available' }
+    ],
+    [
+        { hour: 9, status: 'booked' },
+        { hour: 12, status: 'available' },
+        { hour: 17, status: 'available' }
+    ],
+    [
+        { hour: 6, status: 'available' },
+        { hour: 11, status: 'booked' },
+        { hour: 16, status: 'available' }
+    ]
+];
+const elenaAvailability = getTrainerAvailability({
+    trainerId: "elena",
+    type: "personal trainer",
+    subType: "Elena Rodriguez",
+    color: "#8bc34a",
+    slotPatterns: elenaSlotPatterns
+});
+
+const alexSlotPatterns = [
+    [
+        { hour: 10, status: 'available' },
+        { hour: 11, status: 'available' },
+        { hour: 15, status: 'booked' },
+        { hour: 20, status: 'available' }
+    ],
+    [
+        { hour: 9, status: 'available' },
+        { hour: 12, status: 'booked' },
+        { hour: 16, status: 'available' },
+        { hour: 18, status: 'available' }
+    ],
+    [
+        { hour: 11, status: 'available' },
+        { hour: 17, status: 'booked' },
+        { hour: 19, status: 'available' }
+    ],
+    [
+        { hour: 10, status: 'booked' },
+        { hour: 13, status: 'available' },
+        { hour: 17, status: 'available' }
+    ]
+];
+const alexAvailability = getTrainerAvailability({
+    trainerId: "alex",
+    type: "personal trainer",
+    subType: "Alex Chen",
+    color: "#9c27b0",
+    slotPatterns: alexSlotPatterns
+});
+
+const jessicaSlotPatterns = [
+    [
+        { hour: 9, status: 'available' },
+        { hour: 10, status: 'available' },
+        { hour: 14, status: 'booked' },
+        { hour: 16, status: 'available' }
+    ],
+    [
+        { hour: 8, status: 'available' },
+        { hour: 13, status: 'booked' },
+        { hour: 15, status: 'available' }
+    ],
+    [
+        { hour: 10, status: 'available' },
+        { hour: 14, status: 'booked' }
+    ],
+    [
+        { hour: 9, status: 'available' },
+        { hour: 13, status: 'available' },
+        { hour: 16, status: 'booked' }
+    ]
+];
+const jessicaAvailability = getTrainerAvailability({
+    trainerId: "jessica",
+    type: "personal trainer",
+    subType: "Jessica Williams",
+    color: "#ffc107",
+    slotPatterns: jessicaSlotPatterns
+});
+
+const davidSlotPatterns = [
+    [
+        { hour: 6, status: 'available' },
+        { hour: 7, status: 'booked' },
+        { hour: 17, status: 'available' },
+        { hour: 18, status: 'available' }
+    ],
+    [
+        { hour: 8, status: 'available' },
+        { hour: 9, status: 'booked' },
+        { hour: 19, status: 'available' }
+    ],
+    [
+        { hour: 6, status: 'booked' },
+        { hour: 15, status: 'available' },
+        { hour: 20, status: 'available' }
+    ],
+    [
+        { hour: 7, status: 'available' },
+        { hour: 16, status: 'booked' },
+        { hour: 18, status: 'available' }
+    ]
+];
+const davidAvailability = getTrainerAvailability({
+    trainerId: "david",
+    type: "personal trainer",
+    subType: "David Kim",
+    color: "#607d8b",
+    slotPatterns: davidSlotPatterns
+});
+
+const mayaSlotPatterns = [
+    [
+        { hour: 8, status: 'available' },
+        { hour: 12, status: 'available' },
+        { hour: 17, status: 'booked' },
+        { hour: 19, status: 'available' }
+    ],
+    [
+        { hour: 7, status: 'booked' },
+        { hour: 15, status: 'available' },
+        { hour: 18, status: 'available' }
+    ],
+    [
+        { hour: 8, status: 'available' },
+        { hour: 12, status: 'booked' },
+        { hour: 13, status: 'available' }
+    ],
+    [
+        { hour: 9, status: 'available' },
+        { hour: 14, status: 'booked' },
+        { hour: 17, status: 'available' }
+    ]
+];
+const mayaAvailability = getTrainerAvailability({
+    trainerId: "maya",
+    type: "personal trainer",
+    subType: "Maya Patel",
+    color: "#e91e63",
+    slotPatterns: mayaSlotPatterns
+});
+
 export const trainerAvailability = [
     // George Lechapé - Strength & Cardio Coach
-    { id: "george-2025-06-09-09", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-09T09:00:00", end: "2025-06-09T10:00:00", color: "#4c9be8", status: "available" },
-    { id: "george-2025-06-09-10", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-09T10:00:00", end: "2025-06-09T11:00:00", color: "#4c9be8", status: "booked" },
-    { id: "george-2025-06-09-14", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-09T14:00:00", end: "2025-06-09T15:00:00", color: "#4c9be8", status: "available" },
-    { id: "george-2025-06-09-15", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-09T15:00:00", end: "2025-06-09T16:00:00", color: "#4c9be8", status: "available" },
-    { id: "george-2025-06-10-08", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-10T08:00:00", end: "2025-06-10T09:00:00", color: "#4c9be8", status: "booked" },
-    { id: "george-2025-06-10-16", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-10T16:00:00", end: "2025-06-10T17:00:00", color: "#4c9be8", status: "available" },
-
+    // { id: "george-2025-06-09-09", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-09T09:00:00", end: "2025-06-09T10:00:00", color: "#4c9be8", status: "available" },
+    // { id: "george-2025-06-09-10", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-09T10:00:00", end: "2025-06-09T11:00:00", color: "#4c9be8", status: "booked" },
+    // { id: "george-2025-06-09-14", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-09T14:00:00", end: "2025-06-09T15:00:00", color: "#4c9be8", status: "available" },
+    // { id: "george-2025-06-09-15", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-09T15:00:00", end: "2025-06-09T16:00:00", color: "#4c9be8", status: "available" },
+    // { id: "george-2025-06-10-08", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-10T08:00:00", end: "2025-06-10T09:00:00", color: "#4c9be8", status: "booked" },
+    // { id: "george-2025-06-10-16", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-10T16:00:00", end: "2025-06-10T17:00:00", color: "#4c9be8", status: "available" },
+    ...georgeAvailability,
     // Sarah Martinez - Yoga & Pilates Specialist
-    { id: "sarah-2025-06-09-07", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-09T07:00:00", end: "2025-06-09T08:00:00", color: "#e84c8b", status: "available" },
-    { id: "sarah-2025-06-09-11", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-09T11:00:00", end: "2025-06-09T12:00:00", color: "#e84c8b", status: "booked" },
-    { id: "sarah-2025-06-09-17", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-09T17:00:00", end: "2025-06-09T18:00:00", color: "#e84c8b", status: "available" },
-    { id: "sarah-2025-06-09-18", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-09T18:00:00", end: "2025-06-09T19:00:00", color: "#e84c8b", status: "available" },
-    { id: "sarah-2025-06-10-07", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-10T07:00:00", end: "2025-06-10T08:00:00", color: "#e84c8b", status: "available" },
-    { id: "sarah-2025-06-10-19", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-10T19:00:00", end: "2025-06-10T20:00:00", color: "#e84c8b", status: "booked" },
-
+    // { id: "sarah-2025-06-09-07", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-09T07:00:00", end: "2025-06-09T08:00:00", color: "#e84c8b", status: "available" },
+    // { id: "sarah-2025-06-09-11", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-09T11:00:00", end: "2025-06-09T12:00:00", color: "#e84c8b", status: "booked" },
+    // { id: "sarah-2025-06-09-17", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-09T17:00:00", end: "2025-06-09T18:00:00", color: "#e84c8b", status: "available" },
+    // { id: "sarah-2025-06-09-18", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-09T18:00:00", end: "2025-06-09T19:00:00", color: "#e84c8b", status: "available" },
+    // { id: "sarah-2025-06-10-07", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-10T07:00:00", end: "2025-06-10T08:00:00", color: "#e84c8b", status: "available" },
+    // { id: "sarah-2025-06-10-19", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-10T19:00:00", end: "2025-06-10T20:00:00", color: "#e84c8b", status: "booked" },
+    ...sarahAvailability,
     // Marcus Thompson - Athletic Performance Coach
-    { id: "marcus-2025-06-09-08", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-09T08:00:00", end: "2025-06-09T09:00:00", color: "#ff6b35", status: "available" },
-    { id: "marcus-2025-06-09-12", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-09T12:00:00", end: "2025-06-09T13:00:00", color: "#ff6b35", status: "available" },
-    { id: "marcus-2025-06-09-13", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-09T13:00:00", end: "2025-06-09T14:00:00", color: "#ff6b35", status: "booked" },
-    { id: "marcus-2025-06-09-16", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-09T16:00:00", end: "2025-06-09T17:00:00", color: "#ff6b35", status: "available" },
-    { id: "marcus-2025-06-10-06", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-10T06:00:00", end: "2025-06-10T07:00:00", color: "#ff6b35", status: "booked" },
-    { id: "marcus-2025-06-10-15", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-10T15:00:00", end: "2025-06-10T16:00:00", color: "#ff6b35", status: "available" },
-
+    // { id: "marcus-2025-06-09-08", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-09T08:00:00", end: "2025-06-09T09:00:00", color: "#ff6b35", status: "available" },
+    // { id: "marcus-2025-06-09-12", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-09T12:00:00", end: "2025-06-09T13:00:00", color: "#ff6b35", status: "available" },
+    // { id: "marcus-2025-06-09-13", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-09T13:00:00", end: "2025-06-09T14:00:00", color: "#ff6b35", status: "booked" },
+    // { id: "marcus-2025-06-09-16", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-09T16:00:00", end: "2025-06-09T17:00:00", color: "#ff6b35", status: "available" },
+    // { id: "marcus-2025-06-10-06", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-10T06:00:00", end: "2025-06-10T07:00:00", color: "#ff6b35", status: "booked" },
+    // { id: "marcus-2025-06-10-15", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-10T15:00:00", end: "2025-06-10T16:00:00", color: "#ff6b35", status: "available" },
+    ...marcusAvailability,
     // Elena Rodriguez - Weight Loss Specialist
-    { id: "elena-2025-06-09-06", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-09T06:00:00", end: "2025-06-09T07:00:00", color: "#8bc34a", status: "available" },
-    { id: "elena-2025-06-09-09", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-09T09:00:00", end: "2025-06-09T10:00:00", color: "#8bc34a", status: "available" },
-    { id: "elena-2025-06-09-13", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-09T13:00:00", end: "2025-06-09T14:00:00", color: "#8bc34a", status: "booked" },
-    { id: "elena-2025-06-09-19", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-09T19:00:00", end: "2025-06-09T20:00:00", color: "#8bc34a", status: "available" },
-    { id: "elena-2025-06-10-09", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-10T09:00:00", end: "2025-06-10T10:00:00", color: "#8bc34a", status: "booked" },
-    { id: "elena-2025-06-10-18", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-10T18:00:00", end: "2025-06-10T19:00:00", color: "#8bc34a", status: "available" },
-
+    // { id: "elena-2025-06-09-06", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-09T06:00:00", end: "2025-06-09T07:00:00", color: "#8bc34a", status: "available" },
+    // { id: "elena-2025-06-09-09", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-09T09:00:00", end: "2025-06-09T10:00:00", color: "#8bc34a", status: "available" },
+    // { id: "elena-2025-06-09-13", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-09T13:00:00", end: "2025-06-09T14:00:00", color: "#8bc34a", status: "booked" },
+    // { id: "elena-2025-06-09-19", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-09T19:00:00", end: "2025-06-09T20:00:00", color: "#8bc34a", status: "available" },
+    // { id: "elena-2025-06-10-09", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-10T09:00:00", end: "2025-06-10T10:00:00", color: "#8bc34a", status: "booked" },
+    // { id: "elena-2025-06-10-18", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-10T18:00:00", end: "2025-06-10T19:00:00", color: "#8bc34a", status: "available" },
+    ...elenaAvailability,
     // Alex Chen - Functional Fitness Expert
-    { id: "alex-2025-06-09-10", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-09T10:00:00", end: "2025-06-09T11:00:00", color: "#9c27b0", status: "available" },
-    { id: "alex-2025-06-09-11", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-09T11:00:00", end: "2025-06-09T12:00:00", color: "#9c27b0", status: "available" },
-    { id: "alex-2025-06-09-15", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-09T15:00:00", end: "2025-06-09T16:00:00", color: "#9c27b0", status: "booked" },
-    { id: "alex-2025-06-09-20", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-09T20:00:00", end: "2025-06-09T21:00:00", color: "#9c27b0", status: "available" },
-    { id: "alex-2025-06-10-11", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-10T11:00:00", end: "2025-06-10T12:00:00", color: "#9c27b0", status: "available" },
-    { id: "alex-2025-06-10-17", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-10T17:00:00", end: "2025-06-10T18:00:00", color: "#9c27b0", status: "booked" },
-
+    // { id: "alex-2025-06-09-10", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-09T10:00:00", end: "2025-06-09T11:00:00", color: "#9c27b0", status: "available" },
+    // { id: "alex-2025-06-09-11", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-09T11:00:00", end: "2025-06-09T12:00:00", color: "#9c27b0", status: "available" },
+    // { id: "alex-2025-06-09-15", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-09T15:00:00", end: "2025-06-09T16:00:00", color: "#9c27b0", status: "booked" },
+    // { id: "alex-2025-06-09-20", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-09T20:00:00", end: "2025-06-09T21:00:00", color: "#9c27b0", status: "available" },
+    // { id: "alex-2025-06-10-11", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-10T11:00:00", end: "2025-06-10T12:00:00", color: "#9c27b0", status: "available" },
+    // { id: "alex-2025-06-10-17", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-10T17:00:00", end: "2025-06-10T18:00:00", color: "#9c27b0", status: "booked" },
+    ...alexAvailability,
     // Jessica Williams - Senior Fitness Specialist
-    { id: "jessica-2025-06-09-09", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-09T09:00:00", end: "2025-06-09T10:00:00", color: "#ffc107", status: "available" },
-    { id: "jessica-2025-06-09-10", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-09T10:00:00", end: "2025-06-09T11:00:00", color: "#ffc107", status: "available" },
-    { id: "jessica-2025-06-09-14", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-09T14:00:00", end: "2025-06-09T15:00:00", color: "#ffc107", status: "booked" },
-    { id: "jessica-2025-06-09-16", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-09T16:00:00", end: "2025-06-09T17:00:00", color: "#ffc107", status: "available" },
-    { id: "jessica-2025-06-10-10", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-10T10:00:00", end: "2025-06-10T11:00:00", color: "#ffc107", status: "available" },
-    { id: "jessica-2025-06-10-14", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-10T14:00:00", end: "2025-06-10T15:00:00", color: "#ffc107", status: "booked" },
-
+    // { id: "jessica-2025-06-09-09", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-09T09:00:00", end: "2025-06-09T10:00:00", color: "#ffc107", status: "available" },
+    // { id: "jessica-2025-06-09-10", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-09T10:00:00", end: "2025-06-09T11:00:00", color: "#ffc107", status: "available" },
+    // { id: "jessica-2025-06-09-14", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-09T14:00:00", end: "2025-06-09T15:00:00", color: "#ffc107", status: "booked" },
+    // { id: "jessica-2025-06-09-16", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-09T16:00:00", end: "2025-06-09T17:00:00", color: "#ffc107", status: "available" },
+    // { id: "jessica-2025-06-10-10", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-10T10:00:00", end: "2025-06-10T11:00:00", color: "#ffc107", status: "available" },
+    // { id: "jessica-2025-06-10-14", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-10T14:00:00", end: "2025-06-10T15:00:00", color: "#ffc107", status: "booked" },
+    ...jessicaAvailability,
     // David Kim - Strength Training Expert
-    { id: "david-2025-06-09-06", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-09T06:00:00", end: "2025-06-09T07:00:00", color: "#607d8b", status: "available" },
-    { id: "david-2025-06-09-07", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-09T07:00:00", end: "2025-06-09T08:00:00", color: "#607d8b", status: "booked" },
-    { id: "david-2025-06-09-17", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-09T17:00:00", end: "2025-06-09T18:00:00", color: "#607d8b", status: "available" },
-    { id: "david-2025-06-09-18", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-09T18:00:00", end: "2025-06-09T19:00:00", color: "#607d8b", status: "available" },
-    { id: "david-2025-06-10-06", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-10T06:00:00", end: "2025-06-10T07:00:00", color: "#607d8b", status: "booked" },
-    { id: "david-2025-06-10-19", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-10T19:00:00", end: "2025-06-10T20:00:00", color: "#607d8b", status: "available" },
-
+    // { id: "david-2025-06-09-06", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-09T06:00:00", end: "2025-06-09T07:00:00", color: "#607d8b", status: "available" },
+    // { id: "david-2025-06-09-07", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-09T07:00:00", end: "2025-06-09T08:00:00", color: "#607d8b", status: "booked" },
+    // { id: "david-2025-06-09-17", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-09T17:00:00", end: "2025-06-09T18:00:00", color: "#607d8b", status: "available" },
+    // { id: "david-2025-06-09-18", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-09T18:00:00", end: "2025-06-09T19:00:00", color: "#607d8b", status: "available" },
+    // { id: "david-2025-06-10-06", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-10T06:00:00", end: "2025-06-10T07:00:00", color: "#607d8b", status: "booked" },
+    // { id: "david-2025-06-10-19", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-10T19:00:00", end: "2025-06-10T20:00:00", color: "#607d8b", status: "available" },
+    ...davidAvailability,
     // Maya Patel - HIIT & Circuit Training
-    { id: "maya-2025-06-09-08", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-09T08:00:00", end: "2025-06-09T09:00:00", color: "#e91e63", status: "available" },
-    { id: "maya-2025-06-09-12", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-09T12:00:00", end: "2025-06-09T13:00:00", color: "#e91e63", status: "available" },
-    { id: "maya-2025-06-09-17", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-09T17:00:00", end: "2025-06-09T18:00:00", color: "#e91e63", status: "booked" },
-    { id: "maya-2025-06-09-19", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-09T19:00:00", end: "2025-06-09T20:00:00", color: "#e91e63", status: "available" },
-    { id: "maya-2025-06-10-08", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-10T08:00:00", end: "2025-06-10T09:00:00", color: "#e91e63", status: "available" },
-    { id: "maya-2025-06-10-12", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-10T12:00:00", end: "2025-06-10T13:00:00", color: "#e91e63", status: "booked" }
+    // { id: "maya-2025-06-09-08", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-09T08:00:00", end: "2025-06-09T09:00:00", color: "#e91e63", status: "available" },
+    // { id: "maya-2025-06-09-12", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-09T12:00:00", end: "2025-06-09T13:00:00", color: "#e91e63", status: "available" },
+    // { id: "maya-2025-06-09-17", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-09T17:00:00", end: "2025-06-09T18:00:00", color: "#e91e63", status: "booked" },
+    // { id: "maya-2025-06-09-19", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-09T19:00:00", end: "2025-06-09T20:00:00", color: "#e91e63", status: "available" },
+    // { id: "maya-2025-06-10-08", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-10T08:00:00", end: "2025-06-10T09:00:00", color: "#e91e63", status: "available" },
+    // { id: "maya-2025-06-10-12", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-10T12:00:00", end: "2025-06-10T13:00:00", color: "#e91e63", status: "booked" },
+    ...mayaAvailability,
 ];
 
 export function getTrainerAvailabilityByName(name) {
@@ -369,7 +663,7 @@ export const AllCourse = [
     // CROSSFIT PROGRAMS
     // Open Gym Sessions
     {
-        id: "crf-cf-og-2025-06-09-06",
+        id: "cf-og-2025-06-09-06",
         type: "programs",
         subType: "Cross Fit",
         subSubType: "Open Gym",
@@ -380,7 +674,7 @@ export const AllCourse = [
         status: "8/15"
     },
     {
-        id: "crf-cf-og-2025-06-09-18",
+        id: "cf-og-2025-06-09-18",
         type: "programs",
         subType: "Cross Fit",
         subSubType: "Open Gym",
@@ -391,7 +685,7 @@ export const AllCourse = [
         status: "12/15"
     },
     {
-        id: "crf-cf-og-2025-06-10-06",
+        id: "cf-og-2025-06-10-06",
         type: "programs",
         subType: "Cross Fit",
         subSubType: "Open Gym",
@@ -402,7 +696,7 @@ export const AllCourse = [
         status: "5/15"
     },
     {
-        id: "crf-cf-og-2025-06-11-19",
+        id: "cf-og-2025-06-11-19",
         type: "programs",
         subType: "Cross Fit",
         subSubType: "Open Gym",
@@ -415,7 +709,7 @@ export const AllCourse = [
 
     // Circuit Fit Classes
     {
-        id: "crf-cf-cf-2025-06-09-10",
+        id: "cf-cf-2025-06-09-10",
         type: "programs",
         subType: "Cross Fit",
         subSubType: "Circuit Fit",
@@ -426,7 +720,7 @@ export const AllCourse = [
         status: "full"
     },
     {
-        id: "crf-cf-cf-2025-06-09-17",
+        id: "cf-cf-2025-06-09-17",
         type: "programs",
         subType: "Cross Fit",
         subSubType: "Circuit Fit",
@@ -437,7 +731,7 @@ export const AllCourse = [
         status: "11/12"
     },
     {
-        id: "crf-cf-cf-2025-06-10-09",
+        id: "cf-cf-2025-06-10-09",
         type: "programs",
         subType: "Cross Fit",
         subSubType: "Circuit Fit",
@@ -448,7 +742,7 @@ export const AllCourse = [
         status: "7/12"
     },
     {
-        id: "crf-cf-cf-2025-06-11-18",
+        id: "cf-cf-2025-06-11-18",
         type: "programs",
         subType: "Cross Fit",
         subSubType: "Circuit Fit",
@@ -461,7 +755,7 @@ export const AllCourse = [
 
     // Power Fit Classes
     {
-        id: "crf-cf-pf-2025-06-09-07",
+        id: "cf-pf-2025-06-09-07",
         type: "programs",
         subType: "Cross Fit",
         subSubType: "Power Fit",
@@ -472,7 +766,7 @@ export const AllCourse = [
         status: "6/10"
     },
     {
-        id: "crf-cf-pf-2025-06-10-19",
+        id: "cf-pf-2025-06-10-19",
         type: "programs",
         subType: "Cross Fit",
         subSubType: "Power Fit",
@@ -483,7 +777,7 @@ export const AllCourse = [
         status: "full"
     },
     {
-        id: "crf-cf-pf-2025-06-12-08",
+        id: "cf-pf-2025-06-12-08",
         type: "programs",
         subType: "Cross Fit",
         subSubType: "Power Fit",
@@ -496,7 +790,7 @@ export const AllCourse = [
 
     // Total Fit Classes
     {
-        id: "crf-cf-tf-2025-06-09-12",
+        id: "cf-tf-2025-06-09-12",
         type: "programs",
         subType: "Cross Fit",
         subSubType: "Total Fit",
@@ -507,7 +801,7 @@ export const AllCourse = [
         status: "8/14"
     },
     {
-        id: "crf-cf-tf-2025-06-11-17",
+        id: "cf-tf-2025-06-11-17",
         type: "programs",
         subType: "Cross Fit",
         subSubType: "Total Fit",
