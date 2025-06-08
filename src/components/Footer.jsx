@@ -61,6 +61,11 @@ function Footer() {
                 <Link to="/tos" className="text-white text-decoration-underline">
                   Terms of Service
                 </Link>
+                </span>
+                            <span className="d-none d-md-inline mx-2">|</span>
+                        <span>
+                            <a href="https://github.com/UOttawa-Project-Sharing/seg3525-assignment2" className="text-white text-decoration-underline">GitHub Repository</a>
+
               </span>
                     </div>
                 </Col>
