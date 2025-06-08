@@ -1,8 +1,9 @@
 import React from "react";
-import {useParams} from "react-router";
-import {Carousel, Card, Row, Col, Container} from "react-bootstrap";
+import {useParams, useNavigate} from "react-router";
+import {Carousel, Card, Row, Col, Container, Button} from "react-bootstrap";
 
 import { getProgramById } from "../utils/data.js";
+import {useRedirectToBooking} from "../utils/redirection.js";
 
 // Inline CSS styles for the component
 const styles = {
@@ -51,6 +52,18 @@ const styles = {
     }, cardDescActive: {
         opacity: 1, pointerEvents: "auto", maxHeight: 200,
     },
+    // new: for the book button
+    bookButton: {
+        opacity: 0,
+        pointerEvents: "none",
+        transition: "opacity 0.25s, transform 0.18s",
+        transform: "translateY(10px)",
+    },
+    bookButtonActive: {
+        opacity: 1,
+        pointerEvents: "auto",
+        transform: "translateY(0)",
+    },
 };
 
 function chunkArray(array, size) {
@@ -63,6 +76,7 @@ function chunkArray(array, size) {
 
 function ProgramPage() {
     const {programName} = useParams();
+    const redirectBooking = useRedirectToBooking();
     const program = getProgramById(programName);
     const [hoveredIndex, setHoveredIndex] = React.useState(null);
 
@@ -91,42 +105,64 @@ function ProgramPage() {
             >
                 {slides.map((slide, idx) => (<Carousel.Item key={idx}>
                     <Row className="justify-content-center g-4">
-                        {slide.map((sub, i) => (<Col key={i} lg={3} md={6} sm={12}>
-                            <div
-                                style={{
-                                    ...styles.cardHover, ...(hoveredIndex === `${idx}-${i}` ? styles.cardHoverActive : {}),
-                                }}
-                                tabIndex={0}
-                                onMouseEnter={() => setHoveredIndex(`${idx}-${i}`)}
-                                onMouseLeave={() => setHoveredIndex(null)}
-                                onFocus={() => setHoveredIndex(`${idx}-${i}`)}
-                                onBlur={() => setHoveredIndex(null)}
-                            >
-                                <Card style={styles.subCard}
-                                      className="h-100 border-0 program-sub-card overflow-hidden">
-                                    <div style={styles.imageWrapper}>
-                                        <Card.Img
-                                            variant="top"
-                                            src={sub.image}
-                                            alt={sub.name}
-                                            style={styles.cardImg}
-                                        />
+                        {slide.map((sub, i) => {
+                            const isActive = hoveredIndex === `${idx}-${i}`;
+                            return (
+                                <Col key={i} lg={3} md={6} sm={12}>
+                                    <div
+                                        style={{
+                                            ...styles.cardHover, ...(isActive ? styles.cardHoverActive : {}),
+                                        }}
+                                        tabIndex={0}
+                                        onMouseEnter={() => setHoveredIndex(`${idx}-${i}`)}
+                                        onMouseLeave={() => setHoveredIndex(null)}
+                                        onFocus={() => setHoveredIndex(`${idx}-${i}`)}
+                                        onBlur={() => setHoveredIndex(null)}
+                                    >
+                                        <Card style={styles.subCard}
+                                              className="h-100 border-0 program-sub-card overflow-hidden">
+                                            <div style={styles.imageWrapper}>
+                                                <Card.Img
+                                                    variant="top"
+                                                    src={sub.image}
+                                                    alt={sub.name}
+                                                    style={styles.cardImg}
+                                                />
+                                            </div>
+                                            <Card.Body
+                                                className="d-flex flex-column justify-content-center align-items-center">
+                                                <Card.Title
+                                                    className="mb-2 text-primary fs-4">{sub.name}</Card.Title>
+                                                <div
+                                                    style={{
+                                                        ...styles.cardDesc, ...(isActive ? styles.cardDescActive : {}),
+                                                    }}
+                                                >
+                                                    {sub.description}
+                                                </div>
+                                                <Button
+                                                    variant="primary"
+                                                    className="mt-3"
+                                                    hidden={!isActive}
+                                                    style={{
+                                                        ...styles.bookButton,
+                                                        ...(isActive ? styles.bookButtonActive : {})
+                                                    }}
+                                                    onClick={() => redirectBooking({
+                                                        type: "programs",
+                                                        subType: program.name,
+                                                        subSubType: sub.name
+                                                    })}
+                                                    tabIndex={isActive ? 0 : -1}
+                                                >
+                                                    Book
+                                                </Button>
+                                            </Card.Body>
+                                        </Card>
                                     </div>
-                                    <Card.Body
-                                        className="d-flex flex-column justify-content-center align-items-center">
-                                        <Card.Title
-                                            className="mb-2 text-primary fs-4">{sub.name}</Card.Title>
-                                        <div
-                                            style={{
-                                                ...styles.cardDesc, ...(hoveredIndex === `${idx}-${i}` ? styles.cardDescActive : {}),
-                                            }}
-                                        >
-                                            {sub.description}
-                                        </div>
-                                    </Card.Body>
-                                </Card>
-                            </div>
-                        </Col>))}
+                                </Col>
+                            );
+                        })}
                     </Row>
                 </Carousel.Item>))}
             </Carousel>

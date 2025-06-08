@@ -13,14 +13,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-const allEvents = [
-    // Programs events
-    { id: "fop", type: "programs", subType: "Fitness Classes", subSubType: "Open Fit", title: "Open Fit", start: "2025-06-07T14:00:00", end: "2025-06-07T15:00:00", color: "#2E3B9A" },
-    { id: "fy", type: "programs", subType: "Fitness Classes", subSubType: "Yoga", title: "Yoga", start: "2025-06-06T16:00:00", end: "2025-06-06T17:00:00", color: "#4CA745" },
-    // Trainer events
-    { id: "gg", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-07T10:00:00", end: "2025-06-07T11:00:00", color: "#4c9be8" },
-    { id: "juju", type: "personal trainer", subType: "Julie Duffy", title: "PT: Julie Duffy", start: "2025-06-05T13:00:00", end: "2025-06-05T14:00:00", color: "#6610f2" },
-];
+import {getAllEventCourseAndTrainerAvailability} from "../utils/data.js";
+import EventItem from "../components/EventItem.jsx";
 
 export default function BookingPage() {
     const navigate = useNavigate();
@@ -57,7 +51,7 @@ export default function BookingPage() {
     // Filter events based on booking selection
     const filteredEvents = useMemo(() => {
         if (booking.type === "membership") return [];
-        return allEvents.filter(event => {
+        return getAllEventCourseAndTrainerAvailability().filter(event => {
             if (!booking.type) return true; // Show all if nothing is selected
             if (event.type !== booking.type) return false;
             if (booking.subType && event.subType !== booking.subType) return false;
@@ -69,7 +63,7 @@ export default function BookingPage() {
     // For fast lookup of event info by id
     const eventsById = useMemo(() => {
         const obj = {};
-        allEvents.forEach(ev => { obj[ev.id] = ev; });
+        getAllEventCourseAndTrainerAvailability().forEach(ev => { obj[ev.id] = ev; });
         return obj;
     }, []);
 
@@ -113,7 +107,7 @@ export default function BookingPage() {
         // Memberships don't have an event
         let selectedEvent = null;
         if (formValue.type !== "membership" && formValue.eventId) {
-            selectedEvent = allEvents.find(ev => ev.id === formValue.eventId);
+            selectedEvent = getAllEventCourseAndTrainerAvailability().find(ev => ev.id === formValue.eventId);
         }
         navigate("/payment", {
             state: {
@@ -217,13 +211,14 @@ export default function BookingPage() {
                                             center: 'title',
                                             right: 'dayGridMonth,timeGridWeek,timeGridDay'
                                         }}
-                                        height={440}
+                                        height={600}
                                         events={filteredEvents}
-                                        slotMinTime="10:00:00"
-                                        slotMaxTime="19:00:00"
+                                        slotMinTime="08:00:00"
+                                        slotMaxTime="20:00:00"
+                                        slotDuration={"00:15:00"}
                                         allDaySlot={false}
                                         dayHeaderFormat={{ weekday: 'short', month: 'numeric', day: 'numeric' }}
-                                        eventContent={renderEventContent}
+                                        eventContent={(info) => <EventItem info={info}/>}
                                         className="w-100"
                                         themeSystem="bootstrap"
                                         eventClick={handleEventClick}
@@ -234,32 +229,6 @@ export default function BookingPage() {
                     )}
                 </Row>
             </Container>
-        </div>
-    );
-}
-
-// Renders multi-line event titles and color support
-function renderEventContent(eventInfo) {
-    const now = new Date();
-    const eventEnd = new Date(eventInfo.event.end || eventInfo.event.start);
-    const isPast = eventEnd < now;
-
-    return (
-        <div
-            className={`px-2 py-1 rounded ${isPast ? "opacity-50" : ""}`}
-            style={{
-                background: eventInfo.event.backgroundColor || eventInfo.event.color || "var(--bs-primary)",
-                color: "var(--bs-white)",
-                fontSize: 15,
-                whiteSpace: "pre-line",
-                borderRadius: 6,
-                fontWeight: 500,
-                pointerEvents: isPast ? "none" : "auto",
-                filter: isPast ? "grayscale(1)" : undefined,
-                cursor: isPast ? "not-allowed" : "pointer"
-            }}
-        >
-            {eventInfo.event.title.split('\n').map((line, i) => <div key={i}>{line}</div>)}
         </div>
     );
 }

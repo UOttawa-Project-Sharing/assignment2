@@ -1,5 +1,5 @@
 import React from "react";
-import {useParams} from "react-router";
+import { useNavigate, useParams } from "react-router";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,7 +8,9 @@ import Card from "react-bootstrap/Card";
 import FullCalendar from '@fullcalendar/react'
 import timegridPlugin from '@fullcalendar/timegrid'
 
-import { getTrainerById } from "../utils/data.js";
+import { getTrainerAvailabilityByName, getTrainerById } from "../utils/data.js";
+import { useRedirectToBooking } from "../utils/redirection.js";
+import EventItem from "../components/EventItem.jsx";
 
 function DiagonalDottedLinesBg() {
     const lines = [0, 1, 2, 3];
@@ -67,20 +69,40 @@ function DiagonalDottedLinesBg() {
 }
 
 function TrainerPage() {
-    const {TainerName} = useParams();
+    const { TainerName } = useParams();
     const trainer = getTrainerById(TainerName?.toLowerCase());
+
+    const redirectToBooking = useRedirectToBooking();
+    const availabilityEvents = getTrainerAvailabilityByName(trainer?.name);
+
+    // Handler for clicking an availability slot
+    const handleEventClick = (clickInfo) => {
+        const event = clickInfo.event;
+        const status = event.extendedProps.status;
+        if (status === "booked" || status === "full") {
+            alert("This slot is already booked or class is full.");
+            return;
+        }
+        // Build the booking info for the trainer slot
+        redirectToBooking({
+            type: "personal trainer",
+            subType: trainer.name,
+            subSubType: "",
+            eventId: event.id
+        });
+    };
 
     if (!trainer) {
         return (<div
             className="bg-dark text-light d-flex align-items-center justify-content-center"
-            style={{minHeight: "100vh", fontSize: 28}}
+            style={{ minHeight: "100vh", fontSize: 28 }}
         >
             Trainer not found.
         </div>);
     }
 
     return (<>
-        <DiagonalDottedLinesBg/>
+        <DiagonalDottedLinesBg />
         <Row
             className="position-absolute"
             style={{
@@ -182,20 +204,20 @@ function TrainerPage() {
                     </div>
                     <Row className="g-2 mb-4">
                         {trainer.actions.map((a) => (<Col key={a.label} xs="auto">
-                  <span
-                      title={a.label}
-                      className="bg-secondary text-primary d-flex align-items-center justify-content-center"
-                      style={{
-                          width: 42,
-                          height: 42,
-                          fontSize: 25,
-                          borderRadius: "50%",
-                          boxShadow: "0 2px 10px var(--bs-primary)",
-                          opacity: 0.85
-                      }}
-                  >
-                    {a.icon}
-                  </span>
+                            <span
+                                title={a.label}
+                                className="bg-secondary text-primary d-flex align-items-center justify-content-center"
+                                style={{
+                                    width: 42,
+                                    height: 42,
+                                    fontSize: 25,
+                                    borderRadius: "50%",
+                                    boxShadow: "0 2px 10px var(--bs-primary)",
+                                    opacity: 0.85
+                                }}
+                            >
+                                {a.icon}
+                            </span>
                         </Col>))}
                     </Row>
                     <div
@@ -209,7 +231,12 @@ function TrainerPage() {
                     <Row className="g-3 mb-3">
                         <Col xs="auto">
                             <Button
-                                href={trainer.ctaLink}
+                                onClick={() => redirectToBooking({
+                                    type: "personal trainer",
+                                    subType: trainer.name,
+                                    subSubType: "",
+                                    eventId: ""
+                                })}
                                 size="lg"
                                 className="bg-primary text-light border-0"
                                 style={{
@@ -226,7 +253,7 @@ function TrainerPage() {
                         </Col>
                         <Col xs="auto">
                             <Button
-                                href={trainer.moreLink}
+                                href={"#about"}
                                 size="lg"
                                 variant="outline-primary"
                                 className="bg-transparent"
@@ -245,7 +272,7 @@ function TrainerPage() {
                             </Button>
                         </Col>
                     </Row>
-                    <div style={{marginTop: 48}}>
+                    <div style={{ marginTop: 48 }}>
                         <Row className="g-1 mb-2">
                             {[...Array(8)].map((_, i) => (<Col key={i} xs="auto" className="p-0">
                                 <div
@@ -268,7 +295,7 @@ function TrainerPage() {
                         </Row>
                     </div>
                 </Col>
-                <Col xs={12} md={6} style={{zIndex: 4}}>
+                <Col xs={12} md={6} style={{ zIndex: 4 }}>
                     <Row className="justify-content-center flex-nowrap flex-md-wrap gx-0">
                         <Col
                             xs={6}
@@ -461,7 +488,7 @@ function TrainerPage() {
         >
             <Container>
                 <Row className="justify-content-center">
-                    <Col md={8}>
+                    <Col md={10}>
                         <h2
                             className="text-primary"
                             style={{
@@ -478,20 +505,16 @@ function TrainerPage() {
                             <FullCalendar
                                 plugins={[timegridPlugin]}
                                 initialView="timeGridWeek"
+                                slotMinTime={"08:00:00"}
+                                slotMaxTime={"20:00:00"}
+                                slotDuration={"00:15:00"}
+                                allDaySlot={false}
                                 headerToolbar={{
                                     left: "prev,next", center: "title", right: "today"
                                 }}
-                                events={[{
-                                    title: 'Yoga Class', start: '2025-06-06T10:00:00', end: '2025-06-06T11:00:00'
-                                }, {
-                                    title: 'Strength Training', start: '2025-06-07T12:00:00', end: '2025-06-07T13:00:00'
-                                }, {
-                                    title: 'Cardio Session', start: '2025-06-08T14:00:00', end: '2025-06-08T15:00:00'
-                                }, {
-                                    title: 'Nutrition Workshop',
-                                    start: '2025-06-09T16:00:00',
-                                    end: '2025-06-09T17:30:00'
-                                }]}
+                                events={availabilityEvents}
+                                eventClick={handleEventClick}
+                                eventContent={(info) => <EventItem info={info} /> }
                             />
                         </div>
                     </Col>

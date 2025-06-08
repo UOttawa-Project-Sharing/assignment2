@@ -160,27 +160,6 @@ export function getProgramById(id) {
     return ProgramsInfo.find(program => program.id === id);
 }
 
-// const trainers = [{
-//     name: "George",
-//     description: "George is a certified personal trainer with over a decade of experience helping clients achieve their fitness goals. Passionate and motivating, he specializes in strength training and functional movement.",
-//     image: "https://randomuser.me/api/portraits/men/32.jpg",
-//     link: "/trainers/george",
-// }, {
-//     name: "Michel Lagacé",
-//     description: "Michel is a dynamic and enthusiastic trainer known for his personalized approach to fitness. With a background in sports science, he crafts effective workout plans for all levels.",
-//     image: "https://randomuser.me/api/portraits/men/44.jpg",
-//     link: "/trainers/michel",
-// }, {
-//     name: "Lucy Smith",
-//     description: "George is a certified personal trainer with over a decade of experience helping clients achieve their fitness goals. Passionate and motivating, he specializes in strength training and functional movement.",
-//     image: "https://randomuser.me/api/portraits/men/32.jpg",
-//     link: "/trainers/george2",
-// }, {
-//     name: "Laurence Dupont",
-//     description: "Michel is a dynamic and enthusiastic trainer known for his personalized approach to fitness. With a background in sports science, he crafts effective workout plans for all levels.",
-//     image: "https://randomuser.me/api/portraits/men/44.jpg",
-//     link: "/trainers/michel2",
-// },];
 export const trainers = [
     {
         id: "george",
@@ -197,67 +176,202 @@ export const trainers = [
         image: "https://images.pexels.com/photos/1552106/pexels-photo-1552106.jpeg?auto=compress&w=500&h=360&fit=crop",
         image2: "https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg?auto=compress&w=500&h=360&fit=crop",
         cta: "Book a Session",
-        ctaLink: "#book",
-        moreLink: "#about"
     },
     {
-        id: "michel",
-        name: "Michel Lagacé",
-        tagline: "Yoga Instructor",
-        title: "MINDFULNESS & FLEXIBILITY COACH",
-        shortDescription: "Guiding you to inner peace and physical flexibility through mindful yoga practices.",
-        description: "Michel is a passionate yoga instructor with over 8 years of experience in teaching various styles of yoga. His classes focus on mindfulness, breath control, and flexibility, helping students connect their body and mind. Michel believes in creating a supportive environment where everyone can explore their limits and find balance.",
-        about: "Michel's journey into yoga began as a personal practice to manage stress and improve flexibility. Over the years, he has trained in multiple yoga styles including Hatha, Vinyasa, and Yin Yoga. His classes are designed to cater to all levels, from beginners to advanced practitioners. Michel emphasizes the importance of breathwork and meditation in achieving overall well-being.",
-        actions: [{icon: "🧘", label: "Yoga"}, {icon: "📅", label: "Schedule"}, {
-            icon: "🌿", label: "Wellness"
-        }, {icon: "💪", label: "Flexibility"}],
-        profilePicture: "https://randomuser.me/api/portraits/men/44.jpg",
-        image: "https://images.pexels.com/photos/3822620/pexels-photo-3822620.jpeg?auto=compress&w=500&h=360&fit=crop",
-        image2: "https://images.pexels.com/photos/3822621/pexels-photo-3822621.jpeg?auto=compress&w=500&h=360&fit=crop",
-        cta: "Join a Class",
-        ctaLink: "#join",
-        moreLink: "#about"
+        id: "sarah",
+        name: "Sarah Martinez",
+        tagline: "Yoga & Pilates Instructor",
+        title: "MINDFUL MOVEMENT SPECIALIST",
+        shortDescription: "Transform your body and mind through flowing movements. Discover strength, flexibility, and inner peace.",
+        description: "Sarah is a certified yoga and Pilates instructor with 8 years of experience helping clients build core strength, flexibility, and mental clarity. She combines traditional techniques with modern approaches to create balanced, restorative workouts that nurture both body and spirit.",
+        about: "Sarah brings a holistic approach to fitness, emphasizing the connection between physical strength and mental wellness. Her classes blend challenging movements with mindful breathing, creating sessions that strengthen your body while calming your mind. Whether you're a beginner seeking foundation or an advanced practitioner looking to deepen your practice, Sarah provides personalized guidance in a supportive environment.",
+        actions: [{icon: "🧘", label: "Yoga"}, {icon: "💆", label: "Recovery"}, {
+            icon: "🌱", label: "Wellness"
+        }, {icon: "📱", label: "Virtual"}],
+        profilePicture: "https://randomuser.me/api/portraits/women/45.jpg",
+        image: "https://images.pexels.com/photos/3822864/pexels-photo-3822864.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image2: "https://images.pexels.com/photos/3823063/pexels-photo-3823063.jpeg?auto=compress&w=500&h=360&fit=crop",
+        cta: "Start Your Journey",
     },
     {
-        id: "lucy",
-        name: "Lucy Smith",
-        tagline: "Spinning Instructor",
-        title: "ENDURANCE & ENERGY COACH",
-        shortDescription: "Igniting your passion for cycling through high-energy spinning classes.",
-        description: "Lucy is a certified spinning instructor with a background in competitive cycling. Her classes are designed to push your limits while having fun. With her energetic playlists and motivating coaching style, Lucy helps you build endurance and strength on the bike.",
-        about: "Lucy's love for cycling started at a young age, leading her to compete in various cycling events. She transitioned to teaching spinning classes to share her passion and inspire others to enjoy the benefits of indoor cycling. Her classes focus on building cardiovascular fitness, strength, and mental resilience.",
-        actions: [{icon: "🚴", label: "Spinning"}, {icon: "📅", label: "Schedule"}, {
-            icon: "🎶", label: "Music"
-        }, {icon: "💪", label: "Endurance"}],
-        profilePicture: "https://randomuser.me/api/portraits/men/55.jpg",
-        image: "https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&w=500&h=360&fit=crop",
-        image2: "https://images.pexels.com/photos/3822623/pexels-photo-3822623.jpeg?auto=compress&w=500&h=360&fit=crop",
-        cta: "Book a Ride",
-        ctaLink: "#book",
-        moreLink: "#about"
+        id: "marcus",
+        name: "Marcus Thompson",
+        tagline: "Athletic Performance Coach",
+        title: "SPORTS & CONDITIONING EXPERT",
+        shortDescription: "Unlock your athletic potential with sport-specific training designed for peak performance and injury prevention.",
+        description: "Marcus is a former collegiate athlete turned performance coach with 12 years of experience training professional and amateur athletes. He specializes in sport-specific conditioning, explosive power development, and functional movement patterns that translate directly to athletic performance.",
+        about: "Marcus understands what it takes to compete at the highest level. His training philosophy focuses on building athletes who are not only strong and fast, but also resilient and injury-resistant. Using cutting-edge techniques in plyometrics, agility training, and recovery protocols, Marcus helps athletes of all levels reach their competitive goals while maintaining long-term health.",
+        actions: [{icon: "⚡", label: "Speed"}, {icon: "🏆", label: "Performance"}, {
+            icon: "🔥", label: "Conditioning"
+        }, {icon: "🎯", label: "Sport-Specific"}],
+        profilePicture: "https://randomuser.me/api/portraits/men/67.jpg",
+        image: "https://images.pexels.com/photos/1431282/pexels-photo-1431282.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image2: "https://images.pexels.com/photos/3289711/pexels-photo-3289711.jpeg?auto=compress&w=500&h=360&fit=crop",
+        cta: "Train Like a Pro",
     },
     {
-        id: "laurence",
-        name: "Laurence Dupont",
-        tagline: "Pilates Instructor",
-        title: "CORE STRENGTH & BALANCE COACH",
-        shortDescription: "Transforming your body through focused pilates practices for strength and flexibility.",
-        description: "Laurence is an experienced pilates instructor dedicated to helping clients achieve core strength and balance. With a background in dance and physical therapy, Laurence's classes are designed to enhance body awareness and improve overall fitness.",
-        about: "Laurence's journey into pilates began as a way to recover from a dance injury. This led to a deep appreciation for the method's benefits in building strength and flexibility. Laurence's classes emphasize controlled movements, breathwork, and alignment to ensure safe and effective workouts for all levels.",
-        actions: [{icon: "🧘‍♀️", label: "Pilates"}, {icon: "📅", label: "Schedule"}, {
-            icon: "💪", label: "Strength"
-        }, {icon: "🤸", label: "Balance"}],
-        profilePicture: "https://randomuser.me/api/portraits/men/66.jpg",
-        image: "https://images.pexels.com/photos/3822624/pexels-photo-3822624.jpeg?auto=compress&w=500&h=360&fit=crop",
-        image2: "https://images.pexels.com/photos/3822625/pexels-photo-3822625.jpeg?auto=compress&w=500&h=360&fit=crop",
-        cta: "Join a Session",
-        ctaLink: "#join",
-        moreLink: "#about"
+        id: "elena",
+        name: "Elena Rodriguez",
+        tagline: "Weight Loss Specialist",
+        title: "TRANSFORMATION COACH",
+        shortDescription: "Sustainable weight loss through balanced nutrition and enjoyable workouts. Your healthiest self awaits.",
+        description: "Elena is a certified nutritionist and personal trainer with 9 years of experience helping clients achieve lasting weight loss results. She focuses on creating sustainable lifestyle changes rather than quick fixes, combining effective workouts with practical nutrition guidance.",
+        about: "Elena believes that successful weight loss is about more than just numbers on a scale – it's about building healthy habits that last a lifetime. Her compassionate approach helps clients overcome mental barriers while developing a positive relationship with food and exercise. Through personalized meal planning, progressive workout routines, and ongoing support, Elena guides clients toward their transformation goals at a sustainable pace.",
+        actions: [{icon: "⚖️", label: "Weight Loss"}, {icon: "🥗", label: "Meal Plans"}, {
+            icon: "📊", label: "Progress"
+        }, {icon: "💝", label: "Support"}],
+        profilePicture: "https://randomuser.me/api/portraits/women/28.jpg",
+        image: "https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image2: "https://images.pexels.com/photos/3775593/pexels-photo-3775593.jpeg?auto=compress&w=500&h=360&fit=crop",
+        cta: "Transform Today",
     },
+    {
+        id: "alex",
+        name: "Alex Chen",
+        tagline: "Functional Fitness Expert",
+        title: "MOVEMENT & MOBILITY COACH",
+        shortDescription: "Build real-world strength through functional movements that improve your daily life and prevent injury.",
+        description: "Alex is a movement specialist with 7 years of experience in functional fitness and corrective exercise. He helps clients develop strength, mobility, and coordination through exercises that mirror real-life activities, creating bodies that move better in everyday situations.",
+        about: "Alex's philosophy centers on training movement patterns rather than just muscles. His background in physical therapy and strength coaching allows him to identify and correct movement dysfunctions while building functional strength. Whether you're recovering from injury, looking to improve posture, or wanting to move with more confidence in daily activities, Alex creates programs that address your specific needs and movement goals.",
+        actions: [{icon: "🤸", label: "Mobility"}, {icon: "🛠️", label: "Corrective"}, {
+            icon: "🎭", label: "Functional"
+        }, {icon: "⚡", label: "Movement"}],
+        profilePicture: "https://randomuser.me/api/portraits/men/23.jpg",
+        image: "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image2: "https://images.pexels.com/photos/3766211/pexels-photo-3766211.jpeg?auto=compress&w=500&h=360&fit=crop",
+        cta: "Move Better",
+    },
+    {
+        id: "jessica",
+        name: "Jessica Williams",
+        tagline: "Senior Fitness Specialist",
+        title: "ACTIVE AGING COACH",
+        shortDescription: "Stay strong, mobile, and independent with age-appropriate fitness programs designed for active living.",
+        description: "Jessica specializes in fitness for adults 50+ with 11 years of experience in senior wellness and rehabilitation. She creates safe, effective programs that help mature adults maintain strength, balance, and vitality while addressing age-related health concerns.",
+        about: "Jessica is passionate about helping seniors live their most active and independent lives. Her gentle yet effective approach focuses on maintaining bone density, improving balance, and preserving functional strength. With certifications in senior fitness and fall prevention, Jessica designs programs that are both challenging and safe, proving that age is just a number when it comes to staying fit and healthy.",
+        actions: [{icon: "🎯", label: "Balance"}, {icon: "🦴", label: "Bone Health"}, {
+            icon: "🚶", label: "Mobility"
+        }, {icon: "❤️", label: "Heart Health"}],
+        profilePicture: "https://randomuser.me/api/portraits/women/52.jpg",
+        image: "https://images.pexels.com/photos/3823207/pexels-photo-3823207.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image2: "https://images.pexels.com/photos/3768043/pexels-photo-3768043.jpeg?auto=compress&w=500&h=360&fit=crop",
+        cta: "Stay Active",
+    },
+    {
+        id: "david",
+        name: "David Kim",
+        tagline: "Strength Training Expert",
+        title: "POWERLIFTING & BODYBUILDING COACH",
+        shortDescription: "Build serious muscle and strength with proven powerlifting and bodybuilding techniques.",
+        description: "David is a competitive powerlifter and certified strength coach with 15 years of experience in serious strength training. He specializes in progressive overload, compound movements, and advanced training techniques for clients looking to maximize muscle growth and strength gains.",
+        about: "David's expertise lies in the science of getting stronger. As a former competitive powerlifter, he understands what it takes to build impressive strength and muscle mass. His methodical approach to programming ensures consistent progress while minimizing injury risk. Whether you're a beginner looking to build your first pull-up or an experienced lifter chasing new personal records, David provides the technical knowledge and motivation to reach your strength goals.",
+        actions: [{icon: "🏋️", label: "Powerlifting"}, {icon: "💪", label: "Muscle Building"}, {
+            icon: "📈", label: "Progression"
+        }, {icon: "🏆", label: "Competition"}],
+        profilePicture: "https://randomuser.me/api/portraits/men/41.jpg",
+        image: "https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image2: "https://images.pexels.com/photos/1431283/pexels-photo-1431283.jpeg?auto=compress&w=500&h=360&fit=crop",
+        cta: "Get Stronger",
+    },
+    {
+        id: "maya",
+        name: "Maya Patel",
+        tagline: "HIIT & Circuit Training",
+        title: "HIGH-INTENSITY SPECIALIST",
+        shortDescription: "Maximize your workout efficiency with intense, fun circuits that deliver results in minimal time.",
+        description: "Maya is a high-energy fitness instructor with 6 years of experience in HIIT, circuit training, and group fitness. She creates dynamic, time-efficient workouts that combine strength, cardio, and flexibility training for maximum calorie burn and fitness improvement.",
+        about: "Maya brings infectious energy and creativity to every workout. Her background in dance and martial arts influences her dynamic training style, making even the most challenging workouts feel like fun. Maya specializes in helping busy professionals achieve their fitness goals through efficient, varied workouts that prevent boredom and plateaus. Her circuits are designed to improve all aspects of fitness while keeping you engaged and motivated.",
+        actions: [{icon: "⚡", label: "HIIT"}, {icon: "🔄", label: "Circuits"}, {
+            icon: "⏱️", label: "Efficient"
+        }, {icon: "🎵", label: "Fun"}],
+        profilePicture: "https://randomuser.me/api/portraits/women/36.jpg",
+        image: "https://images.pexels.com/photos/3768582/pexels-photo-3768582.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image2: "https://images.pexels.com/photos/3775166/pexels-photo-3775166.jpeg?auto=compress&w=500&h=360&fit=crop",
+        cta: "Burn & Build",
+    }
 ];
 
 export function getTrainerById(id) {
     return trainers.find(trainer => trainer.id === id);
 }
 
-export const trainerAvailability = [];
+export const trainerAvailability = [
+    // George Lechapé - Strength & Cardio Coach
+    { id: "george-2025-06-09-09", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-09T09:00:00", end: "2025-06-09T10:00:00", color: "#4c9be8", status: "available" },
+    { id: "george-2025-06-09-10", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-09T10:00:00", end: "2025-06-09T11:00:00", color: "#4c9be8", status: "booked" },
+    { id: "george-2025-06-09-14", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-09T14:00:00", end: "2025-06-09T15:00:00", color: "#4c9be8", status: "available" },
+    { id: "george-2025-06-09-15", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-09T15:00:00", end: "2025-06-09T16:00:00", color: "#4c9be8", status: "available" },
+    { id: "george-2025-06-10-08", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-10T08:00:00", end: "2025-06-10T09:00:00", color: "#4c9be8", status: "booked" },
+    { id: "george-2025-06-10-16", type: "personal trainer", subType: "George Lechapé", title: "PT: George Lechapé", start: "2025-06-10T16:00:00", end: "2025-06-10T17:00:00", color: "#4c9be8", status: "available" },
+
+    // Sarah Martinez - Yoga & Pilates Specialist
+    { id: "sarah-2025-06-09-07", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-09T07:00:00", end: "2025-06-09T08:00:00", color: "#e84c8b", status: "available" },
+    { id: "sarah-2025-06-09-11", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-09T11:00:00", end: "2025-06-09T12:00:00", color: "#e84c8b", status: "booked" },
+    { id: "sarah-2025-06-09-17", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-09T17:00:00", end: "2025-06-09T18:00:00", color: "#e84c8b", status: "available" },
+    { id: "sarah-2025-06-09-18", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-09T18:00:00", end: "2025-06-09T19:00:00", color: "#e84c8b", status: "available" },
+    { id: "sarah-2025-06-10-07", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-10T07:00:00", end: "2025-06-10T08:00:00", color: "#e84c8b", status: "available" },
+    { id: "sarah-2025-06-10-19", type: "personal trainer", subType: "Sarah Martinez", title: "PT: Sarah Martinez", start: "2025-06-10T19:00:00", end: "2025-06-10T20:00:00", color: "#e84c8b", status: "booked" },
+
+    // Marcus Thompson - Athletic Performance Coach
+    { id: "marcus-2025-06-09-08", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-09T08:00:00", end: "2025-06-09T09:00:00", color: "#ff6b35", status: "available" },
+    { id: "marcus-2025-06-09-12", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-09T12:00:00", end: "2025-06-09T13:00:00", color: "#ff6b35", status: "available" },
+    { id: "marcus-2025-06-09-13", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-09T13:00:00", end: "2025-06-09T14:00:00", color: "#ff6b35", status: "booked" },
+    { id: "marcus-2025-06-09-16", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-09T16:00:00", end: "2025-06-09T17:00:00", color: "#ff6b35", status: "available" },
+    { id: "marcus-2025-06-10-06", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-10T06:00:00", end: "2025-06-10T07:00:00", color: "#ff6b35", status: "booked" },
+    { id: "marcus-2025-06-10-15", type: "personal trainer", subType: "Marcus Thompson", title: "PT: Marcus Thompson", start: "2025-06-10T15:00:00", end: "2025-06-10T16:00:00", color: "#ff6b35", status: "available" },
+
+    // Elena Rodriguez - Weight Loss Specialist
+    { id: "elena-2025-06-09-06", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-09T06:00:00", end: "2025-06-09T07:00:00", color: "#8bc34a", status: "available" },
+    { id: "elena-2025-06-09-09", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-09T09:00:00", end: "2025-06-09T10:00:00", color: "#8bc34a", status: "available" },
+    { id: "elena-2025-06-09-13", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-09T13:00:00", end: "2025-06-09T14:00:00", color: "#8bc34a", status: "booked" },
+    { id: "elena-2025-06-09-19", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-09T19:00:00", end: "2025-06-09T20:00:00", color: "#8bc34a", status: "available" },
+    { id: "elena-2025-06-10-09", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-10T09:00:00", end: "2025-06-10T10:00:00", color: "#8bc34a", status: "booked" },
+    { id: "elena-2025-06-10-18", type: "personal trainer", subType: "Elena Rodriguez", title: "PT: Elena Rodriguez", start: "2025-06-10T18:00:00", end: "2025-06-10T19:00:00", color: "#8bc34a", status: "available" },
+
+    // Alex Chen - Functional Fitness Expert
+    { id: "alex-2025-06-09-10", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-09T10:00:00", end: "2025-06-09T11:00:00", color: "#9c27b0", status: "available" },
+    { id: "alex-2025-06-09-11", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-09T11:00:00", end: "2025-06-09T12:00:00", color: "#9c27b0", status: "available" },
+    { id: "alex-2025-06-09-15", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-09T15:00:00", end: "2025-06-09T16:00:00", color: "#9c27b0", status: "booked" },
+    { id: "alex-2025-06-09-20", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-09T20:00:00", end: "2025-06-09T21:00:00", color: "#9c27b0", status: "available" },
+    { id: "alex-2025-06-10-11", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-10T11:00:00", end: "2025-06-10T12:00:00", color: "#9c27b0", status: "available" },
+    { id: "alex-2025-06-10-17", type: "personal trainer", subType: "Alex Chen", title: "PT: Alex Chen", start: "2025-06-10T17:00:00", end: "2025-06-10T18:00:00", color: "#9c27b0", status: "booked" },
+
+    // Jessica Williams - Senior Fitness Specialist
+    { id: "jessica-2025-06-09-09", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-09T09:00:00", end: "2025-06-09T10:00:00", color: "#ffc107", status: "available" },
+    { id: "jessica-2025-06-09-10", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-09T10:00:00", end: "2025-06-09T11:00:00", color: "#ffc107", status: "available" },
+    { id: "jessica-2025-06-09-14", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-09T14:00:00", end: "2025-06-09T15:00:00", color: "#ffc107", status: "booked" },
+    { id: "jessica-2025-06-09-16", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-09T16:00:00", end: "2025-06-09T17:00:00", color: "#ffc107", status: "available" },
+    { id: "jessica-2025-06-10-10", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-10T10:00:00", end: "2025-06-10T11:00:00", color: "#ffc107", status: "available" },
+    { id: "jessica-2025-06-10-14", type: "personal trainer", subType: "Jessica Williams", title: "PT: Jessica Williams", start: "2025-06-10T14:00:00", end: "2025-06-10T15:00:00", color: "#ffc107", status: "booked" },
+
+    // David Kim - Strength Training Expert
+    { id: "david-2025-06-09-06", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-09T06:00:00", end: "2025-06-09T07:00:00", color: "#607d8b", status: "available" },
+    { id: "david-2025-06-09-07", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-09T07:00:00", end: "2025-06-09T08:00:00", color: "#607d8b", status: "booked" },
+    { id: "david-2025-06-09-17", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-09T17:00:00", end: "2025-06-09T18:00:00", color: "#607d8b", status: "available" },
+    { id: "david-2025-06-09-18", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-09T18:00:00", end: "2025-06-09T19:00:00", color: "#607d8b", status: "available" },
+    { id: "david-2025-06-10-06", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-10T06:00:00", end: "2025-06-10T07:00:00", color: "#607d8b", status: "booked" },
+    { id: "david-2025-06-10-19", type: "personal trainer", subType: "David Kim", title: "PT: David Kim", start: "2025-06-10T19:00:00", end: "2025-06-10T20:00:00", color: "#607d8b", status: "available" },
+
+    // Maya Patel - HIIT & Circuit Training
+    { id: "maya-2025-06-09-08", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-09T08:00:00", end: "2025-06-09T09:00:00", color: "#e91e63", status: "available" },
+    { id: "maya-2025-06-09-12", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-09T12:00:00", end: "2025-06-09T13:00:00", color: "#e91e63", status: "available" },
+    { id: "maya-2025-06-09-17", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-09T17:00:00", end: "2025-06-09T18:00:00", color: "#e91e63", status: "booked" },
+    { id: "maya-2025-06-09-19", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-09T19:00:00", end: "2025-06-09T20:00:00", color: "#e91e63", status: "available" },
+    { id: "maya-2025-06-10-08", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-10T08:00:00", end: "2025-06-10T09:00:00", color: "#e91e63", status: "available" },
+    { id: "maya-2025-06-10-12", type: "personal trainer", subType: "Maya Patel", title: "PT: Maya Patel", start: "2025-06-10T12:00:00", end: "2025-06-10T13:00:00", color: "#e91e63", status: "booked" }
+];
+
+export function getTrainerAvailabilityByName(name) {
+    return trainerAvailability.filter(ev => ev.subType === name);
+}
+
+export const AllCourse = [
+    // Programs events
+    { id: "fop", type: "programs", subType: "Fitness Classes", subSubType: "Open Fit", title: "Open Fit", start: "2025-06-07T14:00:00", end: "2025-06-07T15:00:00", color: "#2E3B9A", status: "2/10" },
+    { id: "fy", type: "programs", subType: "Fitness Classes", subSubType: "Yoga", title: "Yoga", start: "2025-06-06T16:00:00", end: "2025-06-06T17:00:00", color: "#4CA745", status: "full" },
+    { id: "aaaa", type: "programs", subType: "Cross Fit", subSubType: "Circuit Fit", title: "Circuit Fit", start: "2025-06-09T10:00:00", end: "2025-06-09T11:00:00", color: "#FF5733", status: "full" },
+];
+
+export function getAllEventCourseAndTrainerAvailability() {
+    return [...AllCourse, ...trainerAvailability];
+}
