@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import {Link} from "react-router";
 
-import { trainers } from "../utils/data.js";
+import { trainers, ProgramsInfo } from "../utils/data.js";
 
 function NavigatorBar() {
     return (
@@ -17,10 +17,11 @@ function NavigatorBar() {
                     <Nav.Link as={Link} to="/">Home</Nav.Link>
                     <NavDropdown renderMenuOnMount={true}
                                  title={<Link style={{color: 'inherit', textDecoration: 'none'}} to="/programs">Programs</Link>} id="basic-nav-dropdown">
-                        <NavDropdown.Item as={Link} to="/programs/crossfit">Cross Fit</NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/programs/yoga">Yoga</NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/programs/spinning">Spinning</NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/programs/pilates">Pilates</NavDropdown.Item>
+                        {ProgramsInfo.map((program) => (
+                            <NavDropdown.Item key={program.name} as={Link} to={`/programs/${program.id}`}>
+                                {program.name}
+                            </NavDropdown.Item>
+                        ))}
                     </NavDropdown>
                     <NavDropdown renderMenuOnMount={true}
                                  title={<Link style={{color: 'inherit', textDecoration: 'none'}} to="/trainers">Trainers</Link>} id="basic-nav-dropdown">

@@ -2,7 +2,7 @@ import React from "react";
 import {useParams} from "react-router";
 import {Carousel, Card, Row, Col, Container} from "react-bootstrap";
 
-import { ProgramsInfo as programs } from "../utils/data.js";
+import { getProgramById } from "../utils/data.js";
 
 // Inline CSS styles for the component
 const styles = {
@@ -63,7 +63,7 @@ function chunkArray(array, size) {
 
 function ProgramPage() {
     const {programName} = useParams();
-    const program = programs[programName];
+    const program = getProgramById(programName);
     const [hoveredIndex, setHoveredIndex] = React.useState(null);
 
     if (!program) {

@@ -53,9 +53,12 @@ export const MembershipTypeMap = {
 };
 
 // Program data
-export const ProgramsInfo = {
-    "crossfit": {
+export const ProgramsInfo = [
+    {
+        id: "crossfit",
         name: "Cross Fit",
+        image: "https://picsum.photos/170/120",
+        shortDescription: ["CrossFit is a high-intensity fitness program that combines elements of weightlifting, gymnastics, and cardiovascular training. It focuses on functional movements and is designed to improve overall fitness through varied daily workouts."],
         description: "High-intensity fitness program combining weightlifting, gymnastics, and cardio through varied daily workouts. Scalable group classes with certified coaching focus on functional movements and measurable results. Build strength, endurance, and overall fitness in a supportive community environment.",
         backgroundImage: "https://picsum.photos/1200/800?random=21",
         subprograms: [{
@@ -75,8 +78,12 @@ export const ProgramsInfo = {
             image: "https://picsum.photos/400/220?random=34",
             description: "A full-body workout blending strength, cardio, and flexibility for total conditioning.",
         }],
-    }, "yoga": {
+    },
+    {
+        id: "yoga",
         name: "Yoga",
+        image: "https://picsum.photos/170/120?random=1",
+        shortDescription: ["Yoga is a mind-body practice that combines physical postures, breathing techniques, and meditation. It improves flexibility, strength, and mental well-being through ancient traditions adapted for modern life."],
         description: "Mind-body practice combining physical postures, breathing techniques, and meditation. Improve flexibility, strength, and mental well-being through ancient traditions adapted for modern life. Classes for all levels in a peaceful, supportive environment.",
         backgroundImage: "https://picsum.photos/1200/800?random=22",
         subprograms: [{
@@ -96,8 +103,12 @@ export const ProgramsInfo = {
             image: "https://picsum.photos/400/220?random=38",
             description: "Athletic, vigorous style building heat and strength. Fast-paced flow for fitness-focused practitioners.",
         }],
-    }, "spinning": {
+    },
+    {
+        id: "spinning",
         name: "Spinning",
+        image: "https://picsum.photos/170/120?random=2",
+        shortDescription: ["Spinning is a high-energy indoor cycling workout that combines music, motivation, and expert instruction. It builds cardiovascular endurance, strengthens legs, and burns calories in a fun group setting."],
         description: "High-energy indoor cycling classes with motivating music and expert instruction. Burn calories, build cardiovascular endurance, and strengthen legs in a fun group setting. All fitness levels welcome with adjustable resistance.",
         backgroundImage: "https://picsum.photos/1200/800?random=23",
         subprograms: [{
@@ -117,8 +128,12 @@ export const ProgramsInfo = {
             image: "https://picsum.photos/400/220?random=42",
             description: "Music-driven cycling experience combining choreography with cardio. Dance on the bike!",
         }],
-    }, "pilates": {
+    },
+    {
+        id: "pilates",
         name: "Pilates",
+        image: "https://picsum.photos/170/120?random=3",
+        shortDescription: ["Pilates is a low-impact exercise method focusing on core strength, flexibility, and body awareness. It uses precise movements and controlled breathing to improve posture, balance, and muscle tone."],
         description: "Low-impact exercise method focusing on core strength, flexibility, and body awareness. Precise movements and controlled breathing improve posture, balance, and muscle tone. Equipment-based and mat classes available for all abilities.",
         backgroundImage: "https://picsum.photos/1200/800?random=24",
         subprograms: [{
@@ -139,7 +154,11 @@ export const ProgramsInfo = {
             description: "Therapeutic approach for injury recovery and prevention. Small classes with personalized attention.",
         }],
     },
-};
+];
+
+export function getProgramById(id) {
+    return ProgramsInfo.find(program => program.id === id);
+}
 
 // const trainers = [{
 //     name: "George",

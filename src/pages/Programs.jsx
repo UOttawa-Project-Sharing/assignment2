@@ -2,37 +2,16 @@ import React from "react";
 import {Container, Row, Col, Card, Button} from "react-bootstrap";
 import {Link} from "react-router";
 
-const crossfitImg = "https://picsum.photos/170/120";
-const yogaImg = "https://picsum.photos/170/120?random=1";
-const spinningImg = "https://picsum.photos/170/120?random=2";
-const pilatesImg = "https://picsum.photos/170/120?random=3";
-
-const programs = [{
-    title: "Cross Fit",
-    description: ["This is a short cross fit description. This is a short cross fit description. This is a short cross fit description.",],
-    image: crossfitImg,
-}, {
-    title: "Yoga",
-    description: ["This is a short yoga description. This is a short yoga description. This is a short yoga description.",],
-    image: yogaImg,
-}, {
-    title: "Spinning",
-    description: ["This is a short spinning description. This is a short spinning description. This is a short spinning description.",],
-    image: spinningImg,
-}, {
-    title: "Pilates",
-    description: ["This is a short Pilates description. This is a short Pilates description. This is a short Pilates description.",],
-    image: pilatesImg,
-},];
+import { ProgramsInfo } from "../utils/data.js";
 
 function ProgramsPage() {
     return (<>
         <Container fluid>
             <h2 className="text-center mb-5 mt-3 fw-medium text-light">Our Programs</h2>
-            {programs.map((program, idx) => {
+            {ProgramsInfo.map((program, idx) => {
                 const alignLeft = idx % 2 === 0;
                 return (<Row
-                    key={program.title}
+                    key={program.name}
                     className="mb-5"
                     style={{
                         marginLeft: 0, marginRight: 0, justifyContent: alignLeft ? "flex-start" : "flex-end"
@@ -61,7 +40,7 @@ function ProgramsPage() {
                                     <div style={{width: "40%", height: "100%"}}>
                                         <img
                                             src={program.image}
-                                            alt={program.title}
+                                            alt={program.name}
                                             style={{
                                                 width: "100%", height: "100%", objectFit: "cover", borderRadius: 0
                                             }}
@@ -71,10 +50,10 @@ function ProgramsPage() {
                                         <Card.Body
                                             className={`h-100 d-flex flex-column justify-content-center ${alignLeft ? "text-end" : ""}`}>
                                             <Card.Title className="fs-3 fw-bold mb-2">
-                                                {program.title}
+                                                {program.name}
                                             </Card.Title>
                                             <Card.Text className="mb-3">
-                                                {program.description.map((desc, i) => (<span key={i}>
+                                                {program.shortDescription.map((desc, i) => (<span key={i}>
                                                                 {desc}
                                                     <br/>
                                                             </span>))}
@@ -86,7 +65,7 @@ function ProgramsPage() {
                                                     alignSelf: alignLeft ? "flex-end" : "flex-start"
                                                 }}
                                                 as={Link}
-                                                to={`/programs/${program.title.toLowerCase().replace(/\s+/g, "")}`}
+                                                to={`/programs/${program.id}`}
                                             >
                                                 More Info
                                             </Button>
