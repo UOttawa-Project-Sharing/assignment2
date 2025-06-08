@@ -2,28 +2,7 @@ import React from "react";
 import {Container, Row, Col, Card, Button} from "react-bootstrap";
 import {Link} from "react-router";
 
-// Example trainer data
-const trainers = [{
-    name: "George",
-    description: "George is a certified personal trainer with over a decade of experience helping clients achieve their fitness goals. Passionate and motivating, he specializes in strength training and functional movement.",
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
-    link: "/trainers/george",
-}, {
-    name: "Michel",
-    description: "Michel is a dynamic and enthusiastic trainer known for his personalized approach to fitness. With a background in sports science, he crafts effective workout plans for all levels.",
-    image: "https://randomuser.me/api/portraits/men/44.jpg",
-    link: "/trainers/michel",
-}, {
-    name: "Lucy",
-    description: "George is a certified personal trainer with over a decade of experience helping clients achieve their fitness goals. Passionate and motivating, he specializes in strength training and functional movement.",
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
-    link: "/trainers/george2",
-}, {
-    name: "Michel",
-    description: "Michel is a dynamic and enthusiastic trainer known for his personalized approach to fitness. With a background in sports science, he crafts effective workout plans for all levels.",
-    image: "https://randomuser.me/api/portraits/men/44.jpg",
-    link: "/trainers/michel2",
-},];
+import { trainers } from "../utils/data.js";
 
 function TrainersPage() {
     return (<>
@@ -47,7 +26,7 @@ function TrainersPage() {
                     >
                         <div className="w-100 d-flex justify-content-center mt-4 mb-3">
                             <img
-                                src={trainer.image}
+                                src={trainer.profilePicture}
                                 alt={trainer.name}
                                 style={{
                                     width: 120,
@@ -85,7 +64,7 @@ function TrainersPage() {
                                         fontSize: 17, minWidth: 140,
                                     }}
                                     as={Link}
-                                    to={trainer.link}
+                                    to={`/trainers/${trainer.id}`}
                                 >
                                     More Info
                                 </Button>

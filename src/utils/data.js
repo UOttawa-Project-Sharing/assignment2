@@ -141,6 +141,104 @@ export const ProgramsInfo = {
     },
 };
 
-export const trainers = [];
+// const trainers = [{
+//     name: "George",
+//     description: "George is a certified personal trainer with over a decade of experience helping clients achieve their fitness goals. Passionate and motivating, he specializes in strength training and functional movement.",
+//     image: "https://randomuser.me/api/portraits/men/32.jpg",
+//     link: "/trainers/george",
+// }, {
+//     name: "Michel Lagacé",
+//     description: "Michel is a dynamic and enthusiastic trainer known for his personalized approach to fitness. With a background in sports science, he crafts effective workout plans for all levels.",
+//     image: "https://randomuser.me/api/portraits/men/44.jpg",
+//     link: "/trainers/michel",
+// }, {
+//     name: "Lucy Smith",
+//     description: "George is a certified personal trainer with over a decade of experience helping clients achieve their fitness goals. Passionate and motivating, he specializes in strength training and functional movement.",
+//     image: "https://randomuser.me/api/portraits/men/32.jpg",
+//     link: "/trainers/george2",
+// }, {
+//     name: "Laurence Dupont",
+//     description: "Michel is a dynamic and enthusiastic trainer known for his personalized approach to fitness. With a background in sports science, he crafts effective workout plans for all levels.",
+//     image: "https://randomuser.me/api/portraits/men/44.jpg",
+//     link: "/trainers/michel2",
+// },];
+export const trainers = [
+    {
+        id: "george",
+        name: "George Lechapé",
+        tagline: "Personal Trainer",
+        title: "STRENGTH & CARDIO COACH",
+        shortDescription: "With a science-based approach, I empower clients to achieve peak physical health. Let's build your best self together.",
+        description: "George is a certified personal trainer with over 10 years of experience in the fitness industry. He specializes in strength training, functional movement, and cardiovascular conditioning. George's passion for fitness and health drives him to create personalized workout plans that help clients achieve their goals effectively and sustainably.",
+        about: "George is a certified fitness professional with over a decade of experience coaching clients of all levels. His approach combines modern science with practical routines, ensuring every client enjoys sustainable progress. Whether your focus is strength, stamina, or holistic health, George crafts a tailored path for your unique needs. He believes in supporting not just your physical transformation, but also your confidence and motivation to maintain a healthy lifestyle.",
+        actions: [{icon: "🏃", label: "Cardio"}, {icon: "📅", label: "Schedule"}, {
+            icon: "🍎", label: "Nutrition"
+        }, {icon: "💪", label: "Strength"}],
+        profilePicture: "https://randomuser.me/api/portraits/men/32.jpg",
+        image: "https://images.pexels.com/photos/1552106/pexels-photo-1552106.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image2: "https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg?auto=compress&w=500&h=360&fit=crop",
+        cta: "Book a Session",
+        ctaLink: "#book",
+        moreLink: "#about"
+    },
+    {
+        id: "michel",
+        name: "Michel Lagacé",
+        tagline: "Yoga Instructor",
+        title: "MINDFULNESS & FLEXIBILITY COACH",
+        shortDescription: "Guiding you to inner peace and physical flexibility through mindful yoga practices.",
+        description: "Michel is a passionate yoga instructor with over 8 years of experience in teaching various styles of yoga. His classes focus on mindfulness, breath control, and flexibility, helping students connect their body and mind. Michel believes in creating a supportive environment where everyone can explore their limits and find balance.",
+        about: "Michel's journey into yoga began as a personal practice to manage stress and improve flexibility. Over the years, he has trained in multiple yoga styles including Hatha, Vinyasa, and Yin Yoga. His classes are designed to cater to all levels, from beginners to advanced practitioners. Michel emphasizes the importance of breathwork and meditation in achieving overall well-being.",
+        actions: [{icon: "🧘", label: "Yoga"}, {icon: "📅", label: "Schedule"}, {
+            icon: "🌿", label: "Wellness"
+        }, {icon: "💪", label: "Flexibility"}],
+        profilePicture: "https://randomuser.me/api/portraits/men/44.jpg",
+        image: "https://images.pexels.com/photos/3822620/pexels-photo-3822620.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image2: "https://images.pexels.com/photos/3822621/pexels-photo-3822621.jpeg?auto=compress&w=500&h=360&fit=crop",
+        cta: "Join a Class",
+        ctaLink: "#join",
+        moreLink: "#about"
+    },
+    {
+        id: "lucy",
+        name: "Lucy Smith",
+        tagline: "Spinning Instructor",
+        title: "ENDURANCE & ENERGY COACH",
+        shortDescription: "Igniting your passion for cycling through high-energy spinning classes.",
+        description: "Lucy is a certified spinning instructor with a background in competitive cycling. Her classes are designed to push your limits while having fun. With her energetic playlists and motivating coaching style, Lucy helps you build endurance and strength on the bike.",
+        about: "Lucy's love for cycling started at a young age, leading her to compete in various cycling events. She transitioned to teaching spinning classes to share her passion and inspire others to enjoy the benefits of indoor cycling. Her classes focus on building cardiovascular fitness, strength, and mental resilience.",
+        actions: [{icon: "🚴", label: "Spinning"}, {icon: "📅", label: "Schedule"}, {
+            icon: "🎶", label: "Music"
+        }, {icon: "💪", label: "Endurance"}],
+        profilePicture: "https://randomuser.me/api/portraits/men/55.jpg",
+        image: "https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image2: "https://images.pexels.com/photos/3822623/pexels-photo-3822623.jpeg?auto=compress&w=500&h=360&fit=crop",
+        cta: "Book a Ride",
+        ctaLink: "#book",
+        moreLink: "#about"
+    },
+    {
+        id: "laurence",
+        name: "Laurence Dupont",
+        tagline: "Pilates Instructor",
+        title: "CORE STRENGTH & BALANCE COACH",
+        shortDescription: "Transforming your body through focused pilates practices for strength and flexibility.",
+        description: "Laurence is an experienced pilates instructor dedicated to helping clients achieve core strength and balance. With a background in dance and physical therapy, Laurence's classes are designed to enhance body awareness and improve overall fitness.",
+        about: "Laurence's journey into pilates began as a way to recover from a dance injury. This led to a deep appreciation for the method's benefits in building strength and flexibility. Laurence's classes emphasize controlled movements, breathwork, and alignment to ensure safe and effective workouts for all levels.",
+        actions: [{icon: "🧘‍♀️", label: "Pilates"}, {icon: "📅", label: "Schedule"}, {
+            icon: "💪", label: "Strength"
+        }, {icon: "🤸", label: "Balance"}],
+        profilePicture: "https://randomuser.me/api/portraits/men/66.jpg",
+        image: "https://images.pexels.com/photos/3822624/pexels-photo-3822624.jpeg?auto=compress&w=500&h=360&fit=crop",
+        image2: "https://images.pexels.com/photos/3822625/pexels-photo-3822625.jpeg?auto=compress&w=500&h=360&fit=crop",
+        cta: "Join a Session",
+        ctaLink: "#join",
+        moreLink: "#about"
+    },
+];
+
+export function getTrainerById(id) {
+    return trainers.find(trainer => trainer.id === id);
+}
 
 export const trainerAvailability = [];

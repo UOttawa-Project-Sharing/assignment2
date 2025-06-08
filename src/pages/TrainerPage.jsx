@@ -8,23 +8,7 @@ import Card from "react-bootstrap/Card";
 import FullCalendar from '@fullcalendar/react'
 import timegridPlugin from '@fullcalendar/timegrid'
 
-const trainers = {
-    george: {
-        name: "George Lechapé",
-        tagline: "Personal Trainer",
-        title: "STRENGTH & CARDIO COACH",
-        description: "With a science-based approach, I empower clients to achieve peak physical health. Let's build your best self together.",
-        about: "George is a certified fitness professional with over a decade of experience coaching clients of all levels. His approach combines modern science with practical routines, ensuring every client enjoys sustainable progress. Whether your focus is strength, stamina, or holistic health, George crafts a tailored path for your unique needs. He believes in supporting not just your physical transformation, but also your confidence and motivation to maintain a healthy lifestyle.",
-        actions: [{icon: "🏃", label: "Cardio"}, {icon: "📅", label: "Schedule"}, {
-            icon: "🍎", label: "Nutrition"
-        }, {icon: "💪", label: "Strength"}],
-        image: "https://images.pexels.com/photos/1552106/pexels-photo-1552106.jpeg?auto=compress&w=500&h=360&fit=crop",
-        image2: "https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg?auto=compress&w=500&h=360&fit=crop",
-        cta: "Book a Session",
-        ctaLink: "#book",
-        moreLink: "#about"
-    }
-}
+import { getTrainerById } from "../utils/data.js";
 
 function DiagonalDottedLinesBg() {
     const lines = [0, 1, 2, 3];
@@ -84,7 +68,7 @@ function DiagonalDottedLinesBg() {
 
 function TrainerPage() {
     const {TainerName} = useParams();
-    const trainer = trainers[TainerName?.toLowerCase()];
+    const trainer = getTrainerById(TainerName?.toLowerCase());
 
     if (!trainer) {
         return (<div
@@ -220,7 +204,7 @@ function TrainerPage() {
                             fontSize: 20, marginBottom: 40, fontWeight: 400, maxWidth: 420, opacity: 0.92
                         }}
                     >
-                        {trainer.description}
+                        {trainer.shortDescription}
                     </div>
                     <Row className="g-3 mb-3">
                         <Col xs="auto">

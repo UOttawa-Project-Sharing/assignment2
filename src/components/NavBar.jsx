@@ -4,6 +4,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import {Link} from "react-router";
 
+import { trainers } from "../utils/data.js";
+
 function NavigatorBar() {
     return (
         <Navbar expand="lg" className="bg-primary sticky-top" data-bs-theme="dark">
@@ -22,10 +24,11 @@ function NavigatorBar() {
                     </NavDropdown>
                     <NavDropdown renderMenuOnMount={true}
                                  title={<Link style={{color: 'inherit', textDecoration: 'none'}} to="/trainers">Trainers</Link>} id="basic-nav-dropdown">
-                        <NavDropdown.Item as={Link} to="/trainers/george">George</NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/trainers/michel">Michel</NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/trainers/lucy">Lucy</NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to="/trainers/Miguel">Miguel</NavDropdown.Item>
+                        {trainers.map((trainer) => (
+                            <NavDropdown.Item key={trainer.name} as={Link} to={`/trainers/${trainer.id}`}>
+                                {trainer.name}
+                            </NavDropdown.Item>
+                        ))}
                     </NavDropdown>
                     <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
                     <Nav.Link as={Link} to="/memberships">Memberships</Nav.Link>
