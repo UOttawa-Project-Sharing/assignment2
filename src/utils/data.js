@@ -659,570 +659,1250 @@ export function getTrainerAvailabilityByName(name) {
     return trainerAvailability.filter(ev => ev.subType === name);
 }
 
+export function getProgramWeeklySchedule({
+                                             baseId,
+                                             type = "programs",
+                                             subType,
+                                             subSubType,
+                                             title,
+                                             color,
+                                             weeks = 8,
+                                             weeklySlots,
+                                             statusGenerator
+                                         }) {
+    if (!Array.isArray(weeklySlots) || weeklySlots.length !== 7) {
+        throw new Error("weeklySlots must be an array of 7 elements (one for each weekday, starting with Monday).");
+    }
+    const schedule = [];
+    const now = new Date();
+    // Find the next Monday (or today if today is Monday)
+    const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + ((1 + 7 - now.getDay()) % 7));
+    // For each week
+    for (let w = 0; w < weeks; w++) {
+        for (let dayIdx = 0; dayIdx < 7; dayIdx++) {
+            const slots = weeklySlots[dayIdx] || [];
+            if (!slots.length) continue;
+            // Compute the date for this slot
+            const slotDate = new Date(startDate);
+            slotDate.setDate(startDate.getDate() + w * 7 + dayIdx);
+            const dateStr = slotDate.toISOString().slice(0, 10);
+            for (let slotIdx = 0; slotIdx < slots.length; slotIdx++) {
+                const slot = slots[slotIdx];
+                const startHour = String(slot.startHour).padStart(2, "0");
+                const startMinute = String(slot.startMinute || 0).padStart(2, "0");
+                const endHour = String(slot.endHour).padStart(2, "0");
+                const endMinute = String(slot.endMinute || 0).padStart(2, "0");
+                const start = `${dateStr}T${startHour}:${startMinute}:00`;
+                const end = `${dateStr}T${endHour}:${endMinute}:00`;
+                const id = `${baseId}-${dateStr}-${startHour}`;
+                const status = statusGenerator
+                    ? statusGenerator(w, dayIdx, slotIdx, slot)
+                    : slot.status || "";
+                schedule.push({
+                    id,
+                    type,
+                    subType,
+                    subSubType,
+                    title,
+                    start,
+                    end,
+                    color,
+                    status
+                });
+            }
+        }
+    }
+    return schedule;
+}
+
+// min start hours: 8, max end hours: 20
+const openGymSlots = [
+    [ // Monday
+        { startHour: 8, startMinute: 0, endHour: 12, endMinute: 0, status: "8/15" },
+        { startHour: 16, startMinute: 0, endHour: 20, endMinute: 0, status: "12/15" }
+    ],
+    [ // Tuesday
+        { startHour: 8, startMinute: 0, endHour: 16, endMinute: 0, status: "5/15" }
+    ],
+    [ // Wednesday
+        { startHour: 15, startMinute: 0, endHour: 20, endMinute: 0, status: "9/15" }
+    ],
+    [
+        { startHour: 10, startMinute: 0, endHour: 14, endMinute: 0, status: "8/15" },
+    ], // Thursday
+    [
+        { startHour: 8, startMinute: 0, endHour: 12, endMinute: 0, status: "6/15" },
+    ], // Friday
+    [
+        { startHour: 10, startMinute: 0, endHour: 14, endMinute: 0, status: "10/15" },
+    ], // Saturday
+    [
+        { startHour: 9, startMinute: 0, endHour: 13, endMinute: 0, status: "7/15" },
+    ]  // Sunday
+];
+
+export const openGymSchedule = getProgramWeeklySchedule({
+    baseId: "cf-og",
+    type: "programs",
+    subType: "Cross Fit",
+    subSubType: "Open Gym",
+    title: "Open Gym",
+    color: "#FF5733",
+    weeks: 8,
+    weeklySlots: openGymSlots,
+    statusGenerator: (w, d, i, slot) => {
+        let status = Math.floor(Math.random() * 100) + 1;
+        if (status === 100) return "full"; // Simulate full status
+        return `${status}/100`; // Random status for demo
+    }
+});
+
+const circuitFitSlots = [
+    [ // Monday
+        { startHour: 10, startMinute: 0, endHour: 11, endMinute: 0, status: "full" },
+        { startHour: 17, startMinute: 0, endHour: 18, endMinute: 0, status: "11/12" }
+    ],
+    [ // Tuesday
+        { startHour: 9, startMinute: 0, endHour: 10, endMinute: 0, status: "7/12" }
+    ],
+    [ // Wednesday
+        { startHour: 18, startMinute: 0, endHour: 19, endMinute: 0, status: "9/12" }
+    ],
+    [ // Thursday
+        { startHour: 10, startMinute: 0, endHour: 11, endMinute: 0, status: "8/12" }
+    ],
+    [ // Friday
+        { startHour: 17, startMinute: 0, endHour: 18, endMinute: 0, status: "10/12" }
+    ],
+    [ // Saturday
+        { startHour: 9, startMinute: 0, endHour: 10, endMinute: 0, status: "6/12" }
+    ],
+    [ // Sunday
+        { startHour: 18, startMinute: 0, endHour: 19, endMinute: 0, status: "8/12" }
+    ]
+];
+
+const circuitFitSchedule = getProgramWeeklySchedule({
+    baseId: "cf-cf",
+    type: "programs",
+    subType: "Cross Fit",
+    subSubType: "Circuit Fit",
+    title: "Circuit Fit",
+    color: "#ff8133",
+    weeks: 8,
+    weeklySlots: circuitFitSlots,
+    statusGenerator: (w, d, i, slot) => {
+        let status = Math.floor(Math.random() * 12) + 1;
+        if (status === 12) return "full";
+        return `${status}/12`;
+    }
+});
+
+const powerFitSlots = [
+    // Monday
+    [
+        { startHour: 7, startMinute: 0, endHour: 8, endMinute: 0, status: "6/10" }
+    ],
+    // Tuesday
+    [],
+    // Wednesday
+    [],
+    // Thursday
+    [],
+    // Friday
+    [],
+    // Saturday
+    [],
+    // Sunday
+    [
+        { startHour: 19, startMinute: 0, endHour: 20, endMinute: 0, status: "full" }
+    ]
+];
+export const powerFitSchedule = getProgramWeeklySchedule({
+    baseId: "cf-pf",
+    type: "programs",
+    subType: "Cross Fit",
+    subSubType: "Power Fit",
+    title: "Power Fit",
+    color: "#FF5733",
+    weeks: 8,
+    weeklySlots: powerFitSlots,
+    statusGenerator: (w, d, i, slot) => {
+        let status = Math.floor(Math.random() * 15) + 1;
+        if (status === 15) return "full";
+        return `${status}/15`;
+    }
+});
+
+const totalFitSlots = [
+    // Monday
+    [
+        { startHour: 12, startMinute: 0, endHour: 13, endMinute: 30, status: "8/14" }
+    ],
+    // Tuesday
+    [],
+    // Wednesday
+    [
+        { startHour: 17, startMinute: 0, endHour: 18, endMinute: 30, status: "12/14" }
+    ],
+    // Thursday
+    [],
+    // Friday
+    [],
+    // Saturday
+    [],
+    // Sunday
+    []
+];
+export const totalFitSchedule = getProgramWeeklySchedule({
+    baseId: "cf-tf",
+    type: "programs",
+    subType: "Cross Fit",
+    subSubType: "Total Fit",
+    title: "Total Fit",
+    color: "#FF5733",
+    weeks: 8,
+    weeklySlots: totalFitSlots,
+    statusGenerator: (w, d, i, slot) => {
+        let status = Math.floor(Math.random() * 20) + 1;
+        if (status === 20) return "full";
+        return `${status}/20`;
+    }
+});
+
+const hathaYogaSlots = [
+    // Monday
+    [
+        { startHour: 8, startMinute: 0, endHour: 9, endMinute: 15, status: "6/15" }
+    ],
+    // Tuesday
+    [
+        { startHour: 18, startMinute: 0, endHour: 19, endMinute: 15, status: "11/15" }
+    ],
+    // Wednesday
+    [],
+    // Thursday
+    [
+        { startHour: 10, startMinute: 0, endHour: 11, endMinute: 15, status: "9/15" }
+    ],
+    // Friday
+    [],
+    // Saturday
+    [],
+    // Sunday
+    []
+];
+export const hathaYogaSchedule = getProgramWeeklySchedule({
+    baseId: "yg-hy",
+    type: "programs",
+    subType: "Yoga",
+    subSubType: "Hatha Yoga",
+    title: "Hatha Yoga",
+    color: "#8E44AD",
+    weeks: 8,
+    weeklySlots: hathaYogaSlots,
+    statusGenerator: (w, d, i, slot) => {
+        let status = Math.floor(Math.random() * 15) + 1;
+        if (status === 15) return "full";
+        return `${status}/15`;
+    }
+});
+
+const vinyasaFlowSlots = [
+    // Monday
+    [
+        { startHour: 9, startMinute: 30, endHour: 10, endMinute: 45, status: "full" }
+    ],
+    // Tuesday
+    [
+        { startHour: 17, startMinute: 0, endHour: 18, endMinute: 15, status: "13/16" }
+    ],
+    // Wednesday
+    [
+        { startHour: 19, startMinute: 30, endHour: 20, endMinute: 45, status: "8/16" }
+    ],
+    // Thursday
+    [],
+    // Friday
+    [],
+    // Saturday
+    [],
+    // Sunday
+    []
+];
+export const vinyasaFlowSchedule = getProgramWeeklySchedule({
+    baseId: "yg-vf",
+    type: "programs",
+    subType: "Yoga",
+    subSubType: "Vinyasa Flow",
+    title: "Vinyasa Flow",
+    color: "#8E44AD",
+    weeks: 8,
+    weeklySlots: vinyasaFlowSlots,
+    statusGenerator: (w, d, i, slot) => {
+        let status = Math.floor(Math.random() * 15) + 1;
+        if (status === 15) return "full";
+        return `${status}/15`;
+    }
+});
+
+const yinYogaSlots = [
+    // Monday
+    [
+        { startHour: 19, startMinute: 0, endHour: 20, endMinute: 15, status: "7/12" }
+    ],
+    // Tuesday
+    [],
+    // Wednesday
+    [
+        { startHour: 11, startMinute: 0, endHour: 12, endMinute: 15, status: "5/12" }
+    ],
+    // Thursday
+    [],
+    // Friday
+    [],
+    // Saturday
+    [
+        { startHour: 18, startMinute: 0, endHour: 19, endMinute: 15, status: "9/12" }
+    ],
+    // Sunday
+    []
+];
+export const yinYogaSchedule = getProgramWeeklySchedule({
+    baseId: "yg-yn",
+    type: "programs",
+    subType: "Yoga",
+    subSubType: "Yin Yoga",
+    title: "Yin Yoga",
+    color: "#8E44AD",
+    weeks: 8,
+    weeklySlots: yinYogaSlots,
+    statusGenerator: (w, d, i, slot) => {
+        let status = Math.floor(Math.random() * 15) + 1;
+        if (status === 15) return "full";
+        return `${status}/15`;
+    }
+});
+
+const powerYogaSlots = [
+    // Monday
+    [],
+    // Tuesday
+    [
+        { startHour: 7, startMinute: 0, endHour: 8, endMinute: 15, status: "10/14" }
+    ],
+    // Wednesday
+    [],
+    // Thursday
+    [
+        { startHour: 17, startMinute: 0, endHour: 18, endMinute: 15, status: "full" }
+    ],
+    // Friday
+    [],
+    // Saturday
+    [],
+    // Sunday
+    []
+];
+export const powerYogaSchedule = getProgramWeeklySchedule({
+    baseId: "yg-py",
+    type: "programs",
+    subType: "Yoga",
+    subSubType: "Power Yoga",
+    title: "Power Yoga",
+    color: "#8E44AD",
+    weeks: 8,
+    weeklySlots: powerYogaSlots,
+    statusGenerator: (w, d, i, slot) => {
+        let status = Math.floor(Math.random() * 15) + 1;
+        if (status === 15) return "full";
+        return `${status}/15`;
+    }
+});
+
+const spinBasicsSlots = [
+    // Monday
+    [
+        { startHour: 6, startMinute: 30, endHour: 7, endMinute: 30, status: "4/12" }
+    ],
+    // Tuesday
+    [],
+    // Wednesday
+    [
+        { startHour: 10, startMinute: 0, endHour: 11, endMinute: 0, status: "7/12" }
+    ],
+    // Thursday
+    [],
+    // Friday
+    [],
+    // Saturday
+    [
+        { startHour: 19, startMinute: 0, endHour: 20, endMinute: 0, status: "6/12" }
+    ],
+    // Sunday
+    []
+];
+export const spinBasicsSchedule = getProgramWeeklySchedule({
+    baseId: "sp-sb",
+    type: "programs",
+    subType: "Spinning",
+    subSubType: "Spin Basics",
+    title: "Spin Basics",
+    color: "#3498DB",
+    weeks: 8,
+    weeklySlots: spinBasicsSlots,
+    statusGenerator: (w, d, i, slot) => {
+        let status = Math.floor(Math.random() * 15) + 1;
+        if (status === 15) return "full";
+        return `${status}/15`;
+    }
+});
+
+const hiitSpinSlots = [
+    // Monday
+    [
+        { startHour: 18, startMinute: 30, endHour: 19, endMinute: 15, status: "full" }
+    ],
+    // Tuesday
+    [
+        { startHour: 12, startMinute: 0, endHour: 12, endMinute: 45, status: "9/16" }
+    ],
+    // Wednesday
+    [],
+    // Thursday
+    [
+        { startHour: 18, startMinute: 0, endHour: 18, endMinute: 45, status: "14/16" }
+    ],
+    // Friday
+    [],
+    // Saturday
+    [],
+    // Sunday
+    []
+];
+export const hiitSpinSchedule = getProgramWeeklySchedule({
+    baseId: "sp-hs",
+    type: "programs",
+    subType: "Spinning",
+    subSubType: "HIIT Spin",
+    title: "HIIT Spin",
+    color: "#3498DB",
+    weeks: 8,
+    weeklySlots: hiitSpinSlots,
+    statusGenerator: (w, d, i, slot) => {
+        let status = Math.floor(Math.random() * 15) + 1;
+        if (status === 15) return "full";
+        return `${status}/15`;
+    }
+});
+
+const enduranceRideSlots = [
+    // Monday
+    [],
+    // Tuesday
+    [
+        { startHour: 8, startMinute: 0, endHour: 9, endMinute: 0, status: "8/14" }
+    ],
+    // Wednesday
+    [
+        { startHour: 17, startMinute: 0, endHour: 18, endMinute: 0, status: "11/14" }
+    ],
+    // Thursday
+    [],
+    // Friday
+    [],
+    // Saturday
+    [],
+    // Sunday
+    []
+];
+export const enduranceRideSchedule = getProgramWeeklySchedule({
+    baseId: "sp-er",
+    type: "programs",
+    subType: "Spinning",
+    subSubType: "Endurance Ride",
+    title: "Endurance Ride",
+    color: "#3498DB",
+    weeks: 8,
+    weeklySlots: enduranceRideSlots,
+    statusGenerator: (w, d, i, slot) => {
+        let status = Math.floor(Math.random() * 15) + 1;
+        if (status === 15) return "full";
+        return `${status}/15`;
+    }
+});
+
+const rhythmRideSlots = [
+    // Monday
+    [
+        { startHour: 11, startMinute: 0, endHour: 12, endMinute: 0, status: "12/18" }
+    ],
+    // Tuesday
+    [],
+    // Wednesday
+    [],
+    // Thursday
+    [
+        { startHour: 19, startMinute: 0, endHour: 20, endMinute: 0, status: "15/18" }
+    ],
+    // Friday
+    [],
+    // Saturday
+    [
+        { startHour: 17, startMinute: 0, endHour: 18, endMinute: 0, status: "full" }
+    ],
+    // Sunday
+    []
+];
+export const rhythmRideSchedule = getProgramWeeklySchedule({
+    baseId: "sp-rr",
+    type: "programs",
+    subType: "Spinning",
+    subSubType: "Rhythm Ride",
+    title: "Rhythm Ride",
+    color: "#3498DB",
+    weeks: 8,
+    weeklySlots: rhythmRideSlots,
+    statusGenerator: (w, d, i, slot) => {
+        let status = Math.floor(Math.random() * 15) + 1;
+        if (status === 15) return "full";
+        return `${status}/15`;
+    }
+});
+
+const matPilatesSlots = [
+    // Monday
+    [
+        { startHour: 8, startMinute: 0, endHour: 9, endMinute: 0, status: "9/15" }
+    ],
+    // Tuesday
+    [
+        { startHour: 11, startMinute: 0, endHour: 12, endMinute: 0, status: "12/15" }
+    ],
+    // Wednesday
+    [
+        { startHour: 18, startMinute: 30, endHour: 19, endMinute: 30, status: "6/15" }
+    ],
+    // Thursday
+    [],
+    // Friday
+    [],
+    // Saturday
+    [
+        { startHour: 9, startMinute: 0, endHour: 10, endMinute: 0, status: "8/15" }
+    ],
+    // Sunday
+    []
+];
+export const matPilatesSchedule = getProgramWeeklySchedule({
+    baseId: "pl-mp",
+    type: "programs",
+    subType: "Pilates",
+    subSubType: "Mat Pilates",
+    title: "Mat Pilates",
+    color: "#E67E22",
+    weeks: 8,
+    weeklySlots: matPilatesSlots,
+    statusGenerator: (w, d, i, slot) => {
+        let status = Math.floor(Math.random() * 15) + 1;
+        if (status === 15) return "full";
+        return `${status}/15`;
+    }
+});
+
+const reformerPilatesSlots = [
+    // Monday
+    [
+        { startHour: 14, startMinute: 0, endHour: 15, endMinute: 0, status: "full" }
+    ],
+    // Tuesday
+    [
+        { startHour: 16, startMinute: 0, endHour: 17, endMinute: 0, status: "7/8" }
+    ],
+    // Wednesday
+    [],
+    // Thursday
+    [
+        { startHour: 10, startMinute: 0, endHour: 11, endMinute: 0, status: "5/8" }
+    ],
+    // Friday
+    [],
+    // Saturday
+    [],
+    // Sunday
+    []
+];
+export const reformerPilatesSchedule = getProgramWeeklySchedule({
+    baseId: "pl-rp",
+    type: "programs",
+    subType: "Pilates",
+    subSubType: "Reformer Pilates",
+    title: "Reformer Pilates",
+    color: "#E67E22",
+    weeks: 8,
+    weeklySlots: reformerPilatesSlots,
+    statusGenerator: (w, d, i, slot) => {
+        let status = Math.floor(Math.random() * 15) + 1;
+        if (status === 15) return "full";
+        return `${status}/15`;
+    }
+});
+
+const pilatesFusionSlots = [
+    // Monday
+    [
+        { startHour: 16, startMinute: 0, endHour: 17, endMinute: 15, status: "10/16" }
+    ],
+    // Tuesday
+    [],
+    // Wednesday
+    [
+        { startHour: 12, startMinute: 30, endHour: 13, endMinute: 45, status: "13/16" }
+    ],
+    // Thursday
+    [],
+    // Friday
+    [],
+    // Saturday
+    [
+        { startHour: 11, startMinute: 0, endHour: 12, endMinute: 15, status: "7/16" }
+    ],
+    // Sunday
+    []
+];
+export const pilatesFusionSchedule = getProgramWeeklySchedule({
+    baseId: "pl-pf",
+    type: "programs",
+    subType: "Pilates",
+    subSubType: "Pilates Fusion",
+    title: "Pilates Fusion",
+    color: "#E67E22",
+    weeks: 8,
+    weeklySlots: pilatesFusionSlots,
+    statusGenerator: (w, d, i, slot) => {
+        let status = Math.floor(Math.random() * 15) + 1;
+        if (status === 15) return "full";
+        return `${status}/15`;
+    }
+});
+
+const clinicalPilatesSlots = [
+    // Monday
+    [],
+    // Tuesday
+    [
+        { startHour: 14, startMinute: 0, endHour: 15, endMinute: 0, status: "4/6" }
+    ],
+    // Wednesday
+    [],
+    // Thursday
+    [
+        { startHour: 15, startMinute: 0, endHour: 16, endMinute: 0, status: "5/6" }
+    ],
+    // Friday
+    [],
+    // Saturday
+    [
+        { startHour: 14, startMinute: 0, endHour: 15, endMinute: 0, status: "full" }
+    ],
+    // Sunday
+    []
+];
+export const clinicalPilatesSchedule = getProgramWeeklySchedule({
+    baseId: "pl-cp",
+    type: "programs",
+    subType: "Pilates",
+    subSubType: "Clinical Pilates",
+    title: "Clinical Pilates",
+    color: "#E67E22",
+    weeks: 8,
+    weeklySlots: clinicalPilatesSlots,
+    statusGenerator: (w, d, i, slot) => {
+        let status = Math.floor(Math.random() * 6) + 1;
+        if (status === 6) return "full";
+        return `${status}/6`;
+    }
+});
+
 export const AllCourse = [
     // CROSSFIT PROGRAMS
     // Open Gym Sessions
-    {
-        id: "cf-og-2025-06-09-06",
-        type: "programs",
-        subType: "Cross Fit",
-        subSubType: "Open Gym",
-        title: "Open Gym",
-        start: "2025-06-09T06:00:00",
-        end: "2025-06-09T08:00:00",
-        color: "#FF5733",
-        status: "8/15"
-    },
-    {
-        id: "cf-og-2025-06-09-18",
-        type: "programs",
-        subType: "Cross Fit",
-        subSubType: "Open Gym",
-        title: "Open Gym",
-        start: "2025-06-09T18:00:00",
-        end: "2025-06-09T20:00:00",
-        color: "#FF5733",
-        status: "12/15"
-    },
-    {
-        id: "cf-og-2025-06-10-06",
-        type: "programs",
-        subType: "Cross Fit",
-        subSubType: "Open Gym",
-        title: "Open Gym",
-        start: "2025-06-10T06:00:00",
-        end: "2025-06-10T08:00:00",
-        color: "#FF5733",
-        status: "5/15"
-    },
-    {
-        id: "cf-og-2025-06-11-19",
-        type: "programs",
-        subType: "Cross Fit",
-        subSubType: "Open Gym",
-        title: "Open Gym",
-        start: "2025-06-11T19:00:00",
-        end: "2025-06-11T21:00:00",
-        color: "#FF5733",
-        status: "9/15"
-    },
+    ...openGymSchedule,
+    // {
+    //     id: "cf-og-2025-06-09-06",
+    //     type: "programs",
+    //     subType: "Cross Fit",
+    //     subSubType: "Open Gym",
+    //     title: "Open Gym",
+    //     start: "2025-06-09T06:00:00",
+    //     end: "2025-06-09T08:00:00",
+    //     color: "#FF5733",
+    //     status: "8/15"
+    // },
+    // {
+    //     id: "cf-og-2025-06-09-18",
+    //     type: "programs",
+    //     subType: "Cross Fit",
+    //     subSubType: "Open Gym",
+    //     title: "Open Gym",
+    //     start: "2025-06-09T18:00:00",
+    //     end: "2025-06-09T20:00:00",
+    //     color: "#FF5733",
+    //     status: "12/15"
+    // },
+    // {
+    //     id: "cf-og-2025-06-10-06",
+    //     type: "programs",
+    //     subType: "Cross Fit",
+    //     subSubType: "Open Gym",
+    //     title: "Open Gym",
+    //     start: "2025-06-10T06:00:00",
+    //     end: "2025-06-10T08:00:00",
+    //     color: "#FF5733",
+    //     status: "5/15"
+    // },
+    // {
+    //     id: "cf-og-2025-06-11-19",
+    //     type: "programs",
+    //     subType: "Cross Fit",
+    //     subSubType: "Open Gym",
+    //     title: "Open Gym",
+    //     start: "2025-06-11T19:00:00",
+    //     end: "2025-06-11T21:00:00",
+    //     color: "#FF5733",
+    //     status: "9/15"
+    // },
 
     // Circuit Fit Classes
-    {
-        id: "cf-cf-2025-06-09-10",
-        type: "programs",
-        subType: "Cross Fit",
-        subSubType: "Circuit Fit",
-        title: "Circuit Fit",
-        start: "2025-06-09T10:00:00",
-        end: "2025-06-09T11:00:00",
-        color: "#FF5733",
-        status: "full"
-    },
-    {
-        id: "cf-cf-2025-06-09-17",
-        type: "programs",
-        subType: "Cross Fit",
-        subSubType: "Circuit Fit",
-        title: "Circuit Fit",
-        start: "2025-06-09T17:00:00",
-        end: "2025-06-09T18:00:00",
-        color: "#FF5733",
-        status: "11/12"
-    },
-    {
-        id: "cf-cf-2025-06-10-09",
-        type: "programs",
-        subType: "Cross Fit",
-        subSubType: "Circuit Fit",
-        title: "Circuit Fit",
-        start: "2025-06-10T09:00:00",
-        end: "2025-06-10T10:00:00",
-        color: "#FF5733",
-        status: "7/12"
-    },
-    {
-        id: "cf-cf-2025-06-11-18",
-        type: "programs",
-        subType: "Cross Fit",
-        subSubType: "Circuit Fit",
-        title: "Circuit Fit",
-        start: "2025-06-11T18:00:00",
-        end: "2025-06-11T19:00:00",
-        color: "#FF5733",
-        status: "9/12"
-    },
+    ...circuitFitSchedule,
+    // {
+    //     id: "cf-cf-2025-06-09-10",
+    //     type: "programs",
+    //     subType: "Cross Fit",
+    //     subSubType: "Circuit Fit",
+    //     title: "Circuit Fit",
+    //     start: "2025-06-09T10:00:00",
+    //     end: "2025-06-09T11:00:00",
+    //     color: "#FF5733",
+    //     status: "full"
+    // },
+    // {
+    //     id: "cf-cf-2025-06-09-17",
+    //     type: "programs",
+    //     subType: "Cross Fit",
+    //     subSubType: "Circuit Fit",
+    //     title: "Circuit Fit",
+    //     start: "2025-06-09T17:00:00",
+    //     end: "2025-06-09T18:00:00",
+    //     color: "#FF5733",
+    //     status: "11/12"
+    // },
+    // {
+    //     id: "cf-cf-2025-06-10-09",
+    //     type: "programs",
+    //     subType: "Cross Fit",
+    //     subSubType: "Circuit Fit",
+    //     title: "Circuit Fit",
+    //     start: "2025-06-10T09:00:00",
+    //     end: "2025-06-10T10:00:00",
+    //     color: "#FF5733",
+    //     status: "7/12"
+    // },
+    // {
+    //     id: "cf-cf-2025-06-11-18",
+    //     type: "programs",
+    //     subType: "Cross Fit",
+    //     subSubType: "Circuit Fit",
+    //     title: "Circuit Fit",
+    //     start: "2025-06-11T18:00:00",
+    //     end: "2025-06-11T19:00:00",
+    //     color: "#FF5733",
+    //     status: "9/12"
+    // },
 
     // Power Fit Classes
-    {
-        id: "cf-pf-2025-06-09-07",
-        type: "programs",
-        subType: "Cross Fit",
-        subSubType: "Power Fit",
-        title: "Power Fit",
-        start: "2025-06-09T07:00:00",
-        end: "2025-06-09T08:00:00",
-        color: "#FF5733",
-        status: "6/10"
-    },
-    {
-        id: "cf-pf-2025-06-10-19",
-        type: "programs",
-        subType: "Cross Fit",
-        subSubType: "Power Fit",
-        title: "Power Fit",
-        start: "2025-06-10T19:00:00",
-        end: "2025-06-10T20:00:00",
-        color: "#FF5733",
-        status: "full"
-    },
-    {
-        id: "cf-pf-2025-06-12-08",
-        type: "programs",
-        subType: "Cross Fit",
-        subSubType: "Power Fit",
-        title: "Power Fit",
-        start: "2025-06-12T08:00:00",
-        end: "2025-06-12T09:00:00",
-        color: "#FF5733",
-        status: "4/10"
-    },
-
-    // Total Fit Classes
-    {
-        id: "cf-tf-2025-06-09-12",
-        type: "programs",
-        subType: "Cross Fit",
-        subSubType: "Total Fit",
-        title: "Total Fit",
-        start: "2025-06-09T12:00:00",
-        end: "2025-06-09T13:30:00",
-        color: "#FF5733",
-        status: "8/14"
-    },
-    {
-        id: "cf-tf-2025-06-11-17",
-        type: "programs",
-        subType: "Cross Fit",
-        subSubType: "Total Fit",
-        title: "Total Fit",
-        start: "2025-06-11T17:00:00",
-        end: "2025-06-11T18:30:00",
-        color: "#FF5733",
-        status: "12/14"
-    },
+    // {
+    //     id: "cf-pf-2025-06-09-07",
+    //     type: "programs",
+    //     subType: "Cross Fit",
+    //     subSubType: "Power Fit",
+    //     title: "Power Fit",
+    //     start: "2025-06-09T07:00:00",
+    //     end: "2025-06-09T08:00:00",
+    //     color: "#FF5733",
+    //     status: "6/10"
+    // },
+    // {
+    //     id: "cf-pf-2025-06-10-19",
+    //     type: "programs",
+    //     subType: "Cross Fit",
+    //     subSubType: "Power Fit",
+    //     title: "Power Fit",
+    //     start: "2025-06-10T19:00:00",
+    //     end: "2025-06-10T20:00:00",
+    //     color: "#FF5733",
+    //     status: "full"
+    // },
+    // {
+    //     id: "cf-pf-2025-06-12-08",
+    //     type: "programs",
+    //     subType: "Cross Fit",
+    //     subSubType: "Power Fit",
+    //     title: "Power Fit",
+    //     start: "2025-06-12T08:00:00",
+    //     end: "2025-06-12T09:00:00",
+    //     color: "#FF5733",
+    //     status: "4/10"
+    // },
+    ...powerFitSchedule,
+    // // Total Fit Classes
+    // {
+    //     id: "cf-tf-2025-06-09-12",
+    //     type: "programs",
+    //     subType: "Cross Fit",
+    //     subSubType: "Total Fit",
+    //     title: "Total Fit",
+    //     start: "2025-06-09T12:00:00",
+    //     end: "2025-06-09T13:30:00",
+    //     color: "#FF5733",
+    //     status: "8/14"
+    // },
+    // {
+    //     id: "cf-tf-2025-06-11-17",
+    //     type: "programs",
+    //     subType: "Cross Fit",
+    //     subSubType: "Total Fit",
+    //     title: "Total Fit",
+    //     start: "2025-06-11T17:00:00",
+    //     end: "2025-06-11T18:30:00",
+    //     color: "#FF5733",
+    //     status: "12/14"
+    // },
+    ...totalFitSchedule,
 
     // YOGA PROGRAMS
     // Hatha Yoga Classes
-    {
-        id: "yg-hy-2025-06-09-08",
-        type: "programs",
-        subType: "Yoga",
-        subSubType: "Hatha Yoga",
-        title: "Hatha Yoga",
-        start: "2025-06-09T08:00:00",
-        end: "2025-06-09T09:15:00",
-        color: "#8E44AD",
-        status: "6/15"
-    },
-    {
-        id: "yg-hy-2025-06-10-18",
-        type: "programs",
-        subType: "Yoga",
-        subSubType: "Hatha Yoga",
-        title: "Hatha Yoga",
-        start: "2025-06-10T18:00:00",
-        end: "2025-06-10T19:15:00",
-        color: "#8E44AD",
-        status: "11/15"
-    },
-    {
-        id: "yg-hy-2025-06-12-10",
-        type: "programs",
-        subType: "Yoga",
-        subSubType: "Hatha Yoga",
-        title: "Hatha Yoga",
-        start: "2025-06-12T10:00:00",
-        end: "2025-06-12T11:15:00",
-        color: "#8E44AD",
-        status: "9/15"
-    },
+    // {
+    //     id: "yg-hy-2025-06-09-08",
+    //     type: "programs",
+    //     subType: "Yoga",
+    //     subSubType: "Hatha Yoga",
+    //     title: "Hatha Yoga",
+    //     start: "2025-06-09T08:00:00",
+    //     end: "2025-06-09T09:15:00",
+    //     color: "#8E44AD",
+    //     status: "6/15"
+    // },
+    // {
+    //     id: "yg-hy-2025-06-10-18",
+    //     type: "programs",
+    //     subType: "Yoga",
+    //     subSubType: "Hatha Yoga",
+    //     title: "Hatha Yoga",
+    //     start: "2025-06-10T18:00:00",
+    //     end: "2025-06-10T19:15:00",
+    //     color: "#8E44AD",
+    //     status: "11/15"
+    // },
+    // {
+    //     id: "yg-hy-2025-06-12-10",
+    //     type: "programs",
+    //     subType: "Yoga",
+    //     subSubType: "Hatha Yoga",
+    //     title: "Hatha Yoga",
+    //     start: "2025-06-12T10:00:00",
+    //     end: "2025-06-12T11:15:00",
+    //     color: "#8E44AD",
+    //     status: "9/15"
+    // },
+    ...hathaYogaSchedule,
 
     // Vinyasa Flow Classes
-    {
-        id: "yg-vf-2025-06-09-09",
-        type: "programs",
-        subType: "Yoga",
-        subSubType: "Vinyasa Flow",
-        title: "Vinyasa Flow",
-        start: "2025-06-09T09:30:00",
-        end: "2025-06-09T10:45:00",
-        color: "#8E44AD",
-        status: "full"
-    },
-    {
-        id: "yg-vf-2025-06-10-17",
-        type: "programs",
-        subType: "Yoga",
-        subSubType: "Vinyasa Flow",
-        title: "Vinyasa Flow",
-        start: "2025-06-10T17:00:00",
-        end: "2025-06-10T18:15:00",
-        color: "#8E44AD",
-        status: "13/16"
-    },
-    {
-        id: "yg-vf-2025-06-11-19",
-        type: "programs",
-        subType: "Yoga",
-        subSubType: "Vinyasa Flow",
-        title: "Vinyasa Flow",
-        start: "2025-06-11T19:30:00",
-        end: "2025-06-11T20:45:00",
-        color: "#8E44AD",
-        status: "8/16"
-    },
+    // {
+    //     id: "yg-vf-2025-06-09-09",
+    //     type: "programs",
+    //     subType: "Yoga",
+    //     subSubType: "Vinyasa Flow",
+    //     title: "Vinyasa Flow",
+    //     start: "2025-06-09T09:30:00",
+    //     end: "2025-06-09T10:45:00",
+    //     color: "#8E44AD",
+    //     status: "full"
+    // },
+    // {
+    //     id: "yg-vf-2025-06-10-17",
+    //     type: "programs",
+    //     subType: "Yoga",
+    //     subSubType: "Vinyasa Flow",
+    //     title: "Vinyasa Flow",
+    //     start: "2025-06-10T17:00:00",
+    //     end: "2025-06-10T18:15:00",
+    //     color: "#8E44AD",
+    //     status: "13/16"
+    // },
+    // {
+    //     id: "yg-vf-2025-06-11-19",
+    //     type: "programs",
+    //     subType: "Yoga",
+    //     subSubType: "Vinyasa Flow",
+    //     title: "Vinyasa Flow",
+    //     start: "2025-06-11T19:30:00",
+    //     end: "2025-06-11T20:45:00",
+    //     color: "#8E44AD",
+    //     status: "8/16"
+    // },
+    ...vinyasaFlowSchedule,
 
     // Yin Yoga Classes
-    {
-        id: "yg-yn-2025-06-09-19",
-        type: "programs",
-        subType: "Yoga",
-        subSubType: "Yin Yoga",
-        title: "Yin Yoga",
-        start: "2025-06-09T19:00:00",
-        end: "2025-06-09T20:15:00",
-        color: "#8E44AD",
-        status: "7/12"
-    },
-    {
-        id: "yg-yn-2025-06-11-11",
-        type: "programs",
-        subType: "Yoga",
-        subSubType: "Yin Yoga",
-        title: "Yin Yoga",
-        start: "2025-06-11T11:00:00",
-        end: "2025-06-11T12:15:00",
-        color: "#8E44AD",
-        status: "5/12"
-    },
-    {
-        id: "yg-yn-2025-06-13-18",
-        type: "programs",
-        subType: "Yoga",
-        subSubType: "Yin Yoga",
-        title: "Yin Yoga",
-        start: "2025-06-13T18:00:00",
-        end: "2025-06-13T19:15:00",
-        color: "#8E44AD",
-        status: "9/12"
-    },
+    // {
+    //     id: "yg-yn-2025-06-09-19",
+    //     type: "programs",
+    //     subType: "Yoga",
+    //     subSubType: "Yin Yoga",
+    //     title: "Yin Yoga",
+    //     start: "2025-06-09T19:00:00",
+    //     end: "2025-06-09T20:15:00",
+    //     color: "#8E44AD",
+    //     status: "7/12"
+    // },
+    // {
+    //     id: "yg-yn-2025-06-11-11",
+    //     type: "programs",
+    //     subType: "Yoga",
+    //     subSubType: "Yin Yoga",
+    //     title: "Yin Yoga",
+    //     start: "2025-06-11T11:00:00",
+    //     end: "2025-06-11T12:15:00",
+    //     color: "#8E44AD",
+    //     status: "5/12"
+    // },
+    // {
+    //     id: "yg-yn-2025-06-13-18",
+    //     type: "programs",
+    //     subType: "Yoga",
+    //     subSubType: "Yin Yoga",
+    //     title: "Yin Yoga",
+    //     start: "2025-06-13T18:00:00",
+    //     end: "2025-06-13T19:15:00",
+    //     color: "#8E44AD",
+    //     status: "9/12"
+    // },
+    ...yinYogaSchedule,
 
     // Power Yoga Classes
-    {
-        id: "yg-py-2025-06-10-07",
-        type: "programs",
-        subType: "Yoga",
-        subSubType: "Power Yoga",
-        title: "Power Yoga",
-        start: "2025-06-10T07:00:00",
-        end: "2025-06-10T08:15:00",
-        color: "#8E44AD",
-        status: "10/14"
-    },
-    {
-        id: "yg-py-2025-06-12-17",
-        type: "programs",
-        subType: "Yoga",
-        subSubType: "Power Yoga",
-        title: "Power Yoga",
-        start: "2025-06-12T17:00:00",
-        end: "2025-06-12T18:15:00",
-        color: "#8E44AD",
-        status: "full"
-    },
+    // {
+    //     id: "yg-py-2025-06-10-07",
+    //     type: "programs",
+    //     subType: "Yoga",
+    //     subSubType: "Power Yoga",
+    //     title: "Power Yoga",
+    //     start: "2025-06-10T07:00:00",
+    //     end: "2025-06-10T08:15:00",
+    //     color: "#8E44AD",
+    //     status: "10/14"
+    // },
+    // {
+    //     id: "yg-py-2025-06-12-17",
+    //     type: "programs",
+    //     subType: "Yoga",
+    //     subSubType: "Power Yoga",
+    //     title: "Power Yoga",
+    //     start: "2025-06-12T17:00:00",
+    //     end: "2025-06-12T18:15:00",
+    //     color: "#8E44AD",
+    //     status: "full"
+    // },
+    ...powerYogaSchedule,
 
     // SPINNING PROGRAMS
     // Spin Basics Classes
-    {
-        id: "sp-sb-2025-06-09-06",
-        type: "programs",
-        subType: "Spinning",
-        subSubType: "Spin Basics",
-        title: "Spin Basics",
-        start: "2025-06-09T06:30:00",
-        end: "2025-06-09T07:30:00",
-        color: "#3498DB",
-        status: "4/12"
-    },
-    {
-        id: "sp-sb-2025-06-11-10",
-        type: "programs",
-        subType: "Spinning",
-        subSubType: "Spin Basics",
-        title: "Spin Basics",
-        start: "2025-06-11T10:00:00",
-        end: "2025-06-11T11:00:00",
-        color: "#3498DB",
-        status: "7/12"
-    },
-    {
-        id: "sp-sb-2025-06-13-19",
-        type: "programs",
-        subType: "Spinning",
-        subSubType: "Spin Basics",
-        title: "Spin Basics",
-        start: "2025-06-13T19:00:00",
-        end: "2025-06-13T20:00:00",
-        color: "#3498DB",
-        status: "6/12"
-    },
+    // {
+    //     id: "sp-sb-2025-06-09-06",
+    //     type: "programs",
+    //     subType: "Spinning",
+    //     subSubType: "Spin Basics",
+    //     title: "Spin Basics",
+    //     start: "2025-06-09T06:30:00",
+    //     end: "2025-06-09T07:30:00",
+    //     color: "#3498DB",
+    //     status: "4/12"
+    // },
+    // {
+    //     id: "sp-sb-2025-06-11-10",
+    //     type: "programs",
+    //     subType: "Spinning",
+    //     subSubType: "Spin Basics",
+    //     title: "Spin Basics",
+    //     start: "2025-06-11T10:00:00",
+    //     end: "2025-06-11T11:00:00",
+    //     color: "#3498DB",
+    //     status: "7/12"
+    // },
+    // {
+    //     id: "sp-sb-2025-06-13-19",
+    //     type: "programs",
+    //     subType: "Spinning",
+    //     subSubType: "Spin Basics",
+    //     title: "Spin Basics",
+    //     start: "2025-06-13T19:00:00",
+    //     end: "2025-06-13T20:00:00",
+    //     color: "#3498DB",
+    //     status: "6/12"
+    // },
+    ...spinBasicsSchedule,
 
     // HIIT Spin Classes
-    {
-        id: "sp-hs-2025-06-09-18",
-        type: "programs",
-        subType: "Spinning",
-        subSubType: "HIIT Spin",
-        title: "HIIT Spin",
-        start: "2025-06-09T18:30:00",
-        end: "2025-06-09T19:15:00",
-        color: "#3498DB",
-        status: "full"
-    },
-    {
-        id: "sp-hs-2025-06-10-12",
-        type: "programs",
-        subType: "Spinning",
-        subSubType: "HIIT Spin",
-        title: "HIIT Spin",
-        start: "2025-06-10T12:00:00",
-        end: "2025-06-10T12:45:00",
-        color: "#3498DB",
-        status: "9/16"
-    },
-    {
-        id: "sp-hs-2025-06-12-18",
-        type: "programs",
-        subType: "Spinning",
-        subSubType: "HIIT Spin",
-        title: "HIIT Spin",
-        start: "2025-06-12T18:00:00",
-        end: "2025-06-12T18:45:00",
-        color: "#3498DB",
-        status: "14/16"
-    },
+    // {
+    //     id: "sp-hs-2025-06-09-18",
+    //     type: "programs",
+    //     subType: "Spinning",
+    //     subSubType: "HIIT Spin",
+    //     title: "HIIT Spin",
+    //     start: "2025-06-09T18:30:00",
+    //     end: "2025-06-09T19:15:00",
+    //     color: "#3498DB",
+    //     status: "full"
+    // },
+    // {
+    //     id: "sp-hs-2025-06-10-12",
+    //     type: "programs",
+    //     subType: "Spinning",
+    //     subSubType: "HIIT Spin",
+    //     title: "HIIT Spin",
+    //     start: "2025-06-10T12:00:00",
+    //     end: "2025-06-10T12:45:00",
+    //     color: "#3498DB",
+    //     status: "9/16"
+    // },
+    // {
+    //     id: "sp-hs-2025-06-12-18",
+    //     type: "programs",
+    //     subType: "Spinning",
+    //     subSubType: "HIIT Spin",
+    //     title: "HIIT Spin",
+    //     start: "2025-06-12T18:00:00",
+    //     end: "2025-06-12T18:45:00",
+    //     color: "#3498DB",
+    //     status: "14/16"
+    // },
+    ...hiitSpinSchedule,
 
     // Endurance Ride Classes
-    {
-        id: "sp-er-2025-06-10-08",
-        type: "programs",
-        subType: "Spinning",
-        subSubType: "Endurance Ride",
-        title: "Endurance Ride",
-        start: "2025-06-10T08:00:00",
-        end: "2025-06-10T09:00:00",
-        color: "#3498DB",
-        status: "8/14"
-    },
-    {
-        id: "sp-er-2025-06-11-17",
-        type: "programs",
-        subType: "Spinning",
-        subSubType: "Endurance Ride",
-        title: "Endurance Ride",
-        start: "2025-06-11T17:00:00",
-        end: "2025-06-11T18:00:00",
-        color: "#3498DB",
-        status: "11/14"
-    },
+    // {
+    //     id: "sp-er-2025-06-10-08",
+    //     type: "programs",
+    //     subType: "Spinning",
+    //     subSubType: "Endurance Ride",
+    //     title: "Endurance Ride",
+    //     start: "2025-06-10T08:00:00",
+    //     end: "2025-06-10T09:00:00",
+    //     color: "#3498DB",
+    //     status: "8/14"
+    // },
+    // {
+    //     id: "sp-er-2025-06-11-17",
+    //     type: "programs",
+    //     subType: "Spinning",
+    //     subSubType: "Endurance Ride",
+    //     title: "Endurance Ride",
+    //     start: "2025-06-11T17:00:00",
+    //     end: "2025-06-11T18:00:00",
+    //     color: "#3498DB",
+    //     status: "11/14"
+    // },
+    ...enduranceRideSchedule,
 
     // Rhythm Ride Classes
-    {
-        id: "sp-rr-2025-06-09-11",
-        type: "programs",
-        subType: "Spinning",
-        subSubType: "Rhythm Ride",
-        title: "Rhythm Ride",
-        start: "2025-06-09T11:00:00",
-        end: "2025-06-09T12:00:00",
-        color: "#3498DB",
-        status: "12/18"
-    },
-    {
-        id: "sp-rr-2025-06-12-19",
-        type: "programs",
-        subType: "Spinning",
-        subSubType: "Rhythm Ride",
-        title: "Rhythm Ride",
-        start: "2025-06-12T19:00:00",
-        end: "2025-06-12T20:00:00",
-        color: "#3498DB",
-        status: "15/18"
-    },
-    {
-        id: "sp-rr-2025-06-13-17",
-        type: "programs",
-        subType: "Spinning",
-        subSubType: "Rhythm Ride",
-        title: "Rhythm Ride",
-        start: "2025-06-13T17:00:00",
-        end: "2025-06-13T18:00:00",
-        color: "#3498DB",
-        status: "full"
-    },
+    // {
+    //     id: "sp-rr-2025-06-09-11",
+    //     type: "programs",
+    //     subType: "Spinning",
+    //     subSubType: "Rhythm Ride",
+    //     title: "Rhythm Ride",
+    //     start: "2025-06-09T11:00:00",
+    //     end: "2025-06-09T12:00:00",
+    //     color: "#3498DB",
+    //     status: "12/18"
+    // },
+    // {
+    //     id: "sp-rr-2025-06-12-19",
+    //     type: "programs",
+    //     subType: "Spinning",
+    //     subSubType: "Rhythm Ride",
+    //     title: "Rhythm Ride",
+    //     start: "2025-06-12T19:00:00",
+    //     end: "2025-06-12T20:00:00",
+    //     color: "#3498DB",
+    //     status: "15/18"
+    // },
+    // {
+    //     id: "sp-rr-2025-06-13-17",
+    //     type: "programs",
+    //     subType: "Spinning",
+    //     subSubType: "Rhythm Ride",
+    //     title: "Rhythm Ride",
+    //     start: "2025-06-13T17:00:00",
+    //     end: "2025-06-13T18:00:00",
+    //     color: "#3498DB",
+    //     status: "full"
+    // },
+    ...rhythmRideSchedule,
 
     // PILATES PROGRAMS
     // Mat Pilates Classes
-    {
-        id: "pl-mp-2025-06-09-08",
-        type: "programs",
-        subType: "Pilates",
-        subSubType: "Mat Pilates",
-        title: "Mat Pilates",
-        start: "2025-06-09T08:00:00",
-        end: "2025-06-09T09:00:00",
-        color: "#E67E22",
-        status: "9/15"
-    },
-    {
-        id: "pl-mp-2025-06-10-11",
-        type: "programs",
-        subType: "Pilates",
-        subSubType: "Mat Pilates",
-        title: "Mat Pilates",
-        start: "2025-06-10T11:00:00",
-        end: "2025-06-10T12:00:00",
-        color: "#E67E22",
-        status: "12/15"
-    },
-    {
-        id: "pl-mp-2025-06-11-18",
-        type: "programs",
-        subType: "Pilates",
-        subSubType: "Mat Pilates",
-        title: "Mat Pilates",
-        start: "2025-06-11T18:30:00",
-        end: "2025-06-11T19:30:00",
-        color: "#E67E22",
-        status: "6/15"
-    },
-    {
-        id: "pl-mp-2025-06-13-09",
-        type: "programs",
-        subType: "Pilates",
-        subSubType: "Mat Pilates",
-        title: "Mat Pilates",
-        start: "2025-06-13T09:00:00",
-        end: "2025-06-13T10:00:00",
-        color: "#E67E22",
-        status: "8/15"
-    },
+    // {
+    //     id: "pl-mp-2025-06-09-08",
+    //     type: "programs",
+    //     subType: "Pilates",
+    //     subSubType: "Mat Pilates",
+    //     title: "Mat Pilates",
+    //     start: "2025-06-09T08:00:00",
+    //     end: "2025-06-09T09:00:00",
+    //     color: "#E67E22",
+    //     status: "9/15"
+    // },
+    // {
+    //     id: "pl-mp-2025-06-10-11",
+    //     type: "programs",
+    //     subType: "Pilates",
+    //     subSubType: "Mat Pilates",
+    //     title: "Mat Pilates",
+    //     start: "2025-06-10T11:00:00",
+    //     end: "2025-06-10T12:00:00",
+    //     color: "#E67E22",
+    //     status: "12/15"
+    // },
+    // {
+    //     id: "pl-mp-2025-06-11-18",
+    //     type: "programs",
+    //     subType: "Pilates",
+    //     subSubType: "Mat Pilates",
+    //     title: "Mat Pilates",
+    //     start: "2025-06-11T18:30:00",
+    //     end: "2025-06-11T19:30:00",
+    //     color: "#E67E22",
+    //     status: "6/15"
+    // },
+    // {
+    //     id: "pl-mp-2025-06-13-09",
+    //     type: "programs",
+    //     subType: "Pilates",
+    //     subSubType: "Mat Pilates",
+    //     title: "Mat Pilates",
+    //     start: "2025-06-13T09:00:00",
+    //     end: "2025-06-13T10:00:00",
+    //     color: "#E67E22",
+    //     status: "8/15"
+    // },
+    ...matPilatesSchedule,
 
     // Reformer Pilates Classes
-    {
-        id: "pl-rp-2025-06-09-14",
-        type: "programs",
-        subType: "Pilates",
-        subSubType: "Reformer Pilates",
-        title: "Reformer Pilates",
-        start: "2025-06-09T14:00:00",
-        end: "2025-06-09T15:00:00",
-        color: "#E67E22",
-        status: "full"
-    },
-    {
-        id: "pl-rp-2025-06-10-16",
-        type: "programs",
-        subType: "Pilates",
-        subSubType: "Reformer Pilates",
-        title: "Reformer Pilates",
-        start: "2025-06-10T16:00:00",
-        end: "2025-06-10T17:00:00",
-        color: "#E67E22",
-        status: "7/8"
-    },
-    {
-        id: "pl-rp-2025-06-12-10",
-        type: "programs",
-        subType: "Pilates",
-        subSubType: "Reformer Pilates",
-        title: "Reformer Pilates",
-        start: "2025-06-12T10:00:00",
-        end: "2025-06-12T11:00:00",
-        color: "#E67E22",
-        status: "5/8"
-    },
+    // {
+    //     id: "pl-rp-2025-06-09-14",
+    //     type: "programs",
+    //     subType: "Pilates",
+    //     subSubType: "Reformer Pilates",
+    //     title: "Reformer Pilates",
+    //     start: "2025-06-09T14:00:00",
+    //     end: "2025-06-09T15:00:00",
+    //     color: "#E67E22",
+    //     status: "full"
+    // },
+    // {
+    //     id: "pl-rp-2025-06-10-16",
+    //     type: "programs",
+    //     subType: "Pilates",
+    //     subSubType: "Reformer Pilates",
+    //     title: "Reformer Pilates",
+    //     start: "2025-06-10T16:00:00",
+    //     end: "2025-06-10T17:00:00",
+    //     color: "#E67E22",
+    //     status: "7/8"
+    // },
+    // {
+    //     id: "pl-rp-2025-06-12-10",
+    //     type: "programs",
+    //     subType: "Pilates",
+    //     subSubType: "Reformer Pilates",
+    //     title: "Reformer Pilates",
+    //     start: "2025-06-12T10:00:00",
+    //     end: "2025-06-12T11:00:00",
+    //     color: "#E67E22",
+    //     status: "5/8"
+    // },
+    ...reformerPilatesSchedule,
 
     // Pilates Fusion Classes
-    {
-        id: "pl-pf-2025-06-09-16",
-        type: "programs",
-        subType: "Pilates",
-        subSubType: "Pilates Fusion",
-        title: "Pilates Fusion",
-        start: "2025-06-09T16:00:00",
-        end: "2025-06-09T17:15:00",
-        color: "#E67E22",
-        status: "10/16"
-    },
-    {
-        id: "pl-pf-2025-06-11-12",
-        type: "programs",
-        subType: "Pilates",
-        subSubType: "Pilates Fusion",
-        title: "Pilates Fusion",
-        start: "2025-06-11T12:30:00",
-        end: "2025-06-11T13:45:00",
-        color: "#E67E22",
-        status: "13/16"
-    },
-    {
-        id: "pl-pf-2025-06-13-11",
-        type: "programs",
-        subType: "Pilates",
-        subSubType: "Pilates Fusion",
-        title: "Pilates Fusion",
-        start: "2025-06-13T11:00:00",
-        end: "2025-06-13T12:15:00",
-        color: "#E67E22",
-        status: "7/16"
-    },
+    // {
+    //     id: "pl-pf-2025-06-09-16",
+    //     type: "programs",
+    //     subType: "Pilates",
+    //     subSubType: "Pilates Fusion",
+    //     title: "Pilates Fusion",
+    //     start: "2025-06-09T16:00:00",
+    //     end: "2025-06-09T17:15:00",
+    //     color: "#E67E22",
+    //     status: "10/16"
+    // },
+    // {
+    //     id: "pl-pf-2025-06-11-12",
+    //     type: "programs",
+    //     subType: "Pilates",
+    //     subSubType: "Pilates Fusion",
+    //     title: "Pilates Fusion",
+    //     start: "2025-06-11T12:30:00",
+    //     end: "2025-06-11T13:45:00",
+    //     color: "#E67E22",
+    //     status: "13/16"
+    // },
+    // {
+    //     id: "pl-pf-2025-06-13-11",
+    //     type: "programs",
+    //     subType: "Pilates",
+    //     subSubType: "Pilates Fusion",
+    //     title: "Pilates Fusion",
+    //     start: "2025-06-13T11:00:00",
+    //     end: "2025-06-13T12:15:00",
+    //     color: "#E67E22",
+    //     status: "7/16"
+    // },
+    ...pilatesFusionSchedule,
 
     // Clinical Pilates Classes
-    {
-        id: "pl-cp-2025-06-10-14",
-        type: "programs",
-        subType: "Pilates",
-        subSubType: "Clinical Pilates",
-        title: "Clinical Pilates",
-        start: "2025-06-10T14:00:00",
-        end: "2025-06-10T15:00:00",
-        color: "#E67E22",
-        status: "4/6"
-    },
-    {
-        id: "pl-cp-2025-06-12-15",
-        type: "programs",
-        subType: "Pilates",
-        subSubType: "Clinical Pilates",
-        title: "Clinical Pilates",
-        start: "2025-06-12T15:00:00",
-        end: "2025-06-12T16:00:00",
-        color: "#E67E22",
-        status: "5/6"
-    },
-    {
-        id: "pl-cp-2025-06-13-14",
-        type: "programs",
-        subType: "Pilates",
-        subSubType: "Clinical Pilates",
-        title: "Clinical Pilates",
-        start: "2025-06-13T14:00:00",
-        end: "2025-06-13T15:00:00",
-        color: "#E67E22",
-        status: "full"
-    }
+    // {
+    //     id: "pl-cp-2025-06-10-14",
+    //     type: "programs",
+    //     subType: "Pilates",
+    //     subSubType: "Clinical Pilates",
+    //     title: "Clinical Pilates",
+    //     start: "2025-06-10T14:00:00",
+    //     end: "2025-06-10T15:00:00",
+    //     color: "#E67E22",
+    //     status: "4/6"
+    // },
+    // {
+    //     id: "pl-cp-2025-06-12-15",
+    //     type: "programs",
+    //     subType: "Pilates",
+    //     subSubType: "Clinical Pilates",
+    //     title: "Clinical Pilates",
+    //     start: "2025-06-12T15:00:00",
+    //     end: "2025-06-12T16:00:00",
+    //     color: "#E67E22",
+    //     status: "5/6"
+    // },
+    // {
+    //     id: "pl-cp-2025-06-13-14",
+    //     type: "programs",
+    //     subType: "Pilates",
+    //     subSubType: "Clinical Pilates",
+    //     title: "Clinical Pilates",
+    //     start: "2025-06-13T14:00:00",
+    //     end: "2025-06-13T15:00:00",
+    //     color: "#E67E22",
+    //     status: "full"
+    // }
+    ...clinicalPilatesSchedule
 ];
 
 export function getAllEventCourseAndTrainerAvailability() {
