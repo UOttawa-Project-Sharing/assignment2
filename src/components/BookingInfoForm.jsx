@@ -2,18 +2,7 @@ import React, { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-const memberships = ["Base", "Advanced", "Expert"];
-const programCategories = [
-    {
-        name: "Fitness Classes",
-        subPrograms: ["Open Fit", "Yoga", "Cross Fit"]
-    },
-    {
-        name: "Wellness",
-        subPrograms: ["Pilates", "Stretching"]
-    }
-];
-const trainers = ["George Lechapé", "Julie Duffy", "Anna Kim"];
+import  { MembershipPlans, trainers, ProgramsInfo } from "../utils/data.js";
 
 export default function BookingInfoForm({ onSubmit, onChange, value, availableEvents, memberTab }) {
     useEffect(() => {
@@ -61,15 +50,15 @@ export default function BookingInfoForm({ onSubmit, onChange, value, availableEv
     let subTypeOptions = [];
     let subSubTypeOptions = [];
     if (value.type === "membership") {
-        subTypeOptions = memberships;
+        subTypeOptions = MembershipPlans.map(plan => plan.title);
     } else if (value.type === "programs") {
-        subTypeOptions = programCategories.map(c => c.name);
+        subTypeOptions = ProgramsInfo.map(c => c.name);
         if (value.subType) {
-            const found = programCategories.find(c => c.name === value.subType);
-            subSubTypeOptions = found ? found.subPrograms : [];
+            const found = ProgramsInfo.find(c => c.name === value.subType);
+            subSubTypeOptions = found ? found.subprograms.map((p) => p.name) : [];
         }
     } else if (value.type === "personal trainer") {
-        subTypeOptions = trainers;
+        subTypeOptions = trainers.map(t => t.name);
     }
 
     // Only show future events for the selected filters
