@@ -65,18 +65,22 @@ export const ProgramsInfo = [
             name: "Open Gym",
             image: "https://images.unsplash.com/photo-1578762560042-46ad127c95ea?w=400&h=220&fit=crop",
             description: "Access our fully equipped CrossFit facility with complete freedom to train on your schedule. Use our Olympic weightlifting platforms, pull-up rigs, and full range of functional fitness equipment.",
+            price: 20,
         }, {
             name: "Circuit Fit",
             image: "https://images.unsplash.com/photo-1533681904393-9ab6eee7e408?w=400&h=220&fit=crop",
             description: "High-intensity circuit training combining functional movements with time-based challenges. Boost cardiovascular fitness, build lean muscle, and improve overall conditioning in energizing group sessions.",
+            price: 49,
         }, {
             name: "Power Fit",
             image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=400&h=220&fit=crop",
             description: "Specialized strength training focusing on Olympic lifts, powerlifting movements, and explosive power development. Perfect for athletes and serious lifters looking to maximize strength gains.",
+            price: 49,
         }, {
             name: "Total Fit",
             image: "https://images.unsplash.com/photo-1434596922112-19c563067271?w=400&h=220&fit=crop",
             description: "Comprehensive full-body conditioning program integrating strength training, cardiovascular fitness, mobility work, and functional movement patterns for complete physical development.",
+            price: 49,
         }],
     },
     {
@@ -90,18 +94,22 @@ export const ProgramsInfo = [
             name: "Hatha Yoga",
             image: "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=400&h=220&fit=crop",
             description: "Gentle, slow-paced yoga practice emphasizing basic postures, proper alignment, and deep breathing. Ideal for beginners and those seeking a meditative, restorative approach to yoga.",
+            price: 52,
         }, {
             name: "Vinyasa Flow",
             image: "https://images.unsplash.com/photo-1588286840104-8957b019727f?w=400&h=220&fit=crop",
             description: "Dynamic, flowing sequences that link breath with movement. Build strength, flexibility, and grace through creative transitions and energizing flows suitable for intermediate practitioners.",
+            price: 48,
         }, {
             name: "Yin Yoga",
             image: "https://images.unsplash.com/photo-1524863479829-916d8e77f114?w=400&h=220&fit=crop",
             description: "Passive, meditative practice featuring long-held poses (3-5 minutes) targeting deep connective tissues. Promotes flexibility, stress relief, and inner calm through stillness and mindfulness.",
+            price: 45,
         }, {
             name: "Power Yoga",
             image: "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=400&h=220&fit=crop",
             description: "Athletic, vigorous yoga style that builds heat, strength, and stamina. Fast-paced, challenging sequences designed for fitness-focused practitioners seeking a dynamic workout.",
+            price: 55,
         }],
     },
     {
@@ -115,18 +123,22 @@ export const ProgramsInfo = [
             name: "Spin Basics",
             image: "https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=400&h=220&fit=crop",
             description: "Beginner-friendly introduction to indoor cycling focusing on proper bike setup, riding technique, and basic training principles. Build confidence and cardiovascular base in a supportive environment.",
+            price: 30,
         }, {
             name: "HIIT Spin",
             image: "https://images.unsplash.com/photo-1554470166-20d3f466089b?w=400&h=220&fit=crop",
             description: "High-intensity interval training on stationary bikes featuring alternating periods of maximum effort sprints and active recovery. Maximize calorie burn and improve anaerobic fitness.",
+            price: 40,
         }, {
             name: "Endurance Ride",
             image: "https://images.unsplash.com/photo-1637578371283-d9076f66ba8e?w=400&h=220&fit=crop",
             description: "Longer, steady-state cycling sessions (45-60 minutes) designed to build aerobic capacity, mental resilience, and cardiovascular endurance through sustained moderate-intensity efforts.",
+            price: 35,
         }, {
             name: "Rhythm Ride",
             image: "https://images.unsplash.com/photo-1625594755684-a73285a64f66?w=400&h=220&fit=crop",
             description: "Music-driven cycling experience combining choreographed upper body movements with pedaling rhythms. Dance on the bike while getting an amazing cardio workout in this fun, party-like atmosphere.",
+            price: 50,
         }],
     },
     {
@@ -140,18 +152,22 @@ export const ProgramsInfo = [
             name: "Mat Pilates",
             image: "https://images.unsplash.com/photo-1600881333290-31fdbdfbe493?w=400&h=220&fit=crop",
             description: "Traditional floor-based Pilates using body weight resistance and gravity. Focus on core stabilization, postural alignment, and fundamental movement patterns accessible to all fitness levels.",
+            price: 25,
         }, {
             name: "Reformer Pilates",
             image: "https://images.unsplash.com/photo-1717500252573-d31d4bf5ddf1?w=400&h=220&fit=crop",
             description: "Equipment-based training using the Pilates reformer with spring resistance and pulley systems. Provides enhanced support and variable resistance for more precise, challenging movements.",
+            price: 60,
         }, {
             name: "Pilates Fusion",
             image: "https://images.unsplash.com/photo-1591258370814-01609b341790?w=400&h=220&fit=crop",
             description: "Creative blend combining Pilates principles with yoga poses, barre techniques, and functional movement. Dynamic full-body conditioning that challenges strength, flexibility, and coordination.",
+            price: 45,
         }, {
             name: "Clinical Pilates",
             image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=220&fit=crop",
             description: "Therapeutic approach designed for injury rehabilitation, chronic pain management, and movement dysfunction correction. Small group classes with individualized modifications and professional guidance.",
+            price: 55,
         }],
     },
 ];
@@ -176,6 +192,7 @@ export const trainers = [
         image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=360&fit=crop",
         image2: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500&h=360&fit=crop",
         cta: "Book a Session",
+        price: 50,
     },
     {
         id: "sarah",
@@ -192,6 +209,7 @@ export const trainers = [
         image: "https://images.unsplash.com/uploads/1413395496082cbc91228/43e39040?w=500&h=360&fit=crop",
         image2: "https://images.unsplash.com/photo-1606487704494-4e2fa9969cb5?w=500&h=360&fit=crop",
         cta: "Start Your Journey",
+        price: 65,
     },
     {
         id: "marcus",
@@ -208,6 +226,7 @@ export const trainers = [
         image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=500&h=360&fit=crop",
         image2: "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=500&h=360&fit=crop",
         cta: "Train Like a Pro",
+        price: 80,
     },
     {
         id: "elena",
@@ -224,6 +243,7 @@ export const trainers = [
         image: "https://images.unsplash.com/photo-1606902965551-dce093cda6e7?w=500&h=360&fit=fit",
         image2: "https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?w=500&h=360&fit=crop",
         cta: "Transform Today",
+        price: 70,
     },
     {
         id: "alex",
@@ -240,6 +260,7 @@ export const trainers = [
         image: "https://images.unsplash.com/photo-1704375058325-e51b6382a95d?w=500&h=360&fit=fit",
         image2: "https://images.unsplash.com/photo-1639496908204-6f949b0f46e1?w=500&h=360&fit=crop",
         cta: "Move Better",
+        price: 55,
     },
     {
         id: "jessica",
@@ -256,6 +277,7 @@ export const trainers = [
         image: "https://images.unsplash.com/photo-1692372372810-c848c9cca1c5?w=500&h=360&fit=fit",
         image2: "https://images.unsplash.com/photo-1617293378985-d7fae23773b0?w=500&h=360&fit=crop",
         cta: "Stay Active",
+        price: 60,
     },
     {
         id: "david",
@@ -272,6 +294,7 @@ export const trainers = [
         image: "https://images.unsplash.com/photo-1636007596622-90bf5679f5dc?w=500&h=360&fit=fit",
         image2: "https://images.unsplash.com/photo-1744551472900-d23f4997e1cd?w=500&h=360&fit=fit",
         cta: "Get Stronger",
+        price: 75,
     },
     {
         id: "maya",
@@ -288,6 +311,7 @@ export const trainers = [
         image: "https://images.unsplash.com/photo-1598575435251-574ba3ba7ad3?w=500&h=360&fit=fit",
         image2: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=500&h=360&fit=crop",
         cta: "Burn & Build",
+        price: 40,
     }
 ];
 
@@ -1907,4 +1931,46 @@ export const AllCourse = [
 
 export function getAllEventCourseAndTrainerAvailability() {
     return [...AllCourse, ...trainerAvailability];
+}
+
+export function getPriceFromName(name) {
+    const crossFitPrices = getProgramById("crossfit").subprograms.map(sub => ({
+        name: sub.name,
+        price: sub.price
+    }));
+    const yogaPrices = getProgramById("yoga").subprograms.map(sub => ({
+        name: sub.name,
+        price: sub.price
+    }));
+    const spinningPrices = getProgramById("spinning").subprograms.map(sub => ({
+        name: sub.name,
+        price: sub.price
+    }));
+    const pilatesPrices = getProgramById("pilates").subprograms.map(sub => ({
+        name: sub.name,
+        price: sub.price
+    }));
+    const subProgramPrices = [
+        ...crossFitPrices,
+        ...yogaPrices,
+        ...spinningPrices,
+        ...pilatesPrices
+    ];
+    const trainerPrices = trainers.map(trainer => ({
+        name: trainer.name,
+        price: trainer.price
+    }));
+    const membershipPlanPrices = MembershipPlans.map(plan => ({
+        name: plan.title,
+        price: plan.price
+    }));
+    const namePrices = [
+        ...subProgramPrices,
+        ...trainerPrices,
+        ...membershipPlanPrices
+    ];
+    const found = namePrices.find(item => item.name === name);
+    console.log("Found price for", name, ":", found ? found.price : 0);
+    console.log(namePrices);
+    return found ? found.price : 0;
 }

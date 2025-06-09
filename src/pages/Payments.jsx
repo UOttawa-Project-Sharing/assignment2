@@ -11,6 +11,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 
 import { isValidEmail, isLikelyLocation, isValidCardNumber, isValidExpiry, isValidCVC } from "../utils/validators.js";
+import {getPriceFromName} from "../utils/data.js";
 
 export default function PaymentPage() {
     const location = useLocation();
@@ -60,10 +61,10 @@ export default function PaymentPage() {
                     : booking?.type === "membership"
                         ? `1x ${booking.subType || "Membership"}`
                         : "1x Booking",
-                amount: selectedEvent?.price || 40
+                amount: (booking?.type === "programs") ? getPriceFromName(booking?.subSubType) : getPriceFromName(booking?.subType),
             }
         ],
-        total: selectedEvent?.price || 40
+        total: (booking?.type === "programs") ? getPriceFromName(booking?.subSubType) : getPriceFromName(booking?.subType)
     };
 
     const isBillingFull =
